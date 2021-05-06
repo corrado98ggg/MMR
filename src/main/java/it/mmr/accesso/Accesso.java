@@ -28,11 +28,16 @@ public class Accesso extends JFrame implements ActionListener{
     // ImageIcon icon = new ImageIcon("java/code/src/main/java/im/secondo.png");
     public Accesso() {
         super("MMR");
+        ImageIcon icon_sign =new ImageIcon("src/main/java/images/iconasi_log.png.png");
 
-        login = new JButton("Login");
+
+        login = new JButton(icon_sign);
         login.addActionListener(this);
 
-        //ImageIcon icon_sign =new ImageIcon("src/main/java/images/iconasi2.png");
+
+        login.setBorder(BorderFactory.createEmptyBorder());
+        login.setContentAreaFilled(false);
+
         condizioni = new JButton("termini e condizioni d'uso");
         condizioni.setForeground(new Color(0xff0000));
         condizioni.addActionListener(this);
@@ -95,7 +100,7 @@ public class Accesso extends JFrame implements ActionListener{
         sing.setBackground(azzurro);
         sing.add(tick);
 
-        panelLog.setBounds(400, 350, 100, 40);
+        panelLog.setBounds(400, 320, 105, 80);
         panelLog.setOpaque(true);
 
         lpane.add(panelBack, 0, 0);

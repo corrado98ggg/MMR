@@ -1,7 +1,11 @@
 package it.mmr.accesso;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.io.Reader;
 
 public class Termini extends JFrame {
 
@@ -9,9 +13,9 @@ public class Termini extends JFrame {
     {
         super("Termini e condizioni d'uso");
 
-        JTextArea text=new JTextArea("L'eseguibile creato da : \nCorrado Carriero e\nEnrico Garrapa,\nE' un progetto per l'esame\n di programmazione ad oggetti\nle risorse mulimediali e i dati usati\nsono di proprietà intellettuale di UniMore");
+        JTextArea text=new JTextArea("L'eseguibile creato da : Corrado \nCarriero e Enrico Garrapa,E' un \nprogetto per l'esame di program\nmazione ad oggetti le risorse\nmulimediali e i dati usati sono\ndi proprietà intellettuale di UniMore");
 
-        text.setSize(300, 400);
+        text.setFont(new Font("Monaco", Font.PLAIN, 15));
         JPanel t=new JPanel();
         t.setBackground(Color.white);
         t.add(text);
@@ -19,5 +23,9 @@ public class Termini extends JFrame {
         setContentPane(t);
         setResizable(false);
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Termini();
     }
 }

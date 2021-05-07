@@ -278,4 +278,10 @@ public class Sign_up extends JFrame implements ActionListener {
         }
         return null;
     }
+
+    public static void main(String[] args) {
+        new Sign_up();
+    }
+
 }
+

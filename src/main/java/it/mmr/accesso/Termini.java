@@ -14,8 +14,8 @@ public class Termini extends JFrame {
         super("Termini e condizioni d'uso");
 
         JTextArea text=new JTextArea("L'eseguibile creato da : Corrado \nCarriero e Enrico Garrapa,E' un \nprogetto per l'esame di program\nmazione ad oggetti le risorse\nmulimediali e i dati usati sono\ndi proprietà intellettuale di UniMore");
-
         text.setFont(new Font("Monaco", Font.PLAIN, 15));
+        text.setEditable(false);
         JPanel t=new JPanel();
         t.setBackground(Color.white);
         t.add(text);

@@ -6,9 +6,11 @@ it/mmr/layout/Home.java
  it.mmr.layout.Home
 it/mmr/accesso/Sign_up.java
  it.mmr.accesso.Sign_up
+it/mmr/layout/AggPersonale.java
+ it.mmr.layout.AggPersonale
 it/mmr/database/ResultSetToJTable.java
  it.mmr.database.ResultSetToJTable
-it/mmr/accesso/Termini.java
- it.mmr.accesso.Termini
 it/mmr/accesso/Accesso.java
  it.mmr.accesso.Accesso
+it/mmr/accesso/Termini.java
+ it.mmr.accesso.Termini

@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 import static it.mmr.layout.Home.*;
 
-public class AggPersonale extends JFrame implements ActionListener {
+public class  AggPersonale extends JFrame implements ActionListener {
 
     JButton add;
     static String s = new String("cdhcdbn");
@@ -24,10 +24,8 @@ public class AggPersonale extends JFrame implements ActionListener {
         agg.add(personale);
         agg.add(add);
 
-
         setContentPane(agg);
         setVisible(true);
-
 
     }
 

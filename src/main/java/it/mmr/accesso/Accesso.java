@@ -20,16 +20,34 @@ public class Accesso extends JFrame implements ActionListener{
     JButton condizioni;
     JLabel background;
     Color azzurro = new Color(0x02cbff);
-    Color azzurro1=new Color(0x01c8ff);
+    Color azzurro1=new Color(0x01C8FF);
     JTextField utente;
     JPasswordField password;
     JCheckBox tick;
+   JTextArea etichetta_utente;
+   JTextArea etichetta_password;
 
     // ImageIcon icon = new ImageIcon("java/code/src/main/java/im/secondo.png");
     public Accesso() {
         super("MMR");
         ImageIcon icon_sign =new ImageIcon("src/main/java/images/iconasi_log.png.png");
+        etichetta_password = new JTextArea("Password");
+        etichetta_utente = new JTextArea("Nome utente");
+        etichetta_utente.setEditable(false);
+        etichetta_password.setEditable(false);
 
+       JPanel ep = new JPanel();
+        JPanel eu = new JPanel(); //pannelli relativi a label: password e utente
+        //etichetta_utente.setBackground(new Color() );
+        ep.add(etichetta_password);
+        eu.add(etichetta_utente);
+        eu.setBounds(97, 180, 90,20);
+        eu.setBackground(azzurro);
+
+        ep.setBounds(100, 260, 60,20);
+        ep.setOpaque(true);
+        etichetta_password.setBorder(BorderFactory.createEmptyBorder());
+        //etichetta_password.setContentAreaFilled(false);*/
 
         login = new JButton(icon_sign);
         login.addActionListener(this);
@@ -73,18 +91,24 @@ public class Accesso extends JFrame implements ActionListener{
         panelLog.setBackground(azzurro1);
 
 
-        utente = new JTextField("Inserisci nome utente");
-        password = new JPasswordField("inserisci una nuova password");
+
+        utente = new JTextField("");
+        password = new JPasswordField("");
 
 
-        JPanel access = new JPanel();
-        access.setBackground(azzurro1);
+        JPanel access_utente = new JPanel();
+        access_utente.setBackground(azzurro1);
 
         utente.setPreferredSize(new Dimension(400,50));
         password.setPreferredSize(new Dimension(400,50));
-        access.setBounds(100, 200, 400,150);
-        access.add(utente);
-        access.add(password);
+        access_utente.setBounds(100, 200, 400,50);
+
+        access_utente.add(utente);
+
+        JPanel access_password = new JPanel();
+        access_password.setBounds(100, 280, 400, 50);
+        access_password.setBackground(azzurro1);
+        access_password.add(password);
 
         panelLog.add(login);
         //panelGreen.add(sign_up);
@@ -105,8 +129,11 @@ public class Accesso extends JFrame implements ActionListener{
 
         lpane.add(panelBack, 0, 0);
         lpane.add(panelLog, 1, 0);
-        lpane.add(access, 2,0);
+        lpane.add(access_utente, 2,0);
+        lpane.add(access_password, 2,0);
         lpane.add(sing, 3,0);
+        lpane.add(eu, 4,0);
+        lpane.add(ep, 4, 0);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
       //  frame.pack();
         setResizable(false);

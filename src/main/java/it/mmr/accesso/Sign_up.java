@@ -30,10 +30,14 @@ public class Sign_up extends JFrame implements ActionListener {
     private final JTextField utente;
     private final JPasswordField password;
     UUID id;
+    JTextField nome;
+    JTextField cognome;
+    JTextField divisione;
+
 
     public Sign_up() {
 
-        super("Sign up");
+        super("Aggiungi personale");
 
         JLayeredPane lsignup = new JLayeredPane();
         add(lsignup, BorderLayout.CENTER);
@@ -71,8 +75,23 @@ public class Sign_up extends JFrame implements ActionListener {
         password = new JPasswordField("inserisci una nuova password");
         password.setPreferredSize(new Dimension(250,30));
 
+        nome=new JTextField("nome");
+        nome.setPreferredSize(new Dimension(250,30));
+        cognome =new JTextField("cognome");
+        cognome.setPreferredSize(new Dimension(250,30));
+        divisione=new JTextField("divisione");
+        divisione.setPreferredSize(new Dimension(250,30));
+/*
+        JPanel pn=new JPanel();
+        pn.add(nome);
+        JPanel pc=new JPanel();
+        pc.add(cognome);
+        JPanel pd=new JPanel();*/
+
+
+
         JPanel panel = new JPanel();
-        panel.setBounds(0,0,700,475);
+        panel.setBounds(0,0,700,875);
         panel.setBackground(new Color(0x02cbff));
 
         JLabel picLabel = new JLabel(new ImageIcon(resized_logo_mmr));
@@ -80,16 +99,19 @@ public class Sign_up extends JFrame implements ActionListener {
 
         JPanel panelscritte=new JPanel();
         panelscritte.setBackground(new Color(0x02cbff));
-        panelscritte.setBounds(400,250,250,100);
+        panelscritte.setBounds(400,200,250,400);
 
         JPanel panel_logo_mmr=new JPanel();
         panel_logo_mmr.setBackground(new Color(0x02cbff));
-        panel_logo_mmr.setBounds(50,225,300,175);
+        panel_logo_mmr.setBounds(60,255,300,175);
 
         panel.add(piclabel2);
         panel_logo_mmr.add(picLabel);
         panelscritte.add(utente);
         panelscritte.add(password);
+        panelscritte.add(nome);
+        panelscritte.add(cognome);
+        panelscritte.add(divisione);
         panelscritte.add(ok);
         panelscritte.add(exit);
 

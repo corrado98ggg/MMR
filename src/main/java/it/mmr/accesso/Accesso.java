@@ -158,6 +158,8 @@ public class Accesso extends JFrame implements ActionListener{
              */
 
             try {
+
+                System.out.println(utente.getText());
                 if(check_database(utente.getText(), password.getText()) == true && tick.isSelected() == true){
                     setVisible(false);
                     new Home();
@@ -193,7 +195,6 @@ public class Accesso extends JFrame implements ActionListener{
 
     public boolean check_database(String utente_tmp, String password_tmp) throws SQLException {
 
-
         try {
             testConnection();
             //load();
@@ -203,12 +204,12 @@ public class Accesso extends JFrame implements ActionListener{
 
         Statement statement = DBManager.getConnection().createStatement();
 
-        ResultSet rs = statement.executeQuery("SELECT Nome FROM registrazioni LIMIT 100");
+        ResultSet rs = statement.executeQuery("SELECT Utente FROM registrazioni LIMIT 100");
 
         password_tmp = MD5(password_tmp);
 
         while(rs.next()) {
-            if (rs.getString("nome").compareTo(utente_tmp) == 0) {
+            if (rs.getString("utente").compareTo(utente_tmp) == 0) {
 
                 ResultSet rs2 = statement.executeQuery("SELECT Password FROM registrazioni LIMIT 100");
 

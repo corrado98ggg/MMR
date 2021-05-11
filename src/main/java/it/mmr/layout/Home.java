@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
+
 
 public class Home extends JFrame implements ActionListener {
     JButton piu, piu_bussiness, piu_motori, piu_dinamica_del_veicolo, piu_powertrain, piu_ricerca;
@@ -35,7 +35,9 @@ public class Home extends JFrame implements ActionListener {
         piu.addActionListener(this);
         JPanel a = new JPanel();
         a.setSize(700, 700);
+
         a.add(piu);
+
         a.setBounds(1370, 850, 150, 150);
         JLayeredPane p1 = new JLayeredPane();
         p1.add(a, 1, 0);

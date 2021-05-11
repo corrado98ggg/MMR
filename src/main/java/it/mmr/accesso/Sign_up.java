@@ -29,10 +29,12 @@ public class Sign_up extends JFrame implements ActionListener {
     private final JButton exit;
     private final JTextField utente;
     private final JPasswordField password;
+    public static String root_check;
     UUID id;
     JTextField nome;
     JTextField cognome;
     JTextField divisione;
+    JCheckBox tick_root;
 
 
     public Sign_up() {
@@ -87,6 +89,9 @@ public class Sign_up extends JFrame implements ActionListener {
         JPanel pc=new JPanel();
         pc.add(cognome);
         JPanel pd=new JPanel();*/
+        JLabel root=new JLabel("root");
+        root.setBackground(new Color(0x02cbff));
+        tick_root=new JCheckBox();
 
 
 
@@ -112,6 +117,8 @@ public class Sign_up extends JFrame implements ActionListener {
         panelscritte.add(nome);
         panelscritte.add(cognome);
         panelscritte.add(divisione);
+        panelscritte.add(root);
+        panelscritte.add(tick_root);
         panelscritte.add(ok);
         panelscritte.add(exit);
 
@@ -169,10 +176,18 @@ public class Sign_up extends JFrame implements ActionListener {
 
                 id = java.util.UUID.randomUUID();
 
+
+                if(tick_root.isSelected() == true){
+                    root_check = "TRUE";
+                } else {
+                    root_check = "FALSE";
+                }
+
+
                 try {
                     String query = String.format(
-                            "INSERT INTO registrazioni (id, nome, password) VALUES ('%s','%s', '%s')",
-                            id, utente.getText(), password_hash);
+                            "INSERT INTO registrazioni (id, utente, nome, cognome, password, root, divisione) VALUES ('%s','%s', '%s', '%s', '%s', '%s', '%s')",
+                            id, utente.getText(), nome.getText(), cognome.getText(), password_hash, root_check, divisione.getText() );
                     Statement statement = DBManager.getConnection().createStatement();
                     statement.executeUpdate(query);
                     statement.close();
@@ -244,7 +259,7 @@ public class Sign_up extends JFrame implements ActionListener {
     }
 
 
-    public void testConnection() throws SQLException {
+    public static void testConnection() throws SQLException {
         DBManager.setConnection(
                 Utils.JDBC_Driver_SQLite,
                 Utils.JDBC_URL_SQLite);
@@ -254,7 +269,10 @@ public class Sign_up extends JFrame implements ActionListener {
             statement.executeQuery("SELECT * FROM registrazioni");
         } catch (SQLException e) {
             statement.executeUpdate("DROP TABLE IF EXISTS registrazioni");
-            statement.executeUpdate("CREATE TABLE registrazioni (" + "id VARCHAR(50) PRIMARY KEY, " + "Nome VARCHAR(50)," + "Password VARCHAR(50))");
+            statement.executeUpdate("CREATE TABLE registrazioni (" + "id VARCHAR(50) PRIMARY KEY, " + "Utente VARCHAR(50),"
+                    + "Nome VARCHAR(50)," + "Cognome VARCHAR(50),"
+                    + "Password VARCHAR(50)," + "Root BOOLEAN,"
+                    + "Divisione VARCHAR(50))");
         }
     }
 
@@ -287,7 +305,7 @@ public class Sign_up extends JFrame implements ActionListener {
 *implementazione hashing di password tipo
 *MD5
 */
-    public String MD5(String md5) {
+    public static String MD5(String md5) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
             byte[] array = md.digest(md5.getBytes());

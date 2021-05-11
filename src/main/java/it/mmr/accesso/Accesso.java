@@ -21,7 +21,8 @@ public class Accesso extends JFrame implements ActionListener{
     JLabel background;
     Color azzurro = new Color(0x02cbff);
     Color azzurro1=new Color(0x01C8FF);
-    JTextField utente;
+    public static String ciao = "cazzone";
+    public static JTextField utente;
     JPasswordField password;
     JCheckBox tick;
    JTextArea etichetta_utente;

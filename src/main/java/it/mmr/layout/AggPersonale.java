@@ -5,8 +5,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static it.mmr.layout.Home.*;
-
 public class  AggPersonale extends JFrame implements ActionListener {
 
     JButton add;
@@ -40,7 +38,7 @@ public class  AggPersonale extends JFrame implements ActionListener {
             s = new String(personale.getText());
             System.out.println(s);
             JLabel text = new JLabel(s);
-            Home.p1.add(text);
+            Schermata_Principale_home.p1.add(text);
 
         }
     }

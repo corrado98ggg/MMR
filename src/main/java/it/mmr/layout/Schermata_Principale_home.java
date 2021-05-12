@@ -1,7 +1,8 @@
 package it.mmr.layout;
 
-import it.mmr.accesso.Sign_up;
-import it.mmr.accesso.Accesso;
+import it.mmr.accesso.Registrazione_database;
+import it.mmr.accesso.Login_iniziale;
+import it.mmr.accesso.Rimozione_database;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,12 +10,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class Home extends JFrame  implements ActionListener  {
-    JButton piu, piu_bussiness, piu_motori, piu_dinamica_del_veicolo, piu_powertrain, piu_ricerca;
+public class Schermata_Principale_home extends JFrame  implements ActionListener  {
+    JButton piu, meno, piu_bussiness, piu_motori, piu_dinamica_del_veicolo, piu_powertrain, piu_ricerca;
     public static JPanel p1;
     public JMenuBar barra;
 
-    public Home() {
+    public Schermata_Principale_home() {
         super("Home");
 
         //primo menu:
@@ -28,7 +29,7 @@ public class Home extends JFrame  implements ActionListener  {
         ImageIcon icon_meno = new ImageIcon("src/main/java/images/meno.png");
 
 
-        JButton meno=new JButton(icon_meno);
+        meno=new JButton(icon_meno);
         meno.setBorder(BorderFactory.createEmptyBorder());
         meno.setContentAreaFilled(false);
         meno.addActionListener(this);
@@ -96,7 +97,7 @@ public class Home extends JFrame  implements ActionListener  {
                 "ruolo"};
 
         String [] [] dati={
-                { Accesso.ciao , "carriero", "videomaker"},
+                { "cnienc" , "carriero", "videomaker"},
 
                 {"enrico", "garrapa", "nullafacente"},
 
@@ -208,11 +209,15 @@ public class Home extends JFrame  implements ActionListener  {
          * che può accedere all'eseguibile
          */
         if (e.getSource() == piu) {
-            new Sign_up();
+            new Registrazione_database();
+        }
+
+        if(e.getSource() == meno){
+            new Rimozione_database();
         }
     }
 
     public static void main(String[] args) {
-        new Home();
+        new Schermata_Principale_home();
     }
 }

@@ -1,11 +1,14 @@
 it/mmr/database/DBManager.java
  it.mmr.database.DBManager
-it/mmr/Funzioni_comuni/MonthPanel.java
- it.mmr.Funzioni_comuni.MonthPanel
 it/mmr/database/Utils.java
  it.mmr.database.Utils
-it/mmr/accesso/Termini.java
- it.mmr.accesso.Termini
+it/mmr/Funzioni_comuni/MonthPanel.java
+ it.mmr.Funzioni_comuni.MonthPanel
+it/mmr/Funzioni_comuni/CalendarFrame.java
+ it.mmr.Funzioni_comuni.CalendarFrame
+ it.mmr.Funzioni_comuni.CalendarFrame$1
+it/mmr/accesso/Registrazione_database.java
+ it.mmr.accesso.Registrazione_database
 it/mmr/Funzioni_comuni/JavaSwingCalendar.java
  it.mmr.Funzioni_comuni.JavaSwingCalendar
  it.mmr.Funzioni_comuni.JavaSwingCalendar$1
@@ -13,16 +16,13 @@ it/mmr/Funzioni_comuni/JavaSwingCalendar.java
  it.mmr.Funzioni_comuni.JavaSwingCalendar$btnPrev_Action
  it.mmr.Funzioni_comuni.JavaSwingCalendar$cmbYear_Action
  it.mmr.Funzioni_comuni.JavaSwingCalendar$tblCalendarRenderer
-it/mmr/accesso/Sign_up.java
- it.mmr.accesso.Sign_up
-it/mmr/Funzioni_comuni/CalendarFrame.java
- it.mmr.Funzioni_comuni.CalendarFrame
- it.mmr.Funzioni_comuni.CalendarFrame$1
-it/mmr/database/ResultSetToJTable.java
- it.mmr.database.ResultSetToJTable
-it/mmr/layout/Home.java
- it.mmr.layout.Home
 it/mmr/layout/AggPersonale.java
  it.mmr.layout.AggPersonale
-it/mmr/accesso/Accesso.java
- it.mmr.accesso.Accesso
+it/mmr/accesso/Termini_e_condizioni.java
+ it.mmr.accesso.Termini_e_condizioni
+it/mmr/accesso/Login_iniziale.java
+ it.mmr.accesso.Login_iniziale
+it/mmr/layout/Schermata_Principale_home.java
+ it.mmr.layout.Schermata_Principale_home
+it/mmr/accesso/Rimozione_database.java
+ it.mmr.accesso.Rimozione_database

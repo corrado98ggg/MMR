@@ -1,15 +1,11 @@
 package it.mmr.accesso;
 
-import org.jetbrains.annotations.NotNull;
-
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.io.Reader;
 
-public class Termini extends JFrame {
+public class Termini_e_condizioni extends JFrame {
 
-    public Termini()
+    public Termini_e_condizioni()
     {
         super("Termini e condizioni d'uso");
 
@@ -26,6 +22,6 @@ public class Termini extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Termini();
+        new Termini_e_condizioni();
     }
 }

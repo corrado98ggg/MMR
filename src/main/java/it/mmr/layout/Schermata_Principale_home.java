@@ -1,221 +1,112 @@
 package it.mmr.layout;
 
-import it.mmr.accesso.Registrazione_database;
-import it.mmr.accesso.Login_iniziale;
-import it.mmr.accesso.Rimozione_database;
+import it.mmr.database.Registrazione_database;
+import it.mmr.layout.Divisioni.*;
 
+import it.mmr.layout.Tabs_divisione.PannelloTotale;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
-public class Schermata_Principale_home extends JFrame  implements ActionListener  {
-    JButton piu, meno, piu_bussiness, piu_motori, piu_dinamica_del_veicolo, piu_powertrain, piu_ricerca;
-    public static JPanel p1;
-    public JMenuBar barra;
+public class Schermata_Principale_home extends JFrame {
+
+   /* public JButton piu;
+    public JButton meno;*/
+    JTabbedPane divisioni;
+    JButton avvertenza;
 
     public Schermata_Principale_home() {
         super("Home");
 
-        //primo menu:
 
-
-        JLayeredPane contenitore=new JLayeredPane();
-
-        ImageIcon icon_piu = new ImageIcon("src/main/java/images/piuu.png");
         ImageIcon logo_mmr = new ImageIcon("src/main/java/images/mmr_logo.jpg");
-        ImageIcon im_bloccoNote=new ImageIcon("src/main/java/images/blocco_note.jpg");
-        ImageIcon icon_meno = new ImageIcon("src/main/java/images/meno.png");
+        //ImageIcon blocco_note = new ImageIcon("src/main/java/images/blocco_note.jpg");
+
+        BufferedImage blocconote = null;
+        try {
+            blocconote = ImageIO.read(new File("src/main/java/images/blocco_note.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        BufferedImage danger = null;
+        try {
+            danger = ImageIO.read(new File("src/main/java/images/danger.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
-        meno=new JButton(icon_meno);
-        meno.setBorder(BorderFactory.createEmptyBorder());
-        meno.setContentAreaFilled(false);
-        meno.addActionListener(this);
-        JPanel pmeno=new JPanel();
-        pmeno.setBackground(Color.WHITE);
-        pmeno.add(meno);
-        pmeno.setBounds(1370,700,150,150);
+        BufferedImage resized_blocco_note = Registrazione_database.getScaledDimension(blocconote, 500, 500);
+        BufferedImage resized_danger = Registrazione_database.getScaledDimension(danger, 60, 75);
+
+        JTabbedPane divisioni = new JTabbedPane(JTabbedPane.LEFT);
+
+        String prova= new String("shajcbkjjaòvujkzxnfoòuk m,hvdb8oiwyhieh");
+        JTextArea testo=new JTextArea(prova);
 
 
-        piu = new JButton(icon_piu);
+        testo.setFont(new Font("Monaco", Font.ITALIC, 15));
+        testo.setEditable(false);
 
-        piu_bussiness = new JButton(icon_piu);
-        piu_motori = new JButton(icon_piu);
-        piu_dinamica_del_veicolo = new JButton(icon_piu);
-        piu_powertrain = new JButton(icon_piu);
-        piu_ricerca = new JButton(icon_piu);
+      JPanel d=new JPanel();
+      d.setBounds(30,400,200,200);
+      d.add(testo);
 
-        piu.setBorder(BorderFactory.createEmptyBorder());
-        piu.setContentAreaFilled(false);
-        piu.addActionListener(this);
-        JPanel a = new JPanel();
+       // JPanel contenitore =new JPanel();
 
-        a.setSize(700, 700);
+        avvertenza=new JButton("agg avvertenza");
+        JPanel panello_avvertenza=new JPanel();
+        panello_avvertenza.add(avvertenza);
+        panello_avvertenza.setBounds(85,975,200,200);
 
-        a.add(piu);
+        JLayeredPane a=new JLayeredPane();
 
+        //JLabel b=new JLabel((Icon) resized_blocco_note);
+        JLabel picLabel = new JLabel(new ImageIcon(resized_blocco_note));
+        JPanel c=new JPanel();
 
-        a.setBackground(Color.white);
-        a.setBounds(1370, 851, 150, 150);
-        JLayeredPane p1 = new JLayeredPane();
-        p1.add(a, 2, 0);
-        p1.add(pmeno,1,0);
+        JLabel picLabel1 = new JLabel(new ImageIcon(resized_danger));
+        JPanel panello_danger=new JPanel();
 
+        panello_danger.add(picLabel1);
+        panello_danger.setBounds(45,950,65,80);
 
-        JPanel colore=new JPanel();
-        colore.setSize(1920,1200);
-        p1.add(colore,0,0);
+        c.setBackground(new Color(237,237,237));
+        c.add(picLabel);
+        c.setBounds(16,330,300,300);
 
-        JTabbedPane prova=new JTabbedPane();
-        JPanel calle=new JPanel();
-        prova.addTab("Calendario",calle);
+        divisioni.add(null, logo_mmr);
+        divisioni.addTab("aereodinamica", Aereodinamica.aereodinamica());
+        divisioni.addTab("Business", PannelloTotale.PannelloTotale());
+        divisioni.addTab("motori", PannelloTotale.PannelloTotale());
+        divisioni.addTab("Dinamica del veicolo", PannelloTotale.PannelloTotale());
+        divisioni.addTab("Elettronica", PannelloTotale.PannelloTotale());
+        divisioni.addTab("Powertrain", PannelloTotale.PannelloTotale());
+        divisioni.addTab("Ricerca", PannelloTotale.PannelloTotale());
 
+        divisioni.setSelectedIndex(1);
 
-        p1.add(prova,2,0);
+        divisioni.setSize(1920,1080);
+        a.setBounds(0,0,1920,1080);
+        a.add(divisioni,0,0);
+        a.add(c,1,1);
+        a.add(d,2,2);
+        a.add(panello_avvertenza,2,2);
+        a.add(panello_danger,2,1);
 
-        JTabbedPane tabs = new JTabbedPane();
-        JTabbedPane attività = new JTabbedPane(JTabbedPane.LEFT);
-       JPanel pa=new JPanel();
-       pa.add(attività);
-       pa.setBounds(200,200,300,300);
-       contenitore.add(pa,0,0);
-
-
-        JLabel blocconote=new JLabel(im_bloccoNote);
-        JPanel bn=new JPanel();
-        bn.add(blocconote);
-        bn.setBounds(0,300,300,300);
-        contenitore.add(bn,1,0);
-
-        tabs.setBackground(Color.CYAN);
-        tabs.addTab("Personale",p1);
-
-       String [] nomi={"nome",
-                "cognome",
-                "ruolo"};
-
-        String [] [] dati={
-                { "cnienc" , "carriero", "videomaker"},
-
-                {"enrico", "garrapa", "nullafacente"},
-
-                {"marco","cask","bho"},
-
-                {"fjk","jnk","ikln"}
-        };
-
-        JTable table= new JTable(dati,nomi);
-
-        table.setEnabled(false);
-
-        table.setBounds(0,25,1700,1000);
-
-        p1.add(table,0,0);
-
-        JLabel testan=new JLabel("nome");
-        JLabel testac=new JLabel("cognome");
-        JLabel testar=new JLabel("ruolo");
-
-        JPanel colo_n=new JPanel();
-
-        colo_n.add(testan);
-        colo_n.setBounds(0,0,50,25);
-        p1.add(colo_n,2,0);
-
-
-     JPanel colo_c=new JPanel();
-
-     colo_c.add(testac);
-     colo_c.setBounds(565,0,70,25);
-
-
-     JPanel colo_r=new JPanel();
-
-     colo_r.add(testar);
-     colo_r.setBounds(1130,0,50,25);
-     p1.add(colo_r,0,0);
-
-        p1.add(colo_c,1,0);
-
-
-        tabs.addTab("calendario",calle);
-
-        //SwingUtilities.invokeLater(new CalendarFrame());
-        // calle.add(calendari);
-
-        JPanel p2_1 = new JPanel();
-        JPanel p3_1 = new JPanel();
-        JPanel p4_1 = new JPanel();
-        JPanel p5_1 = new JPanel();
-        JPanel p6_1 = new JPanel();
-
-        attività.add(null, logo_mmr);
-
-        p2_1.add(piu_bussiness);
-        p2_1.setBounds(1370, 850, 150, 150);
-        piu_bussiness.setBorder(BorderFactory.createEmptyBorder());
-        piu_bussiness.setContentAreaFilled(false);
-        piu_bussiness.addActionListener(this);
-
-        p3_1.add(piu_motori);
-        p3_1.setBounds(1370, 850, 150, 150);
-        piu_motori.setBorder(BorderFactory.createEmptyBorder());
-        piu_motori.setContentAreaFilled(false);
-        piu_motori.addActionListener(this);
-
-        p4_1.add(piu_powertrain);
-        p4_1.setBounds(1370, 850, 150, 150);
-        piu_powertrain.setBorder(BorderFactory.createEmptyBorder());
-        piu_powertrain.setContentAreaFilled(false);
-        piu_powertrain.addActionListener(this);
-
-        p5_1.add(piu_ricerca);
-        p5_1.setBounds(1370, 850, 150, 150);
-        piu_ricerca.setBorder(BorderFactory.createEmptyBorder());
-        piu_ricerca.setContentAreaFilled(false);
-        piu_ricerca.addActionListener(this);
-
-        p6_1.add(piu_dinamica_del_veicolo);
-        p6_1.setBounds(1370, 850, 150, 150);
-        piu_dinamica_del_veicolo.setBorder(BorderFactory.createEmptyBorder());
-        piu_dinamica_del_veicolo.setContentAreaFilled(false);
-        piu_dinamica_del_veicolo.addActionListener(this);
-
-
-        attività.addTab("aereodinamica", tabs);
-        attività.addTab("Business", p2_1);
-        attività.addTab("motori", p3_1);
-        attività.addTab("Dinamica del veicolo", p4_1);
-        attività.addTab("Elettronica", p5_1);
-        attività.addTab("Powertrain", p6_1);
-        attività.addTab("Ricerca", p4_1);
-
-        attività.setSelectedIndex(1);
-
-
-        setContentPane(attività);
+        setContentPane(a);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(1920, 1080);
         setVisible(true);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-        /**
-         * aggiunta di un nuovo account
-         * che può accedere all'eseguibile
-         */
-        if (e.getSource() == piu) {
-            new Registrazione_database();
-        }
-
-        if(e.getSource() == meno){
-            new Rimozione_database();
-        }
-    }
 
     public static void main(String[] args) {
         new Schermata_Principale_home();

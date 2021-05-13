@@ -16,7 +16,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
     JButton login;
     JButton condizioni;
     JLabel background;
-    Color azzurro = new Color(0x02cbff);
+    Color azzurro = new Color(0x01C8FF);
     Color azzurro1 = new Color(0x01C8FF);
     public static JTextField utente;
     JPasswordField password;
@@ -54,7 +54,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
         login.setContentAreaFilled(false);
 
         condizioni = new JButton("termini e condizioni d'uso");
-        condizioni.setForeground(new Color(0xff0000));
+        condizioni.setForeground(new Color(0xE70E0E));
         condizioni.addActionListener(this);
         condizioni.setBorder(BorderFactory.createEmptyBorder());
         condizioni.setContentAreaFilled(false);

@@ -1,6 +1,6 @@
-package it.mmr.accesso;
+package it.mmr.database;
 
-import it.mmr.database.DBManager;
+import it.mmr.accesso.Login_iniziale;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,12 +11,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serial;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.UUID;
 
-    /** creazione di interfaccia
+/** creazione di interfaccia
      * di sing up
      * con metodo di mascheramento doHashing per salvataggio di password
      */

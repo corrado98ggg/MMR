@@ -1,7 +1,4 @@
-package it.mmr.accesso;
-
-import it.mmr.database.Utils;
-import it.mmr.database.DBManager;
+package it.mmr.database;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

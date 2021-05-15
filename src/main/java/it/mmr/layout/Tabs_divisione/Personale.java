@@ -104,24 +104,29 @@ public class Personale extends JFrame implements ActionListener {
          * da spostare in Personale.java
          */
         String[] nomi = {"nome",
-                "cognome",
-                "ruolo"};
+                "cognome"};
 
         String[][] dati = {
-                {"cnienc", "carriero", "videomaker"},
+                {"cnienc", "carriero" },
 
-                {"enrico", "garrapa", "nullafacente"},
+                {"enrico", "garrapa" },
 
-                {"marco", "cask", "bho"},
+                {"marco", "cask"},
 
-                {"fjk", "jnk", "ikln"}
+                {"fjk", "jnk"}
         };
 
         JTable table = new JTable(dati, nomi);
         table.setEnabled(false);
-        table.setBounds(0, 25, 1700, 1000);
-
+        table.setBounds(0, 25, 1140, 1000);
         pannello_del_personale.add(table, 0, 0);
+
+        String[] ruoli={"ruoli"};
+
+        String [][] dati_ruoli= {{"ciao"} ,{"ciao"},{"ciao"},{"ciao"}};
+        JTable table_ruoli=new JTable(dati_ruoli,ruoli);
+        table_ruoli.setBounds(1140,25,500,2000);
+        pannello_del_personale.add(table_ruoli,0,0);
 
         JLabel testa_nome = new JLabel("nome");
         JLabel testa_cognome = new JLabel("cognome");

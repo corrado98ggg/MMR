@@ -10,32 +10,32 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class Calendario extends Component {
+public class Calendario extends JFrame{
     static JLabel lblMonth, lblYear;
     static JButton btnPrev, btnNext;
     static JTable tblCalendar;
     static JComboBox cmbYear;
-    static JFrame frmMain;
+    static JPanel frmMain;
     public static Container pane;
     static DefaultTableModel mtblCalendar; //Table model
     static JScrollPane stblCalendar; //The scrollpane
     static JPanel pnlCalendar;
     static int realYear, realMonth, realDay, currentYear, currentMonth;
 
-    public Calendario(){
+    public static Container Calendario(){
         //Look and feel
         try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());}
         catch (ClassNotFoundException e) {}
         catch (InstantiationException e) {}
         catch (IllegalAccessException e) {}
         catch (UnsupportedLookAndFeelException e) {}
-
+       // setSize(330, 375);
         //Prepare frame
-        frmMain = new JFrame ("Gestionnaire de clients"); //Create frame
-        frmMain.setSize(330, 375); //Set size to 400x400 pixels
-        pane = frmMain.getContentPane(); //Get content pane
-        pane.setLayout(null); //Apply null layout
-        frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Close when X is clicked
+        //Set size to 400x400 pixels
+        pane = new Container();//Get content pane
+        pane.setSize(330, 375);
+     //   pane.setLayout(null); //Apply null layout
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Close when X is clicked
 
         //Create controls
         lblMonth = new JLabel ("January");
@@ -56,6 +56,7 @@ public class Calendario extends Component {
         btnNext.addActionListener(new btnNext_Action());
         cmbYear.addActionListener(new cmbYear_Action());
 
+
         //Add controls to pane
         pane.add(pnlCalendar);
         pnlCalendar.add(lblMonth);
@@ -75,8 +76,8 @@ public class Calendario extends Component {
         stblCalendar.setBounds(10, 50, 300, 250);
 
         //Make frame visible
-        frmMain.setResizable(false);
-        frmMain.setVisible(true);
+       // frmMain.setResizable(false);
+      //  frmMain.setVisible(true);
 
         //Get real month/year
         GregorianCalendar cal = new GregorianCalendar(); //Create calendar
@@ -90,6 +91,7 @@ public class Calendario extends Component {
         String[] headers = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}; //All headers
         for (int i=0; i<7; i++){
             mtblCalendar.addColumn(headers[i]);
+
         }
 
         tblCalendar.getParent().setBackground(tblCalendar.getBackground()); //Set background
@@ -114,7 +116,10 @@ public class Calendario extends Component {
         }
 
         //Refresh calendar
-        refreshCalendar (realMonth, realYear); //Refresh calendar
+       // setVisible(true);
+        //  setContentPane(pane);
+        return pane;
+      //  refreshCalendar (realMonth, realYear); //Refresh calendar
     }
 
     public static void refreshCalendar(int month, int year){

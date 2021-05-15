@@ -16,6 +16,16 @@ it/mmr/database/DBManager.java
  it.mmr.database.DBManager
 it/mmr/database/Rimozione_database.java
  it.mmr.database.Rimozione_database
+it/mmr/layout/Tabs_divisione/Personale.java
+ it.mmr.layout.Tabs_divisione.Personale
+it/mmr/accesso/Login_iniziale.java
+ it.mmr.accesso.Login_iniziale
+it/mmr/database/Registrazione_database.java
+ it.mmr.database.Registrazione_database
+it/mmr/layout/Tabs_divisione/PannelloTotale.java
+ it.mmr.layout.Tabs_divisione.PannelloTotale
+it/mmr/layout/Schermata_Principale_home.java
+ it.mmr.layout.Schermata_Principale_home
 it/mmr/layout/Tabs_divisione/Calendario.java
  it.mmr.layout.Tabs_divisione.Calendario
  it.mmr.layout.Tabs_divisione.Calendario$1
@@ -23,15 +33,5 @@ it/mmr/layout/Tabs_divisione/Calendario.java
  it.mmr.layout.Tabs_divisione.Calendario$btnPrev_Action
  it.mmr.layout.Tabs_divisione.Calendario$cmbYear_Action
  it.mmr.layout.Tabs_divisione.Calendario$tblCalendarRenderer
-it/mmr/database/Registrazione_database.java
- it.mmr.database.Registrazione_database
 it/mmr/layout/Divisioni/Aereodinamica.java
  it.mmr.layout.Divisioni.Aereodinamica
-it/mmr/layout/Schermata_Principale_home.java
- it.mmr.layout.Schermata_Principale_home
-it/mmr/accesso/Login_iniziale.java
- it.mmr.accesso.Login_iniziale
-it/mmr/layout/Tabs_divisione/Personale.java
- it.mmr.layout.Tabs_divisione.Personale
-it/mmr/layout/Tabs_divisione/PannelloTotale.java
- it.mmr.layout.Tabs_divisione.PannelloTotale

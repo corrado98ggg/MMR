@@ -17,13 +17,15 @@ public class PannelloTotale extends JFrame{
          */
         JTabbedPane tabs = new JTabbedPane();
         /*
-         * tabs va spostato in PannelloTotale.java
+         * tabs va spostato in PannelloTotale.jav
          */
 
-        Personale a=new Personale();
+        Personale a = new Personale();
+        //Calendario eventi = new Calendario();
         tabs.setBackground(Color.CYAN);
         tabs.addTab("Personale", a.Personale());
-       tabs.addTab("calendario", new Calendario());
+        tabs.addTab("Eventi", null);
+
 
         /*setVisible(true);
         setContentPane(tabs);

@@ -3,37 +3,58 @@ package it.mmr.layout.Tabs_divisione;
 import it.mmr.database.Registrazione_database;
 import it.mmr.database.Rimozione_database;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-public class Personale extends JFrame implements ActionListener{
+public class Personale extends JFrame implements ActionListener {
 
-    public  JButton piu, meno;
+    public JButton piu, meno;
 
     public JLayeredPane Personale() {
         // piu_bussiness, piu_motori, piu_dinamica_del_veicolo, piu_powertrain, piu_ricerca;
         //public static JPanel p1;
         JMenuBar barra;
 
+        //ImageIcon icon_piu = new ImageIcon("src/main/java/images/piuu.png");
+        //ImageIcon icon_meno = new ImageIcon("src/main/java/images/meno.png");
 
-        ImageIcon icon_piu = new ImageIcon("src/main/java/images/piuu.png");
-        ImageIcon icon_meno = new ImageIcon("src/main/java/images/meno.png");
+        BufferedImage icon_meno = null;
+        try {
+            icon_meno = ImageIO.read(new File("src/main/java/images/meno.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BufferedImage resized_icon_meno = Registrazione_database.getScaledDimension(icon_meno, 109, 109);
+
+        BufferedImage icon_piu = null;
+        try {
+            icon_piu = ImageIO.read(new File("src/main/java/images/piuu.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BufferedImage resized_icon_piu = Registrazione_database.getScaledDimension(icon_piu, 100, 100);
 
         ImageIcon logo_mmr = new ImageIcon("src/main/java/images/mmr_logo.jpg");
         /*
          * codice per il tasto meno:
          * codice che deve andare in Personale.java
          */
-        meno = new JButton(icon_meno);
+
+        meno = new JButton(new ImageIcon(resized_icon_meno));
+        meno.addActionListener(this);
         meno.setBorder(BorderFactory.createEmptyBorder());
         meno.setContentAreaFilled(false);
-      //  meno.addActionListener(this);
+        //  meno.addActionListener(this);
         JPanel pmeno = new JPanel();
         pmeno.setBackground(Color.WHITE);
         pmeno.add(meno);
-        pmeno.setBounds(1370, 700, 150, 150);
+        pmeno.setBounds(1370, 740, 150, 150);
 
 
         /*
@@ -41,16 +62,17 @@ public class Personale extends JFrame implements ActionListener{
          * codice che deve essere messo in Personale.java
          */
 
-        piu = new JButton(icon_piu);
+        piu = new JButton(new ImageIcon(resized_icon_piu));
+        piu.addActionListener(this);
 
-       // piu.addActionListener((ActionListener) this);
-       // piu.addActionListener(e);
-      //  Bottoni.actionPerformed(e, piu);
+        // piu.addActionListener((ActionListener) this);
+        // piu.addActionListener(e);
+        //  Bottoni.actionPerformed(e, piu);
         //piu_bussiness = new JButton(icon_piu);
 
         piu.setBorder(BorderFactory.createEmptyBorder());
         piu.setContentAreaFilled(false);
-      //  piu.addActionListener(this);
+        //  piu.addActionListener(this);
 
         /*
          * pannello dedicato al tatso piu
@@ -134,7 +156,6 @@ public class Personale extends JFrame implements ActionListener{
 
     }
 
-
     /**
      * Invoked when an action occurs.
      *
@@ -142,9 +163,12 @@ public class Personale extends JFrame implements ActionListener{
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-if(e.getSource()==piu)
-{
-    new Registrazione_database();
-}
+
+        if(e.getSource() == piu){
+            new Registrazione_database();
+        }
+        if(e.getSource() == meno){
+            new Rimozione_database();
+        }
     }
 }

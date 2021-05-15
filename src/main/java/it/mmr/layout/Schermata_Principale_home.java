@@ -1,6 +1,8 @@
 package it.mmr.layout;
 
+import it.mmr.database.DBManager;
 import it.mmr.database.Registrazione_database;
+import it.mmr.database.Utils;
 import it.mmr.layout.Divisioni.*;
 
 import it.mmr.layout.Tabs_divisione.PannelloTotale;
@@ -8,17 +10,23 @@ import it.mmr.layout.Tabs_divisione.PannelloTotale;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 
-public class Schermata_Principale_home extends JFrame {
+public class Schermata_Principale_home extends JFrame implements ActionListener {
 
    /* public JButton piu;
     public JButton meno;*/
     JTabbedPane divisioni;
     JButton avvertenza;
+    String stringa_di_avvertenza;
+    JLayeredPane a;
 
     public Schermata_Principale_home() {
         super("Home");
@@ -29,7 +37,7 @@ public class Schermata_Principale_home extends JFrame {
 
         BufferedImage blocconote = null;
         try {
-            blocconote = ImageIO.read(new File("src/main/java/images/blocco_note.png"));
+            blocconote = ImageIO.read(new File("src/main/java/images/AVVERTENZE.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,27 +55,15 @@ public class Schermata_Principale_home extends JFrame {
 
         JTabbedPane divisioni = new JTabbedPane(JTabbedPane.LEFT);
 
-        String prova= new String("shajcbkjjaòvujkzxnfoòuk m,hvdb8oiwyhieh");
-        JTextArea testo=new JTextArea(prova);
 
-
-        testo.setFont(new Font("Monaco", Font.ITALIC, 15));
-        testo.setEditable(false);
-
-      JPanel d=new JPanel();
-      d.setBounds(30,400,200,200);
-      d.add(testo);
-
-       // JPanel contenitore =new JPanel();
-
-        avvertenza=new JButton("agg avvertenza");
+        avvertenza = new JButton("Aggiungi avvertenza");
+        avvertenza.addActionListener(this);
         JPanel panello_avvertenza=new JPanel();
         panello_avvertenza.add(avvertenza);
         panello_avvertenza.setBounds(85,975,200,200);
 
-        JLayeredPane a=new JLayeredPane();
+        a = new JLayeredPane();
 
-        //JLabel b=new JLabel((Icon) resized_blocco_note);
         JLabel picLabel = new JLabel(new ImageIcon(resized_blocco_note));
         JPanel c=new JPanel();
 
@@ -75,11 +71,11 @@ public class Schermata_Principale_home extends JFrame {
         JPanel panello_danger=new JPanel();
 
         panello_danger.add(picLabel1);
-        panello_danger.setBounds(45,950,65,80);
+        panello_danger.setBounds(25,950,65,80);
 
         c.setBackground(new Color(237,237,237));
         c.add(picLabel);
-        c.setBounds(16,330,300,300);
+        c.setBounds(20,330,300,300);
 
         divisioni.add(null, logo_mmr);
         divisioni.addTab("aereodinamica", Aereodinamica.aereodinamica());
@@ -96,7 +92,7 @@ public class Schermata_Principale_home extends JFrame {
         a.setBounds(0,0,1920,1080);
         a.add(divisioni,0,0);
         a.add(c,1,1);
-        a.add(d,2,2);
+
         a.add(panello_avvertenza,2,2);
         a.add(panello_danger,2,1);
 
@@ -104,9 +100,62 @@ public class Schermata_Principale_home extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(1920, 1080);
         setVisible(true);
+
+        try {
+            testConnection_avvertenze();
+            //load();
+        } catch (SQLException | NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Database Error!");
+        }
     }
 
+    public void actionPerformed(ActionEvent e) {
 
+        if(e.getSource() == avvertenza){
+
+            stringa_di_avvertenza = JOptionPane.showInputDialog("Inserisci Avvertenza");
+
+            JTextArea testo = new JTextArea(stringa_di_avvertenza);
+            testo.setLineWrap(true);
+            testo.setFont(new Font("Arial Black", Font.BOLD, 10));
+            testo.setOpaque(false);
+            testo.setEditable(false);
+
+
+            JPanel d = new JPanel();
+            d.setBounds(20,450,280,100);
+            d.setBackground(new Color(253, 203, 1));
+            d.add(testo);
+
+            a.add(d,2,2);
+
+            try {
+                String query = String.format(
+                        "INSERT INTO avvertenze (testo) VALUES ('%s')",
+                         stringa_di_avvertenza);
+                Statement statement = DBManager.getConnection().createStatement();
+                statement.executeUpdate(query);
+                statement.close();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+
+        }
+    }
+
+    public static void testConnection_avvertenze() throws SQLException {
+        DBManager.setConnection(
+                Utils.JDBC_Driver_SQLite,
+                Utils.JDBC_URL_SQLite);
+        Statement statement = DBManager.getConnection().createStatement();
+
+        try {
+            statement.executeQuery("SELECT * FROM avvertenze");
+        } catch (SQLException e) {
+            statement.executeUpdate("DROP TABLE IF EXISTS avvertenze");
+            statement.executeUpdate("CREATE TABLE avvertenze (" + "testo LONGVARCHAR PRIMARY KEY)");
+        }
+    }
 
     public static void main(String[] args) {
         new Schermata_Principale_home();

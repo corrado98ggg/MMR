@@ -218,6 +218,8 @@ public class Registrazione_database extends JFrame implements ActionListener {
         }
     }
 
+
+
     /**
      *
      * @return true o false

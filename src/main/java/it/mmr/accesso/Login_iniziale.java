@@ -135,7 +135,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-
+        boolean i = false;
         System.out.println(e);
 
         //se il tasto premuto è: fai->
@@ -166,7 +166,10 @@ public class Login_iniziale extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == condizioni) {
-            new Termini_e_condizioni();
+            if(!i) {
+                new Termini_e_condizioni(); // fixato da me perchè Errico è un coglione
+                i=true;
+            }
         }
 
     }

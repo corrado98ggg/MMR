@@ -1,8 +1,12 @@
 package it.mmr.database;
 
+import javax.swing.*;
 import java.io.File;
 import java.nio.ByteBuffer;
 import java.nio.file.Paths;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.UUID;
 
 public class Utils {
@@ -33,5 +37,25 @@ public class Utils {
         bb.putLong(uuid.getMostSignificantBits());
         bb.putLong(uuid.getLeastSignificantBits());
         return bb.array();
+    }
+
+    public static int quante_persone_sono_registrate() throws SQLException {
+        int cont = 0;
+
+        try {
+            Registrazione_database.testConnection();
+            //load();
+        } catch (SQLException | NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Database Error!");
+        }
+
+        Statement statement = DBManager.getConnection().createStatement();
+
+        ResultSet rs = statement.executeQuery("SELECT * FROM registrazioni LIMIT 100");
+
+        while (rs.next()) {
+            cont++;
+        }
+        return cont;
     }
 }

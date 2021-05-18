@@ -6,11 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class PannelloTotale extends JFrame{
 
 
-    public static JTabbedPane PannelloTotale(){
+    public static JTabbedPane PannelloTotale() throws SQLException {
 
         /*
          * tabs va spostato in PannelloTotale.java

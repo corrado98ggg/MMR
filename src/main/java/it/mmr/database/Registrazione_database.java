@@ -1,5 +1,7 @@
 package it.mmr.database;
 
+import it.mmr.layout.Tabs_divisione.Personale;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -148,8 +150,7 @@ public class Registrazione_database extends JFrame implements ActionListener {
 
         //se il tasto premuto è: fai->
         if (e.getSource() == exit) {
-            //chiudo l'applicazione:
-            System.exit(0);
+            setVisible(false);
         }
         if (e.getSource() == ok) {
 
@@ -192,6 +193,15 @@ public class Registrazione_database extends JFrame implements ActionListener {
 
                 UIManager.put("OptionPane.minimumSize", new Dimension(100, 90));
                 JOptionPane.showMessageDialog(null, "Registrazione avvenuta con successo, ora puoi fare il login!");
+
+                try {
+                    Personale.Stampa_personale(Personale.Matrice_personale());
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+
+                Personale.colonna_ruoli();
+
                 setVisible(false);
 
             } else {

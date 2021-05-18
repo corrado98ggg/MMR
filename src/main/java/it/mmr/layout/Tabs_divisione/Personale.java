@@ -1,7 +1,9 @@
 package it.mmr.layout.Tabs_divisione;
 
+import it.mmr.database.DBManager;
 import it.mmr.database.Registrazione_database;
 import it.mmr.database.Rimozione_database;
+import it.mmr.database.Utils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,18 +13,22 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Personale extends JFrame implements ActionListener {
 
+    private static int contatore_persone;
+    public static String[][] dati;
+    public static String[] nomi = {"nome",
+            "cognome"};
+    public static String[][] dati_ruoli;
+    public static JLayeredPane pannello_del_personale = new JLayeredPane();
+
     public JButton piu, meno;
 
-    public JLayeredPane Personale() {
-        // piu_bussiness, piu_motori, piu_dinamica_del_veicolo, piu_powertrain, piu_ricerca;
-        //public static JPanel p1;
-        JMenuBar barra;
-
-        //ImageIcon icon_piu = new ImageIcon("src/main/java/images/piuu.png");
-        //ImageIcon icon_meno = new ImageIcon("src/main/java/images/meno.png");
+    public JLayeredPane Personale() throws SQLException {
 
         BufferedImage icon_meno = null;
         try {
@@ -41,43 +47,21 @@ public class Personale extends JFrame implements ActionListener {
         BufferedImage resized_icon_piu = Registrazione_database.getScaledDimension(icon_piu, 100, 100);
 
         ImageIcon logo_mmr = new ImageIcon("src/main/java/images/mmr_logo.jpg");
-        /*
-         * codice per il tasto meno:
-         * codice che deve andare in Personale.java
-         */
 
         meno = new JButton(new ImageIcon(resized_icon_meno));
         meno.addActionListener(this);
         meno.setBorder(BorderFactory.createEmptyBorder());
         meno.setContentAreaFilled(false);
-        //  meno.addActionListener(this);
         JPanel pmeno = new JPanel();
         pmeno.setBackground(Color.WHITE);
         pmeno.add(meno);
         pmeno.setBounds(1370, 740, 150, 150);
 
-
-        /*
-         * codice per il tasto piu:
-         * codice che deve essere messo in Personale.java
-         */
-
         piu = new JButton(new ImageIcon(resized_icon_piu));
         piu.addActionListener(this);
 
-        // piu.addActionListener((ActionListener) this);
-        // piu.addActionListener(e);
-        //  Bottoni.actionPerformed(e, piu);
-        //piu_bussiness = new JButton(icon_piu);
-
         piu.setBorder(BorderFactory.createEmptyBorder());
         piu.setContentAreaFilled(false);
-        //  piu.addActionListener(this);
-
-        /*
-         * pannello dedicato al tatso piu
-         * codice deve essere spostato in Personale.java
-         */
 
         JPanel pannello_piu = new JPanel();
         pannello_piu.setSize(700, 700);
@@ -85,48 +69,16 @@ public class Personale extends JFrame implements ActionListener {
         pannello_piu.setBackground(Color.white);
         pannello_piu.setBounds(1370, 851, 150, 150);
 
-        /*
-         * pannello dedicato all'elenco del personale
-         * codice da spostare in Personale.java
-         */
-        JLayeredPane pannello_del_personale = new JLayeredPane();
         pannello_del_personale.add(pannello_piu, 2, 0);
         pannello_del_personale.add(pmeno, 1, 0);
         JPanel colore = new JPanel();
         colore.setSize(1920, 1200);
         pannello_del_personale.add(colore, 0, 0);
-        //JTabbedPane prova = new JTabbedPane();
         JPanel pannello_calendario = new JPanel();
-        //prova.addTab("Calendario", calle);
-        //pannello_del_personale.add(prova, 2, 0);
-        /*
-         * inizio di creazione della tabella del personale
-         * da spostare in Personale.java
-         */
-        String[] nomi = {"nome",
-                "cognome"};
 
-        String[][] dati = {
-                {"cnienc", "carriero" },
+        Personale.Stampa_personale(Personale.Matrice_personale());
 
-                {"enrico", "garrapa" },
-
-                {"marco", "cask"},
-
-                {"fjk", "jnk"}
-        };
-
-        JTable table = new JTable(dati, nomi);
-        table.setEnabled(false);
-        table.setBounds(0, 25, 1140, 1000);
-        pannello_del_personale.add(table, 0, 0);
-
-        String[] ruoli={"ruoli"};
-
-        String [][] dati_ruoli= {{"ciao"} ,{"ciao"},{"ciao"},{"ciao"}};
-        JTable table_ruoli=new JTable(dati_ruoli,ruoli);
-        table_ruoli.setBounds(1140,25,500,2000);
-        pannello_del_personale.add(table_ruoli,0,0);
+        colonna_ruoli();
 
         JLabel testa_nome = new JLabel("nome");
         JLabel testa_cognome = new JLabel("cognome");
@@ -153,14 +105,73 @@ public class Personale extends JFrame implements ActionListener {
 
         pannello_del_personale.add(colonna_cognome, 1, 0);
 
-        /*setContentPane(pannello_del_personale);
-        setSize(1080, 1080);
-        setVisible(true);*/
         return pannello_del_personale;
+    }
 
+    public static String[][] Matrice_personale () throws SQLException {
+
+        try {
+            contatore_persone = Utils.quante_persone_sono_registrate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        dati = new String[contatore_persone][2];
+        int i = 0;
+
+        Statement statement_tmp = DBManager.getConnection().createStatement();
+        ResultSet queryPersonale = statement_tmp.executeQuery("SELECT * FROM registrazioni LIMIT 100");
+
+        while (queryPersonale.next()) {
+            if (i >= contatore_persone) {
+                continue;
+            }
+            for (int j = 1; j < 3; j++) {
+
+                //caso base:
+                if (i == 0 && j == 1) {
+                    dati[i][j - 1] = queryPersonale.getString("nome");
+                    System.out.println(dati[i][j - 1]);
+
+                    continue;
+                }
+                if (j / 2 == 1) {
+                    dati[i][j - 1] = queryPersonale.getString("cognome");
+                    System.out.println(dati[i][j - 1]);
+                }
+
+                if (j / 2 != 1) {
+                    dati[i][j - 1] = queryPersonale.getString("nome");
+                    System.out.println(dati[i][j - 1]);
+                }
+            }
+            i++;
+        }
+        return dati;
+    }
+
+
+    public static void Stampa_personale(String[][] tmp){
+
+        JTable table = new JTable(dati, nomi);
+        table.setEnabled(false);
+        table.setBounds(0, 25, 1140, 1000);
+        pannello_del_personale.add(table, 0, 0);
 
     }
 
+    public static void colonna_ruoli(){
+
+
+        String[] ruoli = {"ruoli"};
+
+        dati_ruoli = new String[contatore_persone][1];
+
+        JTable table_ruoli = new JTable(dati_ruoli, ruoli);
+        table_ruoli.setBounds(1140, 25, 500, 2000);
+        pannello_del_personale.add(table_ruoli, 0, 0);
+
+    }
     /**
      * Invoked when an action occurs.
      *
@@ -169,11 +180,12 @@ public class Personale extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == piu){
+        if (e.getSource() == piu) {
             new Registrazione_database();
         }
-        if(e.getSource() == meno){
+        if (e.getSource() == meno) {
             new Rimozione_database();
         }
     }
+
 }

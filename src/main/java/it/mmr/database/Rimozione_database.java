@@ -1,6 +1,7 @@
 package it.mmr.database;
 
 import it.mmr.accesso.Login_iniziale;
+import it.mmr.layout.Tabs_divisione.Personale;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -121,6 +122,7 @@ import java.sql.Statement;
             } catch (SQLException | NullPointerException e) {
                 JOptionPane.showMessageDialog(this, "Database Error!");
             }
+            Personale.colonna_ruoli();
         }
 
         /**
@@ -160,7 +162,17 @@ import java.sql.Statement;
                     } catch (SQLException e1) {
                         e1.printStackTrace();
                     }
+
+                    try {
+                        Personale.Stampa_personale(Personale.Matrice_personale());
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+
+                    Personale.colonna_ruoli();
+
                     JOptionPane.showMessageDialog(null, "rimozione avvenuta con successo!");
+
                 }
 
             }

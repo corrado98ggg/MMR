@@ -2,10 +2,12 @@ package it.mmr.layout;
 
 import it.mmr.database.DBManager;
 import it.mmr.database.Registrazione_database;
+import it.mmr.database.Rimozione_database;
 import it.mmr.database.Utils;
 import it.mmr.layout.Divisioni.*;
 
 import it.mmr.layout.Tabs_divisione.PannelloTotale;
+import it.mmr.layout.Tabs_divisione.Personale;
 import org.eclipse.jetty.server.PushBuilder;
 
 import javax.imageio.ImageIO;
@@ -31,6 +33,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
     public static JLayeredPane a;
 
     public static String warning;
+    public static String ruolo;
 
     public Schermata_Principale_home() throws SQLException {
         super("Home");
@@ -169,7 +172,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
     public static void aggiungi_stringa(String str) throws SQLException {
 
         try {
-            testConnection_avvertenze();
+            Registrazione_database.testConnection();
             //load();
         } catch (SQLException | NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Database Error!");
@@ -185,6 +188,72 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
+    }
+
+
+    public static void aggiungi_ruolo(String str) throws SQLException {
+
+        try {
+            Registrazione_database.testConnection();
+            //load();
+        } catch (SQLException | NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Database Error!");
+        }
+
+        Statement statement = DBManager.getConnection().createStatement();
+
+        ResultSet tmp = statement.executeQuery("SELECT * FROM registrazioni");
+
+        int i = 0;
+
+        while (tmp.next()) {
+
+            if (i >= Utils.quante_persone_sono_registrate()) {
+                continue;
+            }
+            for (int j = 0; j < 1; j++) {
+
+                if (Personale.dati[i][j].equals(tmp.getString("nome"))) {
+                    if (Personale.dati[i][j + 1].equals(tmp.getString("cognome"))) {
+
+                        try {
+                            String query = String.format(
+                                    "UPDATE registrazioni SET Ruoli=('%s') WHERE Nome IS ('%s') AND Cognome IS ('%s');",
+                                    str, Personale.dati[i][j], Personale.dati[i][j + 1]);
+                            Statement statement_2 = DBManager.getConnection().createStatement();
+                            statement_2.executeUpdate(query);
+                            statement_2.close();
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }
+            }
+          i++;
+        }
+
+    }
+
+    public static void check_ruolo() throws SQLException {
+
+        try {
+            testConnection_avvertenze();
+            //load();
+        } catch (SQLException | NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Database Error!");
+        }
+
+        Statement statement = DBManager.getConnection().createStatement();
+
+        ResultSet tmp = statement.executeQuery("SELECT ruoli FROM registrazioni");
+
+        while (tmp.next()) {
+
+            ruolo = tmp.getString("ruoli");
+            System.out.println(ruolo);
+        }
+         Personale.Stampa_ruoli(Personale.Matrice_ruoli());
+
     }
 
     public static void main(String[] args) throws SQLException {

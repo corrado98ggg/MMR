@@ -26,7 +26,6 @@ public class Registrazione_database extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
     private final JButton ok;
     private final JButton exit;
-    private final JTextField utente;
     private final JPasswordField password;
     public static String root_check;
     UUID id;
@@ -71,8 +70,7 @@ public class Registrazione_database extends JFrame implements ActionListener {
         ok.addActionListener(this);
         exit = new JButton("Exit");
         exit.addActionListener(this);
-        utente = new JTextField("Inserisci nome utente");
-        utente.setPreferredSize(new Dimension(250,30));
+
         password = new JPasswordField("inserisci una nuova password");
         password.setPreferredSize(new Dimension(250,30));
 
@@ -111,7 +109,7 @@ public class Registrazione_database extends JFrame implements ActionListener {
 
         panel.add(piclabel2);
         panel_logo_mmr.add(picLabel);
-        panelscritte.add(utente);
+
         panelscritte.add(password);
         panelscritte.add(nome);
         panelscritte.add(cognome);
@@ -161,8 +159,7 @@ public class Registrazione_database extends JFrame implements ActionListener {
              */
             if (password.getText().length() > 5 && thereisnumber()) {
 
-                System.out.println("Nome utente salvato:");
-                System.out.println(utente.getText());
+                //System.out.println("Nome utente salvato:");
 
                 System.out.println("password prima di Hashing:");
                 System.out.println(password.getPassword());
@@ -182,8 +179,8 @@ public class Registrazione_database extends JFrame implements ActionListener {
 
                 try {
                     String query = String.format(
-                            "INSERT INTO registrazioni (id, utente, nome, cognome, password, root, divisione) VALUES ('%s','%s', '%s', '%s', '%s', '%s', '%s')",
-                            id, utente.getText(), nome.getText(), cognome.getText(), password_hash, root_check, divisione.getText() );
+                            "INSERT INTO registrazioni (id, nome, cognome, password, root, divisione) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",
+                            id, nome.getText(), cognome.getText(), password_hash, root_check, divisione.getText() );
                     Statement statement = DBManager.getConnection().createStatement();
                     statement.executeUpdate(query);
                     statement.close();
@@ -200,7 +197,7 @@ public class Registrazione_database extends JFrame implements ActionListener {
                     throwables.printStackTrace();
                 }
 
-                Personale.colonna_ruoli();
+                //Personale.Stampa_ruoli();
 
                 setVisible(false);
 
@@ -221,13 +218,13 @@ public class Registrazione_database extends JFrame implements ActionListener {
             statement.executeQuery("SELECT * FROM registrazioni");
         } catch (SQLException e) {
             statement.executeUpdate("DROP TABLE IF EXISTS registrazioni");
-            statement.executeUpdate("CREATE TABLE registrazioni (" + "id VARCHAR(50) PRIMARY KEY, " + "Utente VARCHAR(50),"
+            statement.executeUpdate("CREATE TABLE registrazioni (" + "id VARCHAR(50) PRIMARY KEY, "
                     + "Nome VARCHAR(50)," + "Cognome VARCHAR(50),"
                     + "Password VARCHAR(50)," + "Root BOOLEAN,"
+                    + "Ruoli LONGVARCHAR,"
                     + "Divisione VARCHAR(50))");
         }
     }
-
 
 
     /**

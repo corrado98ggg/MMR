@@ -20,11 +20,20 @@ import java.sql.Statement;
 public class Personale extends JFrame implements ActionListener {
 
     private static int contatore_persone;
+
     public static String[][] dati;
+
     public static String[] nomi = {"nome",
             "cognome"};
-    public static String[][] dati_ruoli;
+
+    public static JButton matita;
+
+    public static String[][] dati_ruoli; //[contatore_persone][1]
+
     public static JLayeredPane pannello_del_personale = new JLayeredPane();
+
+
+    public static JTable table_ruoli;
 
     public JButton piu, meno;
 
@@ -78,7 +87,13 @@ public class Personale extends JFrame implements ActionListener {
 
         Personale.Stampa_personale(Personale.Matrice_personale());
 
-        colonna_ruoli();
+        Personale.Stampa_ruoli(Personale.Matrice_ruoli());
+
+        //table_ruoli.addAncestorListener();
+        System.out.println(table_ruoli.getValueAt(0,0).toString());
+
+
+
 
         JLabel testa_nome = new JLabel("nome");
         JLabel testa_cognome = new JLabel("cognome");
@@ -101,10 +116,15 @@ public class Personale extends JFrame implements ActionListener {
 
         colonna_ruolo.add(testa_ruolo);
         colonna_ruolo.setBounds(1130, 0, 50, 25);
-        pannello_del_personale.add(colonna_ruolo, 0, 0);
+        pannello_del_personale.add(colonna_ruolo, 1, 0);
 
-        pannello_del_personale.add(colonna_cognome, 1, 0);
-
+        pannello_del_personale.add(colonna_cognome, 2, 0);
+        JPanel sfondo = new JPanel();
+        sfondo.setBounds(0,40,1920,1000);
+        sfondo.setBackground(Color.white);
+        pannello_del_personale.add(sfondo, 0, 0);
+        Personale a=new Personale();
+        pannello_del_personale.add(a.Stampa_matita(),0,0);
         return pannello_del_personale;
     }
 
@@ -154,29 +174,87 @@ public class Personale extends JFrame implements ActionListener {
     public static void Stampa_personale(String[][] tmp){
 
         JTable table = new JTable(dati, nomi);
+        table.setRowHeight(35);
         table.setEnabled(false);
         table.setBounds(0, 25, 1140, 1000);
-        pannello_del_personale.add(table, 0, 0);
+        pannello_del_personale.add(table, 1, 0);
 
     }
 
-    public static void colonna_ruoli(){
+    public static String[][] Matrice_ruoli() throws SQLException {
 
+        try {
+            contatore_persone = Utils.quante_persone_sono_registrate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        dati_ruoli = new String[contatore_persone][1];
+        int i = 0;
+
+        Statement statement_tmp = DBManager.getConnection().createStatement();
+        ResultSet queryPersonale = statement_tmp.executeQuery("SELECT * FROM registrazioni LIMIT 100");
+
+        while (queryPersonale.next()) {
+            if (i >= contatore_persone) {
+                continue;
+            }
+
+            dati_ruoli[i][0] = queryPersonale.getString("ruoli");
+            //System.out.println(dati_ruoli[i][0]);
+
+            i++;
+        }
+        return dati_ruoli;
+    }
+
+
+    public static void Stampa_ruoli(String[][] tmp) {
 
         String[] ruoli = {"ruoli"};
 
-        dati_ruoli = new String[contatore_persone][1];
+        table_ruoli = new JTable(dati_ruoli, ruoli);
+        table_ruoli.setRowHeight(35);
+        table_ruoli.setEnabled(false);
+        table_ruoli.setBounds(1140, 25, 300, 2000);
+        pannello_del_personale.add(table_ruoli, 1, 0);
 
-        JTable table_ruoli = new JTable(dati_ruoli, ruoli);
-        table_ruoli.setBounds(1140, 25, 500, 2000);
-        pannello_del_personale.add(table_ruoli, 0, 0);
 
     }
-    /**
-     * Invoked when an action occurs.
-     *
-     * @param e the event to be processed
-     */
+
+    public  JPanel Stampa_matita(){
+
+
+        BufferedImage icon_matita = null;
+        try {
+            icon_matita = ImageIO.read(new File("src/main/java/images/matita.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BufferedImage resized_icon_matita = Registrazione_database.getScaledDimension(icon_matita, 30, 30);
+
+
+        matita = new JButton(new ImageIcon(resized_icon_matita));
+        matita.addActionListener(this);
+
+        matita.setBorder(BorderFactory.createEmptyBorder());
+        matita.setContentAreaFilled(false);
+        JPanel matita_panel = new JPanel();
+        matita_panel.setBackground(Color.WHITE);
+        matita_panel.add(matita);
+        matita_panel.setBackground(Color.white);
+        matita_panel.setBounds(1410, 26, 150, 35);
+
+
+        return matita_panel;
+    }
+
+
+        /**
+         * Invoked when an action occurs.
+         *
+         * @param e the event to be processed
+         */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -185,6 +263,10 @@ public class Personale extends JFrame implements ActionListener {
         }
         if (e.getSource() == meno) {
             new Rimozione_database();
+        }
+
+        if(e.getSource() == matita){
+            new Add_ruolo();
         }
     }
 

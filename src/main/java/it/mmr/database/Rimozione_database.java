@@ -122,7 +122,7 @@ import java.sql.Statement;
             } catch (SQLException | NullPointerException e) {
                 JOptionPane.showMessageDialog(this, "Database Error!");
             }
-            Personale.colonna_ruoli();
+            //Personale.colonna_ruoli();
         }
 
         /**
@@ -169,7 +169,7 @@ import java.sql.Statement;
                         throwables.printStackTrace();
                     }
 
-                    Personale.colonna_ruoli();
+                    //Personale.colonna_ruoli();
 
                     JOptionPane.showMessageDialog(null, "rimozione avvenuta con successo!");
 

@@ -24,16 +24,16 @@ public class Personale extends JFrame implements ActionListener {
     public static String[][] dati;
 
     public static String[] nomi = {"nome",
-            "cognome"};
+            "cognome","ruolo"};
 
     public static JButton matita;
 
-    public static String[][] dati_ruoli; //[contatore_persone][1]
+  //  public static String[][] dati_ruoli; //[contatore_persone][1]
 
     public static JLayeredPane pannello_del_personale = new JLayeredPane();
 
 
-    public static JTable table_ruoli;
+ //   public static JTable table_ruoli;
 
     public JButton piu, meno;
 
@@ -83,14 +83,16 @@ public class Personale extends JFrame implements ActionListener {
         JPanel colore = new JPanel();
         colore.setSize(1920, 1200);
         pannello_del_personale.add(colore, 0, 0);
+        Personale a=new Personale();
+        pannello_del_personale.add(a.Stampa_matita(),1,0);
         JPanel pannello_calendario = new JPanel();
 
         Personale.Stampa_personale(Personale.Matrice_personale());
 
-        Personale.Stampa_ruoli(Personale.Matrice_ruoli());
+    //    Personale.Stampa_ruoli(Personale.Matrice_ruoli());
 
         //table_ruoli.addAncestorListener();
-        System.out.println(table_ruoli.getValueAt(0,0).toString());
+       // System.out.println(table_ruoli.getValueAt(0,0).toString());
 
 
 
@@ -109,13 +111,13 @@ public class Personale extends JFrame implements ActionListener {
         JPanel colonna_cognome = new JPanel();
 
         colonna_cognome.add(testa_cognome);
-        colonna_cognome.setBounds(565, 0, 70, 25);
+        colonna_cognome.setBounds(475, 0, 70, 25);
 
 
         JPanel colonna_ruolo = new JPanel();
 
         colonna_ruolo.add(testa_ruolo);
-        colonna_ruolo.setBounds(1130, 0, 50, 25);
+        colonna_ruolo.setBounds(960, 0, 50, 25);
         pannello_del_personale.add(colonna_ruolo, 1, 0);
 
         pannello_del_personale.add(colonna_cognome, 2, 0);
@@ -123,8 +125,7 @@ public class Personale extends JFrame implements ActionListener {
         sfondo.setBounds(0,40,1920,1000);
         sfondo.setBackground(Color.white);
         pannello_del_personale.add(sfondo, 0, 0);
-        Personale a=new Personale();
-        pannello_del_personale.add(a.Stampa_matita(),0,0);
+
         return pannello_del_personale;
     }
 
@@ -136,17 +137,17 @@ public class Personale extends JFrame implements ActionListener {
             throwables.printStackTrace();
         }
 
-        dati = new String[contatore_persone][2];
+        dati = new String[contatore_persone][3];
         int i = 0;
 
         Statement statement_tmp = DBManager.getConnection().createStatement();
         ResultSet queryPersonale = statement_tmp.executeQuery("SELECT * FROM registrazioni LIMIT 100");
-
+       int k=0;
         while (queryPersonale.next()) {
             if (i >= contatore_persone) {
                 continue;
             }
-            for (int j = 1; j < 3; j++) {
+            for (int j = 1; j < 4; j++) {
 
                 //caso base:
                 if (i == 0 && j == 1) {
@@ -156,16 +157,30 @@ public class Personale extends JFrame implements ActionListener {
                     continue;
                 }
                 if (j / 2 == 1) {
+                    if(k==1)
+                    {
+                        dati[i][j - 1] = queryPersonale.getString("ruoli");
+                        System.out.println(dati[i][j - 1]);
+                        continue;
+                    }
                     dati[i][j - 1] = queryPersonale.getString("cognome");
                     System.out.println(dati[i][j - 1]);
+                    k++;
+                    continue;
                 }
 
                 if (j / 2 != 1) {
                     dati[i][j - 1] = queryPersonale.getString("nome");
                     System.out.println(dati[i][j - 1]);
+                    continue;
                 }
+
+
             }
+            k=0;
             i++;
+
+
         }
         return dati;
     }
@@ -176,12 +191,12 @@ public class Personale extends JFrame implements ActionListener {
         JTable table = new JTable(dati, nomi);
         table.setRowHeight(35);
         table.setEnabled(false);
-        table.setBounds(0, 25, 1140, 1000);
+        table.setBounds(0, 25, 1440, 1500);
         pannello_del_personale.add(table, 1, 0);
 
     }
 
-    public static String[][] Matrice_ruoli() throws SQLException {
+    /*public static String[][] Matrice_ruoli() throws SQLException {
 
         try {
             contatore_persone = Utils.quante_persone_sono_registrate();
@@ -220,7 +235,7 @@ public class Personale extends JFrame implements ActionListener {
         pannello_del_personale.add(table_ruoli, 1, 0);
 
 
-    }
+    }*/
 
     public  JPanel Stampa_matita(){
 
@@ -243,7 +258,7 @@ public class Personale extends JFrame implements ActionListener {
         matita_panel.setBackground(Color.WHITE);
         matita_panel.add(matita);
         matita_panel.setBackground(Color.white);
-        matita_panel.setBounds(1410, 26, 150, 35);
+        matita_panel.setBounds(1440, 26, 150, 35);
 
 
         return matita_panel;

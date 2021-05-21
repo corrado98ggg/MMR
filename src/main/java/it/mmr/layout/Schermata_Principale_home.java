@@ -252,7 +252,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
             ruolo = tmp.getString("ruoli");
             System.out.println(ruolo);
         }
-         Personale.Stampa_ruoli(Personale.Matrice_ruoli());
+        // Personale.Stampa_ruoli(Personale.Matrice_ruoli());
 
     }
 

@@ -5,12 +5,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class Calendario extends JFrame{
+public class Calendario extends JFrame implements TableModelListener {
     static JLabel lblMonth, lblYear;
     static JButton btnPrev, btnNext;
     static JTable tblCalendar;
@@ -22,18 +24,18 @@ public class Calendario extends JFrame{
     static JPanel pnlCalendar;
     static int realYear, realMonth, realDay, currentYear, currentMonth;
 
-    public static Container Calendario(){
+    public Container Calendario(){
         //Look and feel
         try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());}
         catch (ClassNotFoundException e) {}
         catch (InstantiationException e) {}
         catch (IllegalAccessException e) {}
         catch (UnsupportedLookAndFeelException e) {}
-       // setSize(330, 375);
+        //setSize(330, 375);
         //Prepare frame
         //Set size to 400x400 pixels
         pane = new Container();//Get content pane
-        pane.setSize(330, 375);
+        pane.setSize(2000, 400);
      //   pane.setLayout(null); //Apply null layout
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Close when X is clicked
 
@@ -43,13 +45,14 @@ public class Calendario extends JFrame{
         cmbYear = new JComboBox();
         btnPrev = new JButton ("<-");
         btnNext = new JButton ("->");
-        mtblCalendar = new DefaultTableModel(){public boolean isCellEditable(int rowIndex, int mColIndex){return false;}};
+        mtblCalendar = new DefaultTableModel(){public boolean isCellEditable(int rowIndex, int mColIndex){return true;}};
+        mtblCalendar.addTableModelListener(this);
         tblCalendar = new JTable(mtblCalendar);
         stblCalendar = new JScrollPane(tblCalendar);
         pnlCalendar = new JPanel(null);
 
         //Set border
-        pnlCalendar.setBorder(BorderFactory.createTitledBorder("Calendar"));
+        pnlCalendar.setBorder(BorderFactory.createTitledBorder("Calendario"));
 
         //Register action listeners
         btnPrev.addActionListener(new btnPrev_Action());
@@ -67,13 +70,13 @@ public class Calendario extends JFrame{
         pnlCalendar.add(stblCalendar);
 
         //Set bounds
-        pnlCalendar.setBounds(0, 0, 320, 335);
-        lblMonth.setBounds(160-lblMonth.getPreferredSize().width/2, 25, 100, 25);
+        pnlCalendar.setBounds(0, 0, 2000, 400);
+        lblMonth.setBounds(100-lblMonth.getPreferredSize().width/2, 25, 500, 500);
         //lblYear.setBounds(10, 305, 80, 20);
-        cmbYear.setBounds(230, 305, 80, 20);
-        btnPrev.setBounds(10, 25, 50, 25);
-        btnNext.setBounds(260, 25, 50, 25);
-        stblCalendar.setBounds(10, 50, 300, 250);
+        cmbYear.setBounds(1420, 350, 100, 40);
+        btnPrev.setBounds(10, 25, 100, 50);
+        btnNext.setBounds(1420, 25, 100, 50);
+        stblCalendar.setBounds(0, 90, 1550, 1000);
 
         //Make frame visible
        // frmMain.setResizable(false);
@@ -88,7 +91,7 @@ public class Calendario extends JFrame{
         currentYear = realYear;
 
         //Add headers
-        String[] headers = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}; //All headers
+        String[] headers = {"Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"}; //All headers
         for (int i=0; i<7; i++){
             mtblCalendar.addColumn(headers[i]);
 
@@ -117,14 +120,17 @@ public class Calendario extends JFrame{
 
         //Refresh calendar
        // setVisible(true);
-        //  setContentPane(pane);
+        //  setContentPane(pane);+
+        Calendario.refreshCalendar (realMonth, realYear); //Refresh calendar
         return pane;
-      //  refreshCalendar (realMonth, realYear); //Refresh calendar
+
     }
 
     public static void refreshCalendar(int month, int year){
         //Variables
-        String[] months =  {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        String[] months =  {"Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio",
+                "Agosto", "Settembre", "Ottobre",
+                "Novembre", "Dicembre"};
         int nod, som; //Number Of Days, Start Of Month
 
         //Allow/disallow buttons
@@ -133,7 +139,7 @@ public class Calendario extends JFrame{
         if (month == 0 && year <= realYear-10){btnPrev.setEnabled(false);} //Too early
         if (month == 11 && year >= realYear+100){btnNext.setEnabled(false);} //Too late
         lblMonth.setText(months[month]); //Refresh the month label (at the top)
-        lblMonth.setBounds(160-lblMonth.getPreferredSize().width/2, 25, 180, 25); //Re-align label with calendar
+        lblMonth.setBounds(750-lblMonth.getPreferredSize().width/2, 35, 180, 25); //Re-align label with calendar
         cmbYear.setSelectedItem(String.valueOf(year)); //Select the correct year in the combo box
 
         //Clear table
@@ -211,6 +217,29 @@ public class Calendario extends JFrame{
                 refreshCalendar(currentMonth, currentYear);
             }
         }
+    }
+
+    /**
+     * This fine grain notification tells listeners the exact range
+     * of cells, rows, or columns that changed.
+     *
+     * @param e a {@code TableModelEvent} to notify listener that a table model
+     *          has changed
+     */
+    @Override
+    public void tableChanged(TableModelEvent e) {
+
+        int row = e.getFirstRow();
+        System.out.println(row);
+        int column = e.getColumn();
+        System.out.println(column);
+        TableModel model = (TableModel)e.getSource();
+        System.out.println(model);
+        String columnName = model.getColumnName(column);
+        System.out.println(columnName);
+        //Object data = model.getValueAt(row, column);
+        //System.out.println(data);
+
     }
 
     public static void main(String[] args) {

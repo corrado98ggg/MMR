@@ -1,5 +1,6 @@
 package it.mmr.layout.Tabs_divisione;
 
+import it.mmr.accesso.Termini_e_condizioni;
 import it.mmr.database.DBManager;
 import it.mmr.database.Registrazione_database;
 import it.mmr.database.Rimozione_database;
@@ -28,6 +29,8 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
     public static String cognome;
     public static Object ruoli_modificato;
     public static String[][] dati;
+
+    boolean c = true;
 
     public static String[] nomi = {"nome",
             "cognome","ruolo"};
@@ -282,15 +285,31 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        boolean i = false;
+
         if (e.getSource() == piu) {
-            new Registrazione_database();
+            if(i == false){
+                i = true;
+            }
+
+            if(c == true || i == true) {
+                new Registrazione_database(); // fixato da me
+                c=false;
+            }
+
         }
         if (e.getSource() == meno) {
-            new Rimozione_database();
+            if(c == true) {
+                new Rimozione_database(); // fixato da me
+                c=false;
+            }
         }
 
-        if(e.getSource() == matita){
-            new Add_ruolo();
+        if(e.getSource() == matita) {
+           // if (!i) {
+                new Add_ruolo(); // fixato da me
+           //     i = true;
+            //}
         }
     }
 

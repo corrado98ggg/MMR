@@ -16,6 +16,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
     JButton login;
     JButton condizioni;
     JLabel background;
+    public static boolean isopen = false;
     Color azzurro = new Color(0x01C8FF);
     Color azzurro1 = new Color(0x01C8FF);
     public static JTextField utente;
@@ -24,18 +25,16 @@ public class Login_iniziale extends JFrame implements ActionListener {
     JTextArea etichetta_utente;
     JTextArea etichetta_password;
 
-    // ImageIcon icon = new ImageIcon("java/code/src/main/java/im/secondo.png");
     public Login_iniziale() {
         super("MMR");
         ImageIcon icon_sign = new ImageIcon("src/main/java/images/iconasi_log.png.png");
         etichetta_password = new JTextArea("Password");
-        etichetta_utente = new JTextArea("Nome utente");
+        etichetta_utente = new JTextArea("Nome");
         etichetta_utente.setEditable(false);
         etichetta_password.setEditable(false);
 
         JPanel ep = new JPanel();
         JPanel eu = new JPanel(); //pannelli relativi a label: password e utente
-        //etichetta_utente.setBackground(new Color() );
         ep.add(etichetta_password);
         eu.add(etichetta_utente);
         eu.setBounds(97, 180, 90, 20);
@@ -44,8 +43,6 @@ public class Login_iniziale extends JFrame implements ActionListener {
         ep.setBounds(100, 260, 60, 20);
         ep.setOpaque(true);
         etichetta_password.setBorder(BorderFactory.createEmptyBorder());
-        //etichetta_password.setContentAreaFilled(false);*/
-
         login = new JButton(icon_sign);
         login.addActionListener(this);
 
@@ -59,11 +56,6 @@ public class Login_iniziale extends JFrame implements ActionListener {
         condizioni.setBorder(BorderFactory.createEmptyBorder());
         condizioni.setContentAreaFilled(false);
 
-
-        //  l.setPreferredSize(g);
-        //l.setBorder(BorderFactory.createEmptyBorder());
-        // l.setContentAreaFilled(false);
-        //var frame = new JFrame();
         setPreferredSize(new Dimension(1200, 550));
         setBounds(400, 200, 1200, 550);
         setLayout(new BorderLayout());
@@ -71,24 +63,18 @@ public class Login_iniziale extends JFrame implements ActionListener {
         add(lpane, BorderLayout.CENTER);
         lpane.setBounds(0, 0, 1200, 700);
 
-
-        // panelBlue.setBackground(Color.BLUE);
         ImageIcon back = new ImageIcon("src/main/java/images/ben.jpeg");
         background = new JLabel("", back, JLabel.CENTER);
         background.setBounds(0, 0, 1200, 700);
         JPanel panelBack = new JPanel();
         panelBack.setBounds(0, -5, 1200, 700);
-
-
         panelBack.setOpaque(true);
         panelBack.add(background);
         JPanel panelLog = new JPanel();
         panelLog.setBackground(azzurro1);
 
-
         utente = new JTextField("");
         password = new JPasswordField("");
-
 
         JPanel access_utente = new JPanel();
         access_utente.setBackground(azzurro1);
@@ -105,8 +91,6 @@ public class Login_iniziale extends JFrame implements ActionListener {
         access_password.add(password);
 
         panelLog.add(login);
-        //panelGreen.add(sign_up);
-
         JPanel sing = new JPanel();
         JLabel messaggio = new JLabel("accetto");
         tick = new JCheckBox();
@@ -129,26 +113,13 @@ public class Login_iniziale extends JFrame implements ActionListener {
         lpane.add(eu, 4, 0);
         lpane.add(ep, 4, 0);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        //  frame.pack();
         setResizable(false);
         setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
-        boolean i = false;
-        System.out.println(e);
-
-        //se il tasto premuto è: fai->
-
 
         if (e.getSource() == login) {
-
-            /**
-             * prima di chiamare un altra classe ricordati
-             * di settare invisibili le finestre che non servono:
-             * per chiamare una classe usa questa nomenclatura:
-             */
-
             try {
 
                 System.out.println(utente.getText());
@@ -166,9 +137,10 @@ public class Login_iniziale extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == condizioni) {
-            if(!i) {
-                new Termini_e_condizioni(); // fixato da me perchè Errico è un coglione
-                i=true;
+            if(isopen == false) {
+
+                new Termini_e_condizioni(); // non è fixato da me
+                isopen=true;
             }
         }
 
@@ -199,12 +171,12 @@ public class Login_iniziale extends JFrame implements ActionListener {
 
         Statement statement = DBManager.getConnection().createStatement();
 
-        ResultSet rs = statement.executeQuery("SELECT Utente FROM registrazioni LIMIT 100");
+        ResultSet rs = statement.executeQuery("SELECT nome FROM registrazioni LIMIT 100");
 
         password_tmp = MD5(password_tmp);
 
         while (rs.next()) {
-            if (rs.getString("utente").compareTo(utente_tmp) == 0) {
+            if (rs.getString("nome").compareTo(utente_tmp) == 0) {
 
                 ResultSet rs2 = statement.executeQuery("SELECT Password FROM registrazioni LIMIT 100");
 
@@ -261,5 +233,4 @@ public class Login_iniziale extends JFrame implements ActionListener {
     public static void main(String[] args) {
         new Login_iniziale();
     }
-
 }

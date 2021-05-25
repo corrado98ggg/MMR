@@ -48,7 +48,6 @@ public class Avvertenze extends JFrame implements ActionListener {
                 throwables.printStackTrace();
             }
             Schermata_Principale_home.i++;
-
         }
     }
 }

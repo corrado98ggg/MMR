@@ -164,7 +164,8 @@ import java.sql.Statement;
                     }
 
                     try {
-                        Personale.Stampa_personale(Personale.Matrice_personale());
+                        Personale x=new Personale();
+                        x.Stampa_personale(Personale.Matrice_personale());
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }

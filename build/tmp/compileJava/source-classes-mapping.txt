@@ -4,8 +4,13 @@ it/mmr/layout/Divisioni/Business.java
  it.mmr.layout.Divisioni.Business
 it/mmr/layout/Divisioni/Elettronica.java
  it.mmr.layout.Divisioni.Elettronica
-it/mmr/layout/Tabs_divisione/Add_ruolo.java
- it.mmr.layout.Tabs_divisione.Add_ruolo
+it/mmr/layout/Tabs_divisione/Calendario.java
+ it.mmr.layout.Tabs_divisione.Calendario
+ it.mmr.layout.Tabs_divisione.Calendario$1
+ it.mmr.layout.Tabs_divisione.Calendario$btnNext_Action
+ it.mmr.layout.Tabs_divisione.Calendario$btnPrev_Action
+ it.mmr.layout.Tabs_divisione.Calendario$cmbYear_Action
+ it.mmr.layout.Tabs_divisione.Calendario$tblCalendarRenderer
 it/mmr/layout/Divisioni/Powertrain.java
  it.mmr.layout.Divisioni.Powertrain
 it/mmr/layout/Divisioni/Motori.java
@@ -16,19 +21,18 @@ it/mmr/accesso/Termini_e_condizioni.java
  it.mmr.accesso.Termini_e_condizioni
 it/mmr/database/DBManager.java
  it.mmr.database.DBManager
+it/mmr/prove/prove.java
+ it.mmr.prove.prove
 it/mmr/layout/Divisioni/Aereodinamica.java
  it.mmr.layout.Divisioni.Aereodinamica
-it/mmr/layout/Avvertenze.java
- it.mmr.layout.Avvertenze
-it/mmr/layout/Tabs_divisione/Calendario.java
- it.mmr.layout.Tabs_divisione.Calendario
- it.mmr.layout.Tabs_divisione.Calendario$1
- it.mmr.layout.Tabs_divisione.Calendario$btnNext_Action
- it.mmr.layout.Tabs_divisione.Calendario$btnPrev_Action
- it.mmr.layout.Tabs_divisione.Calendario$cmbYear_Action
- it.mmr.layout.Tabs_divisione.Calendario$tblCalendarRenderer
 it/mmr/accesso/Login_iniziale.java
  it.mmr.accesso.Login_iniziale
+it/mmr/layout/Avvertenze.java
+ it.mmr.layout.Avvertenze
+it/mmr/layout/Tabs_divisione/Add_ruolo.java
+ it.mmr.layout.Tabs_divisione.Add_ruolo
+it/mmr/layout/Tabs_divisione/TableMy.java
+ it.mmr.layout.Tabs_divisione.TableMy
 it/mmr/layout/Tabs_divisione/Personale.java
  it.mmr.layout.Tabs_divisione.Personale
 it/mmr/layout/Tabs_divisione/PannelloTotale.java

@@ -219,7 +219,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
                         try {
                             String query = String.format(
                                     "UPDATE registrazioni SET Ruoli=('%s') WHERE Nome IS ('%s') AND Cognome IS ('%s');",
-                                    str, Personale.dati[i][j], Personale.dati[i][j + 1]);
+                                    Personale.ruoli_modificato, Personale.nome, Personale.cognome);
                             Statement statement_2 = DBManager.getConnection().createStatement();
                             statement_2.executeUpdate(query);
                             statement_2.close();

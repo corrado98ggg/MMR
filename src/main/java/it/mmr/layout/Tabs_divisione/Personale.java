@@ -4,6 +4,7 @@ import it.mmr.database.DBManager;
 import it.mmr.database.Registrazione_database;
 import it.mmr.database.Rimozione_database;
 import it.mmr.database.Utils;
+import it.mmr.layout.Schermata_Principale_home;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,11 +17,16 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
 
-public class Personale extends JFrame implements ActionListener {
+public class Personale extends JFrame implements ActionListener, TableModelListener {
 
     private static int contatore_persone;
-
+    public static String nome;
+    public static String cognome;
+    public static Object ruoli_modificato;
     public static String[][] dati;
 
     public static String[] nomi = {"nome",
@@ -64,7 +70,7 @@ public class Personale extends JFrame implements ActionListener {
         JPanel pmeno = new JPanel();
         pmeno.setBackground(Color.WHITE);
         pmeno.add(meno);
-        pmeno.setBounds(1370, 740, 150, 150);
+        pmeno.setBounds(1430, 740, 150, 150);
 
         piu = new JButton(new ImageIcon(resized_icon_piu));
         piu.addActionListener(this);
@@ -76,7 +82,7 @@ public class Personale extends JFrame implements ActionListener {
         pannello_piu.setSize(700, 700);
         pannello_piu.add(piu);
         pannello_piu.setBackground(Color.white);
-        pannello_piu.setBounds(1370, 851, 150, 150);
+        pannello_piu.setBounds(1430, 851, 150, 150);
 
         pannello_del_personale.add(pannello_piu, 2, 0);
         pannello_del_personale.add(pmeno, 1, 0);
@@ -84,10 +90,10 @@ public class Personale extends JFrame implements ActionListener {
         colore.setSize(1920, 1200);
         pannello_del_personale.add(colore, 0, 0);
         Personale a=new Personale();
-        pannello_del_personale.add(a.Stampa_matita(),1,0);
+      //  pannello_del_personale.add(a.Stampa_matita(),1,0);
         JPanel pannello_calendario = new JPanel();
-
-        Personale.Stampa_personale(Personale.Matrice_personale());
+        Personale x=new Personale();
+        x.Stampa_personale(Personale.Matrice_personale());
 
     //    Personale.Stampa_ruoli(Personale.Matrice_ruoli());
 
@@ -186,11 +192,14 @@ public class Personale extends JFrame implements ActionListener {
     }
 
 
-    public static void Stampa_personale(String[][] tmp){
+    public  void Stampa_personale(String[][] tmp){
 
         JTable table = new JTable(dati, nomi);
+        table.getModel().addTableModelListener(this);
         table.setRowHeight(35);
-        table.setEnabled(false);
+        table.getColumn("nome").setCellEditor(new TableMy(new JCheckBox()));
+        table.getColumn("cognome").setCellEditor(new TableMy(new JCheckBox()));
+        //table.setEditingColumn(1);
         table.setBounds(0, 25, 1440, 1500);
         pannello_del_personale.add(table, 1, 0);
 
@@ -237,7 +246,7 @@ public class Personale extends JFrame implements ActionListener {
 
     }*/
 
-    public  JPanel Stampa_matita(){
+    /*public  JPanel Stampa_matita(){
 
 
         BufferedImage icon_matita = null;
@@ -262,7 +271,7 @@ public class Personale extends JFrame implements ActionListener {
 
 
         return matita_panel;
-    }
+    }*/
 
 
         /**
@@ -285,4 +294,28 @@ public class Personale extends JFrame implements ActionListener {
         }
     }
 
+    @Override
+    public void tableChanged(TableModelEvent e) {
+
+        int row = e.getFirstRow();
+        System.out.println(row);
+        int column = e.getColumn();
+        System.out.println(column);
+        TableModel model = (TableModel)e.getSource();
+        System.out.println(model);
+        String columnName = model.getColumnName(column);
+        System.out.println(columnName);
+        ruoli_modificato = model.getValueAt(row, column);
+        System.out.println(ruoli_modificato);
+
+        nome = dati[row][0];
+        cognome = dati[row][1];
+
+        try {
+            Schermata_Principale_home.aggiungi_ruolo((String) ruoli_modificato);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
 }

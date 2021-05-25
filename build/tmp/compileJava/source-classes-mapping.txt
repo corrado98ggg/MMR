@@ -43,3 +43,5 @@ it/mmr/layout/Tabs_divisione/PannelloTotale.java
  it.mmr.layout.Tabs_divisione.PannelloTotale
 it/mmr/layout/Tabs_divisione/Eventi.java
  it.mmr.layout.Tabs_divisione.Eventi
+it/mmr/database/Nuovo_evento.java
+ it.mmr.database.Nuovo_evento

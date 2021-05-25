@@ -2,6 +2,7 @@ package it.mmr.layout.Tabs_divisione;
 
 
 import it.mmr.database.DBManager;
+import it.mmr.database.Nuovo_evento;
 import it.mmr.database.Registrazione_database;
 import it.mmr.database.Utils;
 
@@ -64,7 +65,7 @@ public class Eventi extends JFrame implements ActionListener {
         eventi = new JLabel(etichetta_evento);
         contenitore_eventi=new JPanel();
         contenitore_eventi.add(eventi);
-        
+
         contenitore.add(contenitore_eventi,0,0);
         contenitore.setBounds(0,400,2000,1000);
         
@@ -100,7 +101,7 @@ public class Eventi extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == piu){
-            new Registrazione_database();
+            new Nuovo_evento();
         }
     }
 }

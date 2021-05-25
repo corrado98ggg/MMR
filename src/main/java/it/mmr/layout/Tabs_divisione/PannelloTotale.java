@@ -25,12 +25,11 @@ public class PannelloTotale extends JFrame{
         Calendario eventi = new Calendario();
         tabs.setBackground(Color.CYAN);
         tabs.addTab("Personale", a.Personale());
-        Calendario b=new Calendario();
-        JLayeredPane pro=new JLayeredPane();
-        pro.add(eventi.Calendario());
+        //Calendario b=new Calendario();
+        //JLayeredPane pro=new JLayeredPane();
+       // pro.add(eventi.Calendario());
         Eventi h=new Eventi();
-        pro.add(h.Eventi());
-        tabs.addTab("Eventi",pro);
+        tabs.addTab("Eventi",h.Eventi());
 
 
         /*setVisible(true);

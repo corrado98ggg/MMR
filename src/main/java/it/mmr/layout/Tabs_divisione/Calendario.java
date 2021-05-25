@@ -70,7 +70,8 @@ public class Calendario extends JFrame implements TableModelListener {
         pnlCalendar.add(stblCalendar);
 
         //Set bounds
-        pnlCalendar.setBounds(0, 0, 2000, 400);
+        pnlCalendar.setBounds(5, 0, 1990, 400);
+      //  pnlCalendar.setBackground(Color.white);
         lblMonth.setBounds(100-lblMonth.getPreferredSize().width/2, 25, 500, 500);
         //lblYear.setBounds(10, 305, 80, 20);
         cmbYear.setBounds(1420, 350, 100, 40);
@@ -234,11 +235,11 @@ public class Calendario extends JFrame implements TableModelListener {
         int column = e.getColumn();
         System.out.println(column);
         TableModel model = (TableModel)e.getSource();
-        System.out.println(model);
+        //System.out.println(model);
         String columnName = model.getColumnName(column);
         System.out.println(columnName);
         //Object data = model.getValueAt(row, column);
-        //System.out.println(data);
+        System.out.println(lblMonth.toString());
 
     }
 

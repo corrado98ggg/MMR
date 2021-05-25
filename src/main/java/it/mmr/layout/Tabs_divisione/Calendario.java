@@ -1,5 +1,7 @@
 package it.mmr.layout.Tabs_divisione;
 
+import it.mmr.database.DBManager;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,9 +12,12 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
-public class Calendario extends JFrame implements TableModelListener {
+public class Calendario extends JFrame {
     static JLabel lblMonth, lblYear;
     static JButton btnPrev, btnNext;
     static JTable tblCalendar;
@@ -23,31 +28,41 @@ public class Calendario extends JFrame implements TableModelListener {
     static JScrollPane stblCalendar; //The scrollpane
     static JPanel pnlCalendar;
     static int realYear, realMonth, realDay, currentYear, currentMonth;
+    static String[] months = {"Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio",
+            "Agosto", "Settembre", "Ottobre",
+            "Novembre", "Dicembre"};
 
-    public Container Calendario(){
+    public Container Calendario() {
         //Look and feel
-        try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());}
-        catch (ClassNotFoundException e) {}
-        catch (InstantiationException e) {}
-        catch (IllegalAccessException e) {}
-        catch (UnsupportedLookAndFeelException e) {}
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException e) {
+        } catch (InstantiationException e) {
+        } catch (IllegalAccessException e) {
+        } catch (UnsupportedLookAndFeelException e) {
+        }
         //setSize(330, 375);
         //Prepare frame
         //Set size to 400x400 pixels
         pane = new Container();//Get content pane
         pane.setSize(2000, 400);
-     //   pane.setLayout(null); //Apply null layout
+        //   pane.setLayout(null); //Apply null layout
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Close when X is clicked
 
         //Create controls
-        lblMonth = new JLabel ("January");
+        lblMonth = new JLabel("January");
         // lblYear = new JLabel ("Change year:");
         cmbYear = new JComboBox();
-        btnPrev = new JButton ("<-");
-        btnNext = new JButton ("->");
-        mtblCalendar = new DefaultTableModel(){public boolean isCellEditable(int rowIndex, int mColIndex){return true;}};
-        mtblCalendar.addTableModelListener(this);
+        btnPrev = new JButton("<-");
+        btnNext = new JButton("->");
+        mtblCalendar = new DefaultTableModel() {
+            public boolean isCellEditable(int rowIndex, int mColIndex) {
+                return true;
+            }
+        };
+        //mtblCalendar.addTableModelListener(this);
         tblCalendar = new JTable(mtblCalendar);
+
         stblCalendar = new JScrollPane(tblCalendar);
         pnlCalendar = new JPanel(null);
 
@@ -71,8 +86,8 @@ public class Calendario extends JFrame implements TableModelListener {
 
         //Set bounds
         pnlCalendar.setBounds(5, 0, 1990, 400);
-      //  pnlCalendar.setBackground(Color.white);
-        lblMonth.setBounds(100-lblMonth.getPreferredSize().width/2, 25, 500, 500);
+        //  pnlCalendar.setBackground(Color.white);
+        lblMonth.setBounds(100 - lblMonth.getPreferredSize().width / 2, 25, 500, 500);
         //lblYear.setBounds(10, 305, 80, 20);
         cmbYear.setBounds(1420, 350, 100, 40);
         btnPrev.setBounds(10, 25, 100, 50);
@@ -80,8 +95,8 @@ public class Calendario extends JFrame implements TableModelListener {
         stblCalendar.setBounds(0, 90, 1550, 1000);
 
         //Make frame visible
-       // frmMain.setResizable(false);
-      //  frmMain.setVisible(true);
+        // frmMain.setResizable(false);
+        //  frmMain.setVisible(true);
 
         //Get real month/year
         GregorianCalendar cal = new GregorianCalendar(); //Create calendar
@@ -93,7 +108,7 @@ public class Calendario extends JFrame implements TableModelListener {
 
         //Add headers
         String[] headers = {"Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"}; //All headers
-        for (int i=0; i<7; i++){
+        for (int i = 0; i < 7; i++) {
             mtblCalendar.addColumn(headers[i]);
 
         }
@@ -115,37 +130,95 @@ public class Calendario extends JFrame implements TableModelListener {
         mtblCalendar.setRowCount(6);
 
         //Populate table
-        for (int i=realYear-100; i<=realYear+100; i++){
+        for (int i = realYear - 100; i <= realYear + 100; i++) {
             cmbYear.addItem(String.valueOf(i));
         }
 
         //Refresh calendar
-       // setVisible(true);
+        // setVisible(true);
         //  setContentPane(pane);+
-        Calendario.refreshCalendar (realMonth, realYear); //Refresh calendar
+        tblCalendar.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 1) {
+                    int row = tblCalendar.getSelectedRow();
+                    //int row = e.getFirstRow();
+                    System.out.println(row);
+                    System.out.println("-----------------");
+                    System.out.println(currentMonth + 1);
+                    System.out.println("-----------------");
+                    int column = tblCalendar.getSelectedColumn();
+                    System.out.println(column);
+                    System.out.println("-----------------");
+                    System.out.println(tblCalendar.getValueAt(row, column));
+                    System.out.println("-----------------");
+                    System.out.println(currentYear);
+                    System.out.println("-----------------");
+                    int i = (int) tblCalendar.getValueAt(row, column);
+                    System.out.println("-----------------");
+                    System.out.println(i);
+                    System.out.println("-----------------");
+                    try {
+                        disegna_evento(i, currentMonth + 1, currentYear);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    //TableModel model = (TableModel)e.getSource();
+                    //System.out.println(model);
+                    //String columnName = model.getColumnName(column);
+                    //System.out.println(columnName);
+                    //Object data = model.getValueAt(row, column);
+
+                    // viewerPane.add((String) table.getValueAt(row, 0), new JPanel().add(new JTextArea()));
+                    //viewerPane.setSelectedIndex(viewerPane.getComponentCount()-1);
+                }
+            }
+        });
+        Calendario.refreshCalendar(realMonth, realYear); //Refresh calendar
         return pane;
 
     }
 
-    public static void refreshCalendar(int month, int year){
+
+    //DA FINIRE
+    public static void disegna_evento(int giorno, int mese, int anno) throws SQLException {
+        Statement statement_tmp = DBManager.getConnection().createStatement();
+        ResultSet queryPersonale = statement_tmp.executeQuery("SELECT * FROM Eventi LIMIT 100");
+
+        while (queryPersonale.next()) {
+
+            if (months[mese - 1].equals(queryPersonale.getString("mese"))) {
+                if (anno == queryPersonale.getInt("anno")) {
+                    if (giorno == queryPersonale.getInt("giorno")) {
+
+                    }
+                }
+            }
+
+        }
+    }
+
+
+    public static void refreshCalendar(int month, int year) {
         //Variables
-        String[] months =  {"Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio",
-                "Agosto", "Settembre", "Ottobre",
-                "Novembre", "Dicembre"};
+
         int nod, som; //Number Of Days, Start Of Month
 
         //Allow/disallow buttons
         btnPrev.setEnabled(true);
         btnNext.setEnabled(true);
-        if (month == 0 && year <= realYear-10){btnPrev.setEnabled(false);} //Too early
-        if (month == 11 && year >= realYear+100){btnNext.setEnabled(false);} //Too late
+        if (month == 0 && year <= realYear - 10) {
+            btnPrev.setEnabled(false);
+        } //Too early
+        if (month == 11 && year >= realYear + 100) {
+            btnNext.setEnabled(false);
+        } //Too late
         lblMonth.setText(months[month]); //Refresh the month label (at the top)
-        lblMonth.setBounds(750-lblMonth.getPreferredSize().width/2, 35, 180, 25); //Re-align label with calendar
+        lblMonth.setBounds(750 - lblMonth.getPreferredSize().width / 2, 35, 180, 25); //Re-align label with calendar
         cmbYear.setSelectedItem(String.valueOf(year)); //Select the correct year in the combo box
 
         //Clear table
-        for (int i=0; i<6; i++){
-            for (int j=0; j<7; j++){
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
                 mtblCalendar.setValueAt(null, i, j);
             }
         }
@@ -156,9 +229,9 @@ public class Calendario extends JFrame implements TableModelListener {
         som = cal.get(GregorianCalendar.DAY_OF_WEEK);
 
         //Draw calendar
-        for (int i=1; i<=nod; i++){
-            int row = new Integer((i+som-2)/7);
-            int column  =  (i+som-2)%7;
+        for (int i = 1; i <= nod; i++) {
+            int row = new Integer((i + som - 2) / 7);
+            int column = (i + som - 2) % 7;
             mtblCalendar.setValueAt(i, row, column);
         }
 
@@ -166,17 +239,16 @@ public class Calendario extends JFrame implements TableModelListener {
         tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0), new tblCalendarRenderer());
     }
 
-    static class tblCalendarRenderer extends DefaultTableCellRenderer{
-        public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
+    static class tblCalendarRenderer extends DefaultTableCellRenderer {
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean selected, boolean focused, int row, int column) {
             super.getTableCellRendererComponent(table, value, selected, focused, row, column);
-            if (column == 0 || column == 6){ //Week-end
+            if (column == 0 || column == 6) { //Week-end
                 setBackground(new Color(255, 220, 220));
-            }
-            else{ //Week
+            } else { //Week
                 setBackground(new Color(255, 255, 255));
             }
-            if (value != null){
-                if (Integer.parseInt(value.toString()) == realDay && currentMonth == realMonth && currentYear == realYear){ //Today
+            if (value != null) {
+                if (Integer.parseInt(value.toString()) == realDay && currentMonth == realMonth && currentYear == realYear) { //Today
                     setBackground(new Color(220, 220, 255));
                 }
             }
@@ -186,61 +258,38 @@ public class Calendario extends JFrame implements TableModelListener {
         }
     }
 
-    static class btnPrev_Action implements ActionListener{
-        public void actionPerformed (ActionEvent e){
-            if (currentMonth == 0){ //Back one year
+    static class btnPrev_Action implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if (currentMonth == 0) { //Back one year
                 currentMonth = 11;
                 currentYear -= 1;
-            }
-            else{ //Back one month
+            } else { //Back one month
                 currentMonth -= 1;
             }
             refreshCalendar(currentMonth, currentYear);
         }
     }
-    static class btnNext_Action implements ActionListener{
-        public void actionPerformed (ActionEvent e){
-            if (currentMonth == 11){ //Foward one year
+
+    static class btnNext_Action implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if (currentMonth == 11) { //Foward one year
                 currentMonth = 0;
                 currentYear += 1;
-            }
-            else{ //Foward one month
+            } else { //Foward one month
                 currentMonth += 1;
             }
             refreshCalendar(currentMonth, currentYear);
         }
     }
-    static class cmbYear_Action implements ActionListener{
-        public void actionPerformed (ActionEvent e){
-            if (cmbYear.getSelectedItem() != null){
+
+    static class cmbYear_Action implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if (cmbYear.getSelectedItem() != null) {
                 String b = cmbYear.getSelectedItem().toString();
                 currentYear = Integer.parseInt(b);
                 refreshCalendar(currentMonth, currentYear);
             }
         }
-    }
-
-    /**
-     * This fine grain notification tells listeners the exact range
-     * of cells, rows, or columns that changed.
-     *
-     * @param e a {@code TableModelEvent} to notify listener that a table model
-     *          has changed
-     */
-    @Override
-    public void tableChanged(TableModelEvent e) {
-
-        int row = e.getFirstRow();
-        System.out.println(row);
-        int column = e.getColumn();
-        System.out.println(column);
-        TableModel model = (TableModel)e.getSource();
-        //System.out.println(model);
-        String columnName = model.getColumnName(column);
-        System.out.println(columnName);
-        //Object data = model.getValueAt(row, column);
-        System.out.println(lblMonth.toString());
-
     }
 
     public static void main(String[] args) {

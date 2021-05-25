@@ -10,13 +10,8 @@ it/mmr/layout/Divisioni/Powertrain.java
  it.mmr.layout.Divisioni.Powertrain
 it/mmr/layout/Divisioni/Motori.java
  it.mmr.layout.Divisioni.Motori
-it/mmr/layout/Tabs_divisione/Calendario.java
- it.mmr.layout.Tabs_divisione.Calendario
- it.mmr.layout.Tabs_divisione.Calendario$1
- it.mmr.layout.Tabs_divisione.Calendario$btnNext_Action
- it.mmr.layout.Tabs_divisione.Calendario$btnPrev_Action
- it.mmr.layout.Tabs_divisione.Calendario$cmbYear_Action
- it.mmr.layout.Tabs_divisione.Calendario$tblCalendarRenderer
+it/mmr/database/Nuovo_evento.java
+ it.mmr.database.Nuovo_evento
 it/mmr/layout/Tabs_divisione/TableMy.java
  it.mmr.layout.Tabs_divisione.TableMy
 it/mmr/layout/Divisioni/Ricerca.java
@@ -39,9 +34,18 @@ it/mmr/database/Rimozione_database.java
  it.mmr.database.Rimozione_database
 it/mmr/layout/Divisioni/Aereodinamica.java
  it.mmr.layout.Divisioni.Aereodinamica
+it/mmr/Prove/Provacal.java
+ it.mmr.Prove.Provacal
+ it.mmr.Prove.Provacal$1
 it/mmr/layout/Tabs_divisione/PannelloTotale.java
  it.mmr.layout.Tabs_divisione.PannelloTotale
 it/mmr/layout/Tabs_divisione/Eventi.java
  it.mmr.layout.Tabs_divisione.Eventi
-it/mmr/database/Nuovo_evento.java
- it.mmr.database.Nuovo_evento
+it/mmr/layout/Tabs_divisione/Calendario.java
+ it.mmr.layout.Tabs_divisione.Calendario
+ it.mmr.layout.Tabs_divisione.Calendario$1
+ it.mmr.layout.Tabs_divisione.Calendario$2
+ it.mmr.layout.Tabs_divisione.Calendario$btnNext_Action
+ it.mmr.layout.Tabs_divisione.Calendario$btnPrev_Action
+ it.mmr.layout.Tabs_divisione.Calendario$cmbYear_Action
+ it.mmr.layout.Tabs_divisione.Calendario$tblCalendarRenderer

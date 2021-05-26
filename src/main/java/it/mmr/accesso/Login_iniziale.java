@@ -28,8 +28,8 @@ public class Login_iniziale extends JFrame implements ActionListener {
     public Login_iniziale() {
         super("MMR");
         ImageIcon icon_sign = new ImageIcon("src/main/java/images/iconasi_log.png.png");
-        etichetta_password = new JTextArea("Password");
-        etichetta_utente = new JTextArea("Nome");
+     /*//   etichetta_password = new JTextArea("Password");
+        //etichetta_utente = new JTextArea("Nome");
         etichetta_utente.setEditable(false);
         etichetta_password.setEditable(false);
 
@@ -42,7 +42,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
 
         ep.setBounds(100, 260, 60, 20);
         ep.setOpaque(true);
-        etichetta_password.setBorder(BorderFactory.createEmptyBorder());
+        etichetta_password.setBorder(BorderFactory.createEmptyBorder());*/
         login = new JButton(icon_sign);
         login.addActionListener(this);
 
@@ -63,46 +63,47 @@ public class Login_iniziale extends JFrame implements ActionListener {
         add(lpane, BorderLayout.CENTER);
         lpane.setBounds(0, 0, 1200, 700);
 
-        ImageIcon back = new ImageIcon("src/main/java/images/ben.jpeg");
+        ImageIcon back = new ImageIcon("src/main/java/images/back.jpg");
         background = new JLabel("", back, JLabel.CENTER);
         background.setBounds(0, 0, 1200, 700);
         JPanel panelBack = new JPanel();
         panelBack.setBounds(0, -5, 1200, 700);
         panelBack.setOpaque(true);
         panelBack.add(background);
-        JPanel panelLog = new JPanel();
-        panelLog.setBackground(azzurro1);
+        JPanel panelLog = new JPanel(new GridBagLayout());
+        panelLog.setBackground(new Color(0,0,0,0));
+       // panelLog.setBackground(azzurro1);
 
         utente = new JTextField("");
         password = new JPasswordField("");
 
-        JPanel access_utente = new JPanel();
-        access_utente.setBackground(azzurro1);
+        JPanel access_utente = new JPanel(new GridBagLayout());
+        access_utente.setBackground(new Color(0,0,0,0));
 
         utente.setPreferredSize(new Dimension(400, 50));
         password.setPreferredSize(new Dimension(400, 50));
-        access_utente.setBounds(100, 200, 400, 50);
+        access_utente.setBounds(50, 230, 400, 50);
 
         access_utente.add(utente);
 
-        JPanel access_password = new JPanel();
-        access_password.setBounds(100, 280, 400, 50);
-        access_password.setBackground(azzurro1);
+        JPanel access_password = new JPanel(new GridBagLayout());
+        access_password.setBounds(50, 380, 400, 50);
+        access_password.setBackground(new Color(0,0,0,0));
         access_password.add(password);
 
         panelLog.add(login);
-        JPanel sing = new JPanel();
+        JPanel sing = new JPanel(new GridBagLayout());
         JLabel messaggio = new JLabel("accetto");
         tick = new JCheckBox();
-        tick.setBackground(azzurro1);
+        tick.setBackground(new Color(0,0,0,0));
 
         sing.add(messaggio);
         sing.add(condizioni);
         sing.setBounds(0, 450, 300, 100);
-        sing.setBackground(azzurro);
+        sing.setBackground(new Color(0,0,0,0));
         sing.add(tick);
 
-        panelLog.setBounds(400, 320, 105, 80);
+        panelLog.setBounds(490, 360, 105, 80);
         panelLog.setOpaque(true);
 
         lpane.add(panelBack, 0, 0);
@@ -110,8 +111,8 @@ public class Login_iniziale extends JFrame implements ActionListener {
         lpane.add(access_utente, 2, 0);
         lpane.add(access_password, 2, 0);
         lpane.add(sing, 3, 0);
-        lpane.add(eu, 4, 0);
-        lpane.add(ep, 4, 0);
+     //   lpane.add(eu, 4, 0);
+       // lpane.add(ep, 4, 0);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);

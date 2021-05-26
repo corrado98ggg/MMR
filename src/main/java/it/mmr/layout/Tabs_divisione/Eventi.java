@@ -131,14 +131,16 @@ public class Eventi extends JFrame implements ActionListener {
 
         etichetta_fissa_area = new JTextArea(evento);
         eventi = new JTextArea(fisso);
-        eventi.setForeground(Color.red);
+        eventi.setCaretColor(Color.BLACK);
+        eventi.setSelectionColor(Color.BLACK);
+        //eventi.setForeground(Color.red);
         contenitore_eventi = new JPanel();
 
         // eventi.setForeground(new Color(0xE70E0E));
         contenitore_eventi.setBackground(Color.yellow);
         // contenitore_eventi.setBackground(Color.white);
         contenitore_eventi.add(eventi);
-        contenitore_eventi.add(etichetta_fissa_area);
+        //contenitore_eventi.add(etichetta_fissa_area);
         contenitore_eventi.setBounds(-200, 500, 1900, 30);
         eventi.setOpaque(false);
 
@@ -149,10 +151,10 @@ public class Eventi extends JFrame implements ActionListener {
         JPanel contenitore_fisso = new JPanel();
         contenitore_fisso.add(etichetta_fissa_area);
         contenitore_fisso.setBackground(Color.white);
-        contenitore_fisso.setBounds(-200, 700, 1900, 200);
-        etichetta_fissa_area.setSize(1500,200);
+        contenitore_fisso.setBounds(10, 550, 1080, 200);
+        etichetta_fissa_area.setSize(1080,200);
         etichetta_fissa_area.setLineWrap(true);
-        etichetta_fissa_area.setOpaque(false);
+      //  etichetta_fissa_area.setOpaque(false);
         contenitore.add(contenitore_fisso, 3, 0);
         // contenitore.setBounds(0,700,200,200);
 

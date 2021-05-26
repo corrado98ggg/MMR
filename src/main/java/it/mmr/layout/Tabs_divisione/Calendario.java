@@ -256,7 +256,7 @@ public class Calendario extends JFrame {
         if(tmp == true) {
             ret = "";
             for (int i = 0; i < cont; i++){
-               ret = ret+"\n"+ str_my[i];
+               ret = ret + "\n"+ str_my[i];
             }
             return ret;
         }

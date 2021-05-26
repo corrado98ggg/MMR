@@ -19,13 +19,17 @@ import java.sql.Statement;
 
 public class Eventi extends JFrame implements ActionListener {
 
-    public JLayeredPane contenitore;
-    public JTextArea eventi;
-    public JPanel tasto_piu;
-    public JPanel contenitore_eventi;
+    public static JLayeredPane contenitore;
+
+    public static JPanel contenitore_eventi;
     public JButton piu;
 
+    public static JTextArea eventi;
     public static String etichetta_evento;
+
+    public static String etichetta_fissa;
+    public static JTextArea etichetta_fissa_area;
+
     // public Component Eventi;
 
     public JLayeredPane Eventi() throws SQLException {
@@ -54,16 +58,21 @@ public class Eventi extends JFrame implements ActionListener {
         pannello_piu.setBackground(Color.white);
         pannello_piu.setBounds(1430, 850, 150, 150);
 
+        //etichetta_fissa = new String(Calendario.fisso);
+        //etichetta_evento = new String(Calendario.event);
 
-        etichetta_evento = new String("Gara al autodromo di Monza ore:18:15");
 
         //piu = new JButton("piu");
         // tasto_piu=new JPanel();
         // tasto_piu.add(piu);
-        contenitore.add(pannello_piu, 1, 0);
+        contenitore.add(pannello_piu, 4, 0);
 
         testConnection_Eventi();
 
+
+        Disegno_evento(Calendario.fisso, Calendario.event);
+/*
+        etichetta_fissa_area = new JTextArea(etichetta_fissa);
         eventi = new JTextArea(etichetta_evento);
         contenitore_eventi = new JPanel();
 
@@ -71,6 +80,7 @@ public class Eventi extends JFrame implements ActionListener {
         contenitore_eventi.setBackground(Color.yellow);
        // contenitore_eventi.setBackground(Color.white);
         contenitore_eventi.add(eventi);
+        contenitore_eventi.add(etichetta_fissa_area);
         contenitore_eventi.setBounds(-200, 500, 1900, 30);
         eventi.setOpaque(false);
 
@@ -79,7 +89,7 @@ public class Eventi extends JFrame implements ActionListener {
         contenitore.add(contenitore_eventi, 2, 0);
         // contenitore.setBounds(0,700,200,200);
 
-        eventi.setEnabled(false);
+        eventi.setEnabled(false);*/
 
         JPanel sfondo=new JPanel();
         sfondo.setBackground(Color.white);
@@ -109,11 +119,46 @@ public class Eventi extends JFrame implements ActionListener {
             statement.executeQuery("SELECT * FROM Eventi");
         } catch (SQLException e) {
             statement.executeUpdate("DROP TABLE IF EXISTS Eventi");
-            statement.executeUpdate("CREATE TABLE Eventi (" + "Mese VARCHAR(50), "
+            statement.executeUpdate("CREATE TABLE Eventi (" + "Evento LONGVARCHAR PRIMARY KEY, "
                     + "Giorno INTEGER," + "Anno INTEGER,"
                     + "Ora VARCHAR(50),"
-                    + "Evento LONGVARCHAR PRIMARY KEY)");
+                    + "Mese VARCHAR(50))");
         }
+    }
+
+
+    public static void Disegno_evento(String fisso, String evento) throws SQLException{
+
+        etichetta_fissa_area = new JTextArea(evento);
+        eventi = new JTextArea(fisso);
+        eventi.setForeground(Color.red);
+        contenitore_eventi = new JPanel();
+
+        // eventi.setForeground(new Color(0xE70E0E));
+        contenitore_eventi.setBackground(Color.yellow);
+        // contenitore_eventi.setBackground(Color.white);
+        contenitore_eventi.add(eventi);
+        contenitore_eventi.add(etichetta_fissa_area);
+        contenitore_eventi.setBounds(-200, 500, 1900, 30);
+        eventi.setOpaque(false);
+
+        eventi.setSize(1500,50);
+        eventi.setLineWrap(true);
+        contenitore.add(contenitore_eventi, 2, 0);
+
+        JPanel contenitore_fisso = new JPanel();
+        contenitore_fisso.add(etichetta_fissa_area);
+        contenitore_fisso.setBackground(Color.white);
+        contenitore_fisso.setBounds(-200, 700, 1900, 200);
+        etichetta_fissa_area.setSize(1500,200);
+        etichetta_fissa_area.setLineWrap(true);
+        etichetta_fissa_area.setOpaque(false);
+        contenitore.add(contenitore_fisso, 3, 0);
+        // contenitore.setBounds(0,700,200,200);
+
+        eventi.setEnabled(false);
+
+
     }
 
     /**

@@ -28,7 +28,6 @@ public class Nuovo_evento extends JFrame implements ActionListener {
     public static JTextField evento;
     public static JTextField ora;
 
-
     public Nuovo_evento() {
 
         super("Aggiungi evento");
@@ -122,7 +121,7 @@ public class Nuovo_evento extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        String[] mesi = {"Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio",
+       String mesi[] = {"Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio",
                 "Agosto", "Settembre", "Ottobre",
                 "Novembre", "Dicembre", "gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio",
                 "agosto", "settembre", "ottobre",
@@ -144,10 +143,16 @@ public class Nuovo_evento extends JFrame implements ActionListener {
 
             if((check_mesi(mesi, mese.getText()) == true) && (check_giorni(giorni, giorno.getText()) == true)) {
 
+                System.out.println(mese.getText());
+                System.out.println(giorno.getText());
+                System.out.println(anno.getText());
+                System.out.println(ora.getText());
+                System.out.println(evento.getText());
+
                 try {
                     String query = String.format(
-                            "INSERT INTO eventi (mese, giorno, anno, ora, evento) VALUES ('%s', '%s', '%s', '%s', '%s')",
-                            mese.getText(), giorno.getText(), anno.getText(), ora.getText(), evento.getText());
+                            "INSERT INTO Eventi (evento, giorno, anno, ora, mese) VALUES ('%s', '%s', '%s', '%s', '%s')",
+                            evento.getText(), giorno.getText(), anno.getText(), ora.getText(), mese.getText());
                     Statement statement = DBManager.getConnection().createStatement();
                     statement.executeUpdate(query);
                     statement.close();

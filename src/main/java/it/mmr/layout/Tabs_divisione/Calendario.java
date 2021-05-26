@@ -1,6 +1,8 @@
 package it.mmr.layout.Tabs_divisione;
 
 import it.mmr.database.DBManager;
+import it.mmr.database.Nuovo_evento;
+import it.mmr.database.Registrazione_database;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +22,7 @@ import java.util.*;
 public class Calendario extends JFrame {
     static JLabel lblMonth, lblYear;
     static JButton btnPrev, btnNext;
+    public static String[] str_my;
     static JTable tblCalendar;
     static JComboBox cmbYear;
     static JPanel frmMain;
@@ -31,6 +34,14 @@ public class Calendario extends JFrame {
     static String[] months = {"Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio",
             "Agosto", "Settembre", "Ottobre",
             "Novembre", "Dicembre"};
+    static String[] months2 = {"gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio",
+            "agosto", "settembre", "ottobre",
+            "novembre", "dicembre"};
+
+    public static String evento;
+    public static String fisso;
+    public static String event;
+
 
     public Container Calendario() {
         //Look and feel
@@ -158,10 +169,30 @@ public class Calendario extends JFrame {
                     System.out.println(i);
                     System.out.println("-----------------");
                     try {
-                        disegna_evento(i, currentMonth + 1, currentYear);
+                        evento = new String();
+                        evento = prendi_evento(i, currentMonth + 1, currentYear);
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
+
+                    if(evento.compareTo("Nessun evento in programma") == 0){ //0 uguale
+                        fisso = new String("Nessun evento in programma");
+                        try {
+                            Eventi.Disegno_evento(fisso, null);
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+
+                    }else{
+                        fisso = new String("Evento per la data selezionata:");
+                        event = evento;
+                        try {
+                            Eventi.Disegno_evento(fisso, event);
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                    }
+
                     //TableModel model = (TableModel)e.getSource();
                     //System.out.println(model);
                     //String columnName = model.getColumnName(column);
@@ -170,31 +201,66 @@ public class Calendario extends JFrame {
 
                     // viewerPane.add((String) table.getValueAt(row, 0), new JPanel().add(new JTextArea()));
                     //viewerPane.setSelectedIndex(viewerPane.getComponentCount()-1);
+
+
+                   // etichetta_fissa = new String(Calendario.fisso);
+                   // etichetta_evento = new String(Calendario.event);
+
+
+
                 }
             }
         });
         Calendario.refreshCalendar(realMonth, realYear); //Refresh calendar
+
+        try {
+            Registrazione_database.testConnection();
+            //load();
+        } catch (SQLException | NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Database Error!");
+        }
+
         return pane;
 
     }
 
 
     //DA FINIRE
-    public static void disegna_evento(int giorno, int mese, int anno) throws SQLException {
+    public static String prendi_evento(int giorno, int mese, int anno) throws SQLException {
+
+        String ret = new String();
+        //ArrayList<String> stringa_di_vettori=new ArrayList<String>();
+
+        boolean tmp = false;
+        int cont = 0;
+        str_my=new String[20];
+
         Statement statement_tmp = DBManager.getConnection().createStatement();
         ResultSet queryPersonale = statement_tmp.executeQuery("SELECT * FROM Eventi LIMIT 100");
 
         while (queryPersonale.next()) {
 
-            if (months[mese - 1].equals(queryPersonale.getString("mese"))) {
+            if (months[mese - 1].equals(queryPersonale.getString("mese")) || months2[mese - 1].equals(queryPersonale.getString("mese"))) {
                 if (anno == queryPersonale.getInt("anno")) {
                     if (giorno == queryPersonale.getInt("giorno")) {
+
+                        ret = queryPersonale.getString("evento");
+                        str_my[cont]=ret;
+                        cont++;
+                        tmp = true;
 
                     }
                 }
             }
-
         }
+        if(tmp == true) {
+            ret = "";
+            for (int i = 0; i < cont; i++){
+               ret = ret+"\n"+ str_my[i];
+            }
+            return ret;
+        }
+        return "Nessun evento in programma";
     }
 
 

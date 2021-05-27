@@ -29,8 +29,12 @@ public class PannelloTotale extends JFrame{
         //JLayeredPane pro=new JLayeredPane();
        // pro.add(eventi.Calendario());
         Eventi h = new Eventi();
-        tabs.addTab("Eventi",h.Eventi());
 
+        tabs.addTab("Eventi",h.Eventi());
+        tabs.addTab("Andamento", null); //indici più importanti
+        tabs.addTab("Spese e sconti", null); //tutte le spese effettuate
+        tabs.addTab("Sponsor", null);
+        tabs.addTab("Aiuto", null);
 
         /*setVisible(true);
         setContentPane(tabs);

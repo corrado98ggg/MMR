@@ -1,14 +1,9 @@
 package it.mmr.layout;
 
-import it.mmr.database.DBManager;
-import it.mmr.database.Registrazione_database;
-import it.mmr.database.Rimozione_database;
-import it.mmr.database.Utils;
+import it.mmr.database.*;
 import it.mmr.layout.Divisioni.*;
 
-import it.mmr.layout.Tabs_divisione.PannelloTotale;
 import it.mmr.layout.Tabs_divisione.Personale;
-import org.eclipse.jetty.server.PushBuilder;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -29,6 +24,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
      public JButton meno;*/
     JTabbedPane divisioni;
     JButton avvertenza;
+    JButton cambia_password;
     public static int i = 3;
     public static JLayeredPane a;
 
@@ -63,12 +59,19 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         avvertenza = new JButton("Aggiungi avvertenza");
         avvertenza.addActionListener(this);
 
+        cambia_password = new JButton("Cambia Password");
+        cambia_password.addActionListener(this);
+
         a = new JLayeredPane();
         a.add(check_avvertenza(), 2, 2);
 
         JPanel panello_avvertenza = new JPanel();
         panello_avvertenza.add(avvertenza);
         panello_avvertenza.setBounds(85, 975, 200, 200);
+
+        JPanel panello_cambio_password = new JPanel();
+        panello_cambio_password.add(cambia_password);
+        panello_cambio_password.setBounds(60, 800, 200, 100);
 
         JLabel picLabel = new JLabel(new ImageIcon(resized_blocco_note));
         JPanel c = new JPanel();
@@ -101,6 +104,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
 
         a.add(panello_avvertenza, 2, 2);
         a.add(panello_danger, 2, 1);
+        a.add(panello_cambio_password, 2, 2);
 
         setContentPane(a);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -118,6 +122,9 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == avvertenza) {
             new Avvertenze();
+        }
+        if(e.getSource() == cambia_password){
+            new cambio_password();
         }
     }
 

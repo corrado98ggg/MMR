@@ -15,7 +15,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.UUID;
 
-/** creazione di interfaccia
+/**
+ * creazione di interfaccia
  * di sing up
  * con metodo di mascheramento doHashing per salvataggio di password
  */
@@ -33,6 +34,9 @@ public class Registrazione_database extends JFrame implements ActionListener {
     JTextField cognome;
     JTextField divisione;
     JCheckBox tick_root;
+
+    public static BufferedImage resized_logo_mmr;
+    public static BufferedImage resized_logo_uni;
 
 
     public Registrazione_database() {
@@ -60,52 +64,50 @@ public class Registrazione_database extends JFrame implements ActionListener {
         assert logo_mmr != null;
         assert logo_uni != null;
 
-        BufferedImage resized_logo_mmr = getScaledDimension(logo_mmr, 300, 400);
-        BufferedImage resized_logo_uni = getScaledDimension(logo_uni, 600, 800);
-
+        resized_logo_mmr = getScaledDimension(logo_mmr, 300, 400);
+        resized_logo_uni = getScaledDimension(logo_uni, 600, 800);
 
 
         ok = new JButton("OK");
-       // ok.setForeground(new Color(0x02cbff));
+        // ok.setForeground(new Color(0x02cbff));
         ok.addActionListener(this);
         exit = new JButton("Exit");
         exit.addActionListener(this);
 
         password = new JPasswordField("inserisci una nuova password");
-        password.setPreferredSize(new Dimension(250,30));
+        password.setPreferredSize(new Dimension(250, 30));
 
-        nome=new JTextField("nome");
-        nome.setPreferredSize(new Dimension(250,30));
-        cognome =new JTextField("cognome");
-        cognome.setPreferredSize(new Dimension(250,30));
-        divisione=new JTextField("divisione");
-        divisione.setPreferredSize(new Dimension(250,30));
+        nome = new JTextField("nome");
+        nome.setPreferredSize(new Dimension(250, 30));
+        cognome = new JTextField("cognome");
+        cognome.setPreferredSize(new Dimension(250, 30));
+        divisione = new JTextField("divisione");
+        divisione.setPreferredSize(new Dimension(250, 30));
 /*
         JPanel pn=new JPanel();
         pn.add(nome);
         JPanel pc=new JPanel();
         pc.add(cognome);
         JPanel pd=new JPanel();*/
-        JLabel root=new JLabel("root");
+        JLabel root = new JLabel("root");
         root.setBackground(new Color(0x02cbff));
-        tick_root=new JCheckBox();
-
+        tick_root = new JCheckBox();
 
 
         JPanel panel = new JPanel();
-        panel.setBounds(0,0,700,875);
+        panel.setBounds(0, 0, 700, 875);
         panel.setBackground(new Color(0x02cbff));
 
         JLabel picLabel = new JLabel(new ImageIcon(resized_logo_mmr));
         JLabel piclabel2 = new JLabel(new ImageIcon(resized_logo_uni));
 
-        JPanel panelscritte=new JPanel();
+        JPanel panelscritte = new JPanel();
         panelscritte.setBackground(new Color(0x02cbff));
-        panelscritte.setBounds(400,200,250,400);
+        panelscritte.setBounds(400, 200, 250, 400);
 
-        JPanel panel_logo_mmr=new JPanel();
+        JPanel panel_logo_mmr = new JPanel();
         panel_logo_mmr.setBackground(new Color(0x02cbff));
-        panel_logo_mmr.setBounds(60,255,300,175);
+        panel_logo_mmr.setBounds(60, 255, 300, 175);
 
         panel.add(piclabel2);
         panel_logo_mmr.add(picLabel);
@@ -119,14 +121,14 @@ public class Registrazione_database extends JFrame implements ActionListener {
         panelscritte.add(ok);
         panelscritte.add(exit);
 
-          lsignup.add(panel,0,0);
-          lsignup.add(panelscritte,1,0);
-          lsignup.add(panel_logo_mmr,1,0);
+        lsignup.add(panel, 0, 0);
+        lsignup.add(panelscritte, 1, 0);
+        lsignup.add(panel_logo_mmr, 1, 0);
         //setContentPane(panel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBounds(650,300,700,475);
+        setBounds(650, 300, 700, 475);
         setResizable(false);
-        
+
         //setSize(700, 475); //lunghezza * altezza
         setVisible(true);
 
@@ -171,7 +173,7 @@ public class Registrazione_database extends JFrame implements ActionListener {
 
                 id = java.util.UUID.randomUUID();
 
-                if(tick_root.isSelected() == true){
+                if (tick_root.isSelected() == true) {
                     root_check = "TRUE";
                 } else {
                     root_check = "FALSE";
@@ -180,7 +182,7 @@ public class Registrazione_database extends JFrame implements ActionListener {
                 try {
                     String query = String.format(
                             "INSERT INTO registrazioni (id, nome, cognome, password, root, divisione) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",
-                            id, nome.getText(), cognome.getText(), password_hash, root_check, divisione.getText() );
+                            id, nome.getText(), cognome.getText(), password_hash, root_check, divisione.getText());
                     Statement statement = DBManager.getConnection().createStatement();
                     statement.executeUpdate(query);
                     statement.close();
@@ -192,7 +194,7 @@ public class Registrazione_database extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Registrazione avvenuta con successo, ora puoi fare il login!");
 
                 try {
-                    Personale x=new Personale();
+                    Personale x = new Personale();
                     x.Stampa_personale(Personale.Matrice_personale());
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
@@ -229,7 +231,6 @@ public class Registrazione_database extends JFrame implements ActionListener {
 
 
     /**
-     *
      * @return true o false
      * controllo se c'è un numero
      */
@@ -253,10 +254,10 @@ public class Registrazione_database extends JFrame implements ActionListener {
         return false;
     }
 
-/**
-*implementazione hashing di password tipo
-*MD5
-*/
+    /**
+     * implementazione hashing di password tipo
+     * MD5
+     */
     public static String MD5(String md5) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
@@ -270,7 +271,6 @@ public class Registrazione_database extends JFrame implements ActionListener {
         }
         return null;
     }
-
 
 
     public static BufferedImage getScaledDimension(BufferedImage img, int MAX_IMG_WIDTH, int MAX_IMG_HEIGHT) {

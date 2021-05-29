@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-public class PannelloTotale extends JFrame{
+public class PannelloTotale extends JFrame {
 
 
     public static JTabbedPane PannelloTotale() throws SQLException {
@@ -27,12 +27,14 @@ public class PannelloTotale extends JFrame{
         tabs.addTab("Personale", a.Personale());
         //Calendario b=new Calendario();
         //JLayeredPane pro=new JLayeredPane();
-       // pro.add(eventi.Calendario());
+        // pro.add(eventi.Calendario());
         Eventi h = new Eventi();
+        Spese f = new Spese();
 
-        tabs.addTab("Eventi",h.Eventi());
-        tabs.addTab("Andamento", null); //indici più importanti
-        tabs.addTab("Spese e sconti", null); //tutte le spese effettuate
+
+        tabs.addTab("Eventi", h.Eventi());
+        tabs.addTab("Andamento", Andamento.Andamento()); //indici più importanti
+        tabs.addTab("Spese e sconti", f.Spese()); //tutte le spese effettuate
         tabs.addTab("Sponsor", null);
         tabs.addTab("Aiuto", null);
 

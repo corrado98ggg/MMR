@@ -71,13 +71,19 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
 
         JPanel panello_cambio_password = new JPanel();
         panello_cambio_password.add(cambia_password);
-        panello_cambio_password.setBounds(60, 800, 200, 100);
+        panello_cambio_password.setBounds(80, 900, 200, 30);
 
         JLabel picLabel = new JLabel(new ImageIcon(resized_blocco_note));
         JPanel c = new JPanel();
 
+        //JLabel nome_utente_corrente = new JLabel();
+        //JPanel  nome_utente_corrente_pannello = new JPanel();
+
         JLabel picLabel1 = new JLabel(new ImageIcon(resized_danger));
         JPanel panello_danger = new JPanel();
+
+        //nome_utente_corrente_pannello.add(nome_utente_corrente);
+        //nome_utente_corrente_pannello.setBounds(25, 800, 65, 80);
 
         panello_danger.add(picLabel1);
         panello_danger.setBounds(25, 950, 65, 80);
@@ -104,6 +110,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
 
         a.add(panello_avvertenza, 2, 2);
         a.add(panello_danger, 2, 1);
+        //a.add(nome_utente_corrente_pannello, 2, 1);
         a.add(panello_cambio_password, 2, 2);
 
         setContentPane(a);

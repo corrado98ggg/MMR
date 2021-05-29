@@ -33,16 +33,19 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
     boolean c = true;
 
     public static String[] nomi = {"nome",
-            "cognome","ruolo"};
+            "cognome", "ruolo"};
 
     public static JButton matita;
 
-  //  public static String[][] dati_ruoli; //[contatore_persone][1]
+    //  public static String[][] dati_ruoli; //[contatore_persone][1]
 
     public static JLayeredPane pannello_del_personale = new JLayeredPane();
 
+    public static BufferedImage resized_icon_piu;
+    public static BufferedImage resized_icon_meno;
 
- //   public static JTable table_ruoli;
+
+    //   public static JTable table_ruoli;
 
     public JButton piu, meno;
 
@@ -54,7 +57,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         } catch (IOException e) {
             e.printStackTrace();
         }
-        BufferedImage resized_icon_meno = Registrazione_database.getScaledDimension(icon_meno, 109, 109);
+        resized_icon_meno = Registrazione_database.getScaledDimension(icon_meno, 109, 109);
 
         BufferedImage icon_piu = null;
         try {
@@ -62,7 +65,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         } catch (IOException e) {
             e.printStackTrace();
         }
-        BufferedImage resized_icon_piu = Registrazione_database.getScaledDimension(icon_piu, 100, 100);
+        resized_icon_piu = Registrazione_database.getScaledDimension(icon_piu, 100, 100);
 
         ImageIcon logo_mmr = new ImageIcon("src/main/java/images/mmr_logo.jpg");
 
@@ -92,19 +95,16 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         JPanel colore = new JPanel();
         colore.setSize(1920, 1200);
         pannello_del_personale.add(colore, 0, 0);
-        Personale a=new Personale();
-      //  pannello_del_personale.add(a.Stampa_matita(),1,0);
+        Personale a = new Personale();
+        //  pannello_del_personale.add(a.Stampa_matita(),1,0);
         JPanel pannello_calendario = new JPanel();
-        Personale x=new Personale();
+        Personale x = new Personale();
         x.Stampa_personale(Personale.Matrice_personale());
 
-    //    Personale.Stampa_ruoli(Personale.Matrice_ruoli());
+        //    Personale.Stampa_ruoli(Personale.Matrice_ruoli());
 
         //table_ruoli.addAncestorListener();
-       // System.out.println(table_ruoli.getValueAt(0,0).toString());
-
-
-
+        // System.out.println(table_ruoli.getValueAt(0,0).toString());
 
         JLabel testa_nome = new JLabel("nome");
         JLabel testa_cognome = new JLabel("cognome");
@@ -131,14 +131,14 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
 
         pannello_del_personale.add(colonna_cognome, 2, 0);
         JPanel sfondo = new JPanel();
-        sfondo.setBounds(0,40,1920,1000);
+        sfondo.setBounds(0, 40, 1920, 1000);
         sfondo.setBackground(Color.white);
         pannello_del_personale.add(sfondo, 0, 0);
 
         return pannello_del_personale;
     }
 
-    public static String[][] Matrice_personale () throws SQLException {
+    public static String[][] Matrice_personale() throws SQLException {
 
         try {
             contatore_persone = Utils.quante_persone_sono_registrate();
@@ -151,7 +151,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
 
         Statement statement_tmp = DBManager.getConnection().createStatement();
         ResultSet queryPersonale = statement_tmp.executeQuery("SELECT * FROM registrazioni LIMIT 100");
-       int k=0;
+        int k = 0;
         while (queryPersonale.next()) {
             if (i >= contatore_persone) {
                 continue;
@@ -166,8 +166,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
                     continue;
                 }
                 if (j / 2 == 1) {
-                    if(k==1)
-                    {
+                    if (k == 1) {
                         dati[i][j - 1] = queryPersonale.getString("ruoli");
                         System.out.println(dati[i][j - 1]);
                         continue;
@@ -186,7 +185,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
 
 
             }
-            k=0;
+            k = 0;
             i++;
 
 
@@ -195,7 +194,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
     }
 
 
-    public  void Stampa_personale(String[][] tmp){
+    public void Stampa_personale(String[][] tmp) {
 
         JTable table = new JTable(dati, nomi);
         table.getModel().addTableModelListener(this);
@@ -277,39 +276,23 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
     }*/
 
 
-        /**
-         * Invoked when an action occurs.
-         *
-         * @param e the event to be processed
-         */
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
         boolean i = false;
 
         if (e.getSource() == piu) {
-            if(i == false){
-                i = true;
-            }
 
-            if(c == true || i == true) {
-                new Registrazione_database(); // fixato da me
-                c=false;
-            }
+            new Registrazione_database(); // fixato da me
 
         }
         if (e.getSource() == meno) {
-            if(c == true) {
-                new Rimozione_database(); // fixato da me
-                c=false;
-            }
-        }
-
-        if(e.getSource() == matita) {
-           // if (!i) {
-                new Add_ruolo(); // fixato da me
-           //     i = true;
-            //}
+            new Rimozione_database(); // fixato da me
         }
     }
 
@@ -320,7 +303,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         System.out.println(row);
         int column = e.getColumn();
         System.out.println(column);
-        TableModel model = (TableModel)e.getSource();
+        TableModel model = (TableModel) e.getSource();
         System.out.println(model);
         String columnName = model.getColumnName(column);
         System.out.println(columnName);

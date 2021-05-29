@@ -42,6 +42,23 @@ import java.sql.Statement;
             add(lsignup, BorderLayout.CENTER);
             lsignup.setBounds(0, 0, 700, 475);
 
+            Button_ok = new JButton("OK");
+            Button_ok.addActionListener(this);
+
+            Button_exit = new JButton("Exit");
+            Button_exit.addActionListener(this);
+
+            text_nome_utente =new JTextField("nome utente da rimuovere");
+            text_nome_utente.setPreferredSize(new Dimension(250,30));
+
+            text_divisione =new JTextField("inserisci divisione appartentente all'utente");
+            text_divisione.setPreferredSize(new Dimension(250,30));
+
+            /**
+             * creazione dei pannelli per l'interfaccia
+             * grafica della rimozione del personale.
+             */
+
             BufferedImage logo_uni = null;
             try {
                 logo_uni = ImageIO.read(new File("src/main/java/images/logo_uni.png"));
@@ -61,23 +78,6 @@ import java.sql.Statement;
 
             BufferedImage resized_logo_mmr = Registrazione_database.getScaledDimension(logo_mmr, 300, 400);
             BufferedImage resized_logo_uni = Registrazione_database.getScaledDimension(logo_uni, 600, 800);
-
-            Button_ok = new JButton("OK");
-            Button_ok.addActionListener(this);
-
-            Button_exit = new JButton("Exit");
-            Button_exit.addActionListener(this);
-
-            text_nome_utente =new JTextField("nome utente da rimuovere");
-            text_nome_utente.setPreferredSize(new Dimension(250,30));
-
-            text_divisione =new JTextField("inserisci divisione appartentente all'utente");
-            text_divisione.setPreferredSize(new Dimension(250,30));
-
-            /**
-             * creazione dei pannelli per l'interfaccia
-             * grafica della rimozione del personale.
-             */
 
             JPanel panel = new JPanel();
             panel.setBounds(0,0,700,875);

@@ -1,5 +1,8 @@
 package it.mmr.database;
 
+import it.mmr.layout.Tabs_divisione.Personale;
+import it.mmr.layout.Tabs_divisione.Spese;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -168,12 +171,15 @@ public class Nuova_spesa extends JFrame implements ActionListener {
             UIManager.put("OptionPane.minimumSize", new Dimension(100, 90));
             JOptionPane.showMessageDialog(null, "Spesa registrata con successo!");
 
+            try {
+                Spese x = new Spese();
+                x.Stampa_spese(Spese.Matrice_spese());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
             setVisible(false);
-
         }
-
-
-
     }
 
     public static void testConnection_spese() throws SQLException {

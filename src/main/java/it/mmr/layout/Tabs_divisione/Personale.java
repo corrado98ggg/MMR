@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.UUID;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
@@ -76,7 +77,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         JPanel pmeno = new JPanel();
         pmeno.setBackground(Color.WHITE);
         pmeno.add(meno);
-        pmeno.setBounds(1430, 740, 150, 150);
+        pmeno.setBounds(1400, 750, 150, 150);
 
         piu = new JButton(new ImageIcon(resized_icon_piu));
         piu.addActionListener(this);
@@ -88,16 +89,17 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         pannello_piu.setSize(700, 700);
         pannello_piu.add(piu);
         pannello_piu.setBackground(Color.white);
-        pannello_piu.setBounds(1430, 851, 150, 150);
+        pannello_piu.setBounds(1400, 850, 150, 150);
 
-        pannello_del_personale.add(pannello_piu, 2, 0);
-        pannello_del_personale.add(pmeno, 1, 0);
+        pannello_del_personale.add(pannello_piu, 3, 0);
+        pannello_del_personale.add(pmeno, 2, 0);
         JPanel colore = new JPanel();
         colore.setSize(1920, 1200);
         pannello_del_personale.add(colore, 0, 0);
         Personale a = new Personale();
         //  pannello_del_personale.add(a.Stampa_matita(),1,0);
         JPanel pannello_calendario = new JPanel();
+
         Personale x = new Personale();
         x.Stampa_personale(Personale.Matrice_personale());
 
@@ -165,6 +167,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
 
                     continue;
                 }
+
                 if (j / 2 == 1) {
                     if (k == 1) {
                         dati[i][j - 1] = queryPersonale.getString("ruoli");

@@ -175,7 +175,7 @@ public class Calendario extends JFrame {
                         throwables.printStackTrace();
                     }
 
-                    if(evento.compareTo("Nessun evento in programma") == 0){ //0 uguale
+                    if (evento.compareTo("Nessun evento in programma") == 0) { //0 uguale
                         fisso = new String("Nessun evento in programma");
                         try {
                             Eventi.Disegno_evento(fisso, null);
@@ -183,7 +183,7 @@ public class Calendario extends JFrame {
                             throwables.printStackTrace();
                         }
 
-                    }else{
+                    } else {
                         fisso = new String("Evento per la data selezionata:");
                         event = evento;
                         try {
@@ -203,9 +203,8 @@ public class Calendario extends JFrame {
                     //viewerPane.setSelectedIndex(viewerPane.getComponentCount()-1);
 
 
-                   // etichetta_fissa = new String(Calendario.fisso);
-                   // etichetta_evento = new String(Calendario.event);
-
+                    // etichetta_fissa = new String(Calendario.fisso);
+                    // etichetta_evento = new String(Calendario.event);
 
 
                 }
@@ -233,7 +232,7 @@ public class Calendario extends JFrame {
 
         boolean tmp = false;
         int cont = 0;
-        str_my=new String[20];
+        str_my = new String[20];
 
         Statement statement_tmp = DBManager.getConnection().createStatement();
         ResultSet queryPersonale = statement_tmp.executeQuery("SELECT * FROM Eventi LIMIT 100");
@@ -245,7 +244,7 @@ public class Calendario extends JFrame {
                     if (giorno == queryPersonale.getInt("giorno")) {
 
                         ret = queryPersonale.getString("evento");
-                        str_my[cont]=ret;
+                        str_my[cont] = ret;
                         cont++;
                         tmp = true;
 
@@ -253,10 +252,10 @@ public class Calendario extends JFrame {
                 }
             }
         }
-        if(tmp == true) {
+        if (tmp == true) {
             ret = "";
-            for (int i = 0; i < cont; i++){
-               ret = ret + "\n"+ str_my[i];
+            for (int i = 0; i < cont; i++) {
+                ret = ret + "\n" + str_my[i];
             }
             return ret;
         }

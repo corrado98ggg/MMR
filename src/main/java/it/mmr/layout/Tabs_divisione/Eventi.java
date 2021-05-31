@@ -56,7 +56,7 @@ public class Eventi extends JFrame implements ActionListener {
         pannello_piu.setSize(700, 700);
         pannello_piu.add(piu);
         pannello_piu.setBackground(Color.white);
-        pannello_piu.setBounds(1430, 850, 150, 150);
+        pannello_piu.setBounds(1400, 850, 150, 150);
 
         //etichetta_fissa = new String(Calendario.fisso);
         //etichetta_evento = new String(Calendario.event);

@@ -58,4 +58,24 @@ public class Utils {
         }
         return cont;
     }
+
+    public static int quante_spese_sono_registrate() throws SQLException {
+        int cont = 0;
+
+        try {
+            Registrazione_database.testConnection();
+            //load();
+        } catch (SQLException | NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Database Error!");
+        }
+
+        Statement statement = DBManager.getConnection().createStatement();
+
+        ResultSet rs = statement.executeQuery("SELECT * FROM Spese LIMIT 100");
+
+        while (rs.next()) {
+            cont++;
+        }
+        return cont;
+    }
 }

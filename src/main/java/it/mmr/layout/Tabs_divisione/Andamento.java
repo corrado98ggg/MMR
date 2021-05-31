@@ -57,8 +57,8 @@ public class Andamento extends JFrame {
         BufferedImage icona3 = Registrazione_database.getScaledDimension(icon3, 60, 60);
         BufferedImage icona4 = Registrazione_database.getScaledDimension(icon4, 95, 95);
 
-        tot.add(indice(icona4, "Capitale", 678998, "Soldi rimanenti", Color.green), 1, 0);
-        JLayeredPane a = indice(icona2, "Acquisti", 34567, "Documenti in ingresso anno corrente", Color.red);
+        tot.add(indice(icona4, "Totale", 678998, "Soldi rimanenti", Color.green), 1, 0);
+        JLayeredPane a = indice(icona2, "Spese", 34567, "Documenti ingresso anno corrente", Color.red);
         JLayeredPane b = indice(icona3, "Debito", 345678, "Debiti al 12/10/18", Color.red);
         JLayeredPane c = indice(icona, "crediti", 759202, "documenti in ingresso anno correte", Color.green);
 

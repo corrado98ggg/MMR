@@ -35,7 +35,7 @@ public class PannelloTotale extends JFrame {
         tabs.addTab("Eventi", h.Eventi());
         tabs.addTab("Andamento", Andamento.Andamento()); //indici più importanti
         tabs.addTab("Spese e sconti", f.Spese()); //tutte le spese effettuate
-        tabs.addTab("Sponsor", null);
+        //tabs.addTab("Sponsor", null);
         tabs.addTab("Aiuto", null);
 
         /*setVisible(true);

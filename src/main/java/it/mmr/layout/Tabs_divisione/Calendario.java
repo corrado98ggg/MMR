@@ -26,7 +26,7 @@ public class Calendario extends JFrame {
     static JTable tblCalendar;
     static JComboBox cmbYear;
     static JPanel frmMain;
-    public static Container pane;
+
     static DefaultTableModel mtblCalendar; //Table model
     static JScrollPane stblCalendar; //The scrollpane
     static JPanel pnlCalendar;
@@ -43,7 +43,7 @@ public class Calendario extends JFrame {
     public static String event;
 
 
-    public Container Calendario() {
+    public JLayeredPane Calendario() {
         //Look and feel
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -55,7 +55,7 @@ public class Calendario extends JFrame {
         //setSize(330, 375);
         //Prepare frame
         //Set size to 400x400 pixels
-        pane = new Container();//Get content pane
+      JLayeredPane  pane = new JLayeredPane();//Get content pane
         pane.setSize(2000, 400);
         //   pane.setLayout(null); //Apply null layout
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Close when X is clicked
@@ -73,6 +73,7 @@ public class Calendario extends JFrame {
         };
         //mtblCalendar.addTableModelListener(this);
         tblCalendar = new JTable(mtblCalendar);
+
 
         stblCalendar = new JScrollPane(tblCalendar);
         pnlCalendar = new JPanel(null);
@@ -123,6 +124,14 @@ public class Calendario extends JFrame {
             mtblCalendar.addColumn(headers[i]);
 
         }
+
+        tblCalendar.getColumn("Lunedì").setCellEditor(new TableMy(new JCheckBox()));
+        tblCalendar.getColumn("Martedì").setCellEditor(new TableMy(new JCheckBox()));
+        tblCalendar.getColumn("Mercoledì").setCellEditor(new TableMy(new JCheckBox()));
+        tblCalendar.getColumn("Giovedì").setCellEditor(new TableMy(new JCheckBox()));
+        tblCalendar.getColumn("Venerdì").setCellEditor(new TableMy(new JCheckBox()));
+        tblCalendar.getColumn("Sabato").setCellEditor(new TableMy(new JCheckBox()));
+        tblCalendar.getColumn("Domenica").setCellEditor(new TableMy(new JCheckBox()));
 
         tblCalendar.getParent().setBackground(tblCalendar.getBackground()); //Set background
 

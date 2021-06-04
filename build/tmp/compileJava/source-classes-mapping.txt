@@ -1,11 +1,12 @@
 it/mmr/database/Utils.java
  it.mmr.database.Utils
-it/mmr/layout/Divisioni/Business.java
- it.mmr.layout.Divisioni.Business
+it/mmr/layout/Tabs_divisione/Aiuto.java
+ it.mmr.layout.Tabs_divisione.Aiuto
 it/mmr/layout/Tabs_divisione/Add_ruolo.java
  it.mmr.layout.Tabs_divisione.Add_ruolo
-it/mmr/layout/Divisioni/Ricerca.java
- it.mmr.layout.Divisioni.Ricerca
+it/mmr/Prove/Provacal.java
+ it.mmr.Prove.Provacal
+ it.mmr.Prove.Provacal$1
 it/mmr/layout/Divisioni/Motori.java
  it.mmr.layout.Divisioni.Motori
 it/mmr/accesso/Termini_e_condizioni.java
@@ -32,29 +33,30 @@ it/mmr/accesso/Login_iniziale.java
  it.mmr.accesso.Login_iniziale
 it/mmr/layout/Schermata_Principale_home.java
  it.mmr.layout.Schermata_Principale_home
-it/mmr/Prove/Provacal.java
- it.mmr.Prove.Provacal
- it.mmr.Prove.Provacal$1
+it/mmr/database/Nuova_spesa.java
+ it.mmr.database.Nuova_spesa
+it/mmr/database/Rimozione_database.java
+ it.mmr.database.Rimozione_database
 it/mmr/database/Nuovo_evento.java
  it.mmr.database.Nuovo_evento
-it/mmr/layout/Divisioni/Aereodinamica.java
- it.mmr.layout.Divisioni.Aereodinamica
+it/mmr/layout/Divisioni/Ricerca.java
+ it.mmr.layout.Divisioni.Ricerca
 it/mmr/layout/Divisioni/Elettronica.java
  it.mmr.layout.Divisioni.Elettronica
 it/mmr/layout/Divisioni/Powertrain.java
  it.mmr.layout.Divisioni.Powertrain
-it/mmr/database/Rimozione_database.java
- it.mmr.database.Rimozione_database
+it/mmr/layout/Tabs_divisione/Spese.java
+ it.mmr.layout.Tabs_divisione.Spese
+ it.mmr.layout.Tabs_divisione.Spese$1
 it/mmr/layout/Tabs_divisione/Eventi.java
  it.mmr.layout.Tabs_divisione.Eventi
 it/mmr/layout/Tabs_divisione/TableMy.java
  it.mmr.layout.Tabs_divisione.TableMy
+it/mmr/layout/Divisioni/Business.java
+ it.mmr.layout.Divisioni.Business
 it/mmr/layout/Tabs_divisione/PannelloTotale.java
  it.mmr.layout.Tabs_divisione.PannelloTotale
-it/mmr/layout/Tabs_divisione/Spese.java
- it.mmr.layout.Tabs_divisione.Spese
- it.mmr.layout.Tabs_divisione.Spese$1
 it/mmr/layout/Tabs_divisione/Andamento.java
  it.mmr.layout.Tabs_divisione.Andamento
-it/mmr/database/Nuova_spesa.java
- it.mmr.database.Nuova_spesa
+it/mmr/layout/Divisioni/Aereodinamica.java
+ it.mmr.layout.Divisioni.Aereodinamica

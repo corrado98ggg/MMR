@@ -1,6 +1,7 @@
 package it.mmr.layout;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -8,17 +9,34 @@ import java.sql.SQLException;
 public class Avvertenze extends JFrame implements ActionListener {
     JButton ok;
     String stringa_di_avvertenza;
-    JTextArea str;
+    JTextField str;
 
     public Avvertenze() {
-        setSize(200, 200);
-        JPanel pannello_avvertenze = new JPanel();
-        str = new JTextArea();
+        JLayeredPane contenitore=new JLayeredPane();
+        JPanel sfondo=new JPanel();
+        sfondo.setBackground(Color.CYAN);
+        sfondo.setBounds(0,0,500,200);
+        contenitore.add(sfondo,0,0);
+        contenitore.setSize(500,200);
+        setBounds(500,500,500, 200);
+        JPanel pannello_avvertenze = new JPanel(new GridBagLayout());
+        pannello_avvertenze.setBackground(new Color(0,0,0,0));
+        str = new JTextField("bgbbbbbbbbbbbbbbbbbbbbb");
+        str.setPreferredSize(new Dimension(400, 50));
+       // str.setSize(150,50);
         pannello_avvertenze.add(str);
+        pannello_avvertenze.setBounds(50,10,400,50);
+        contenitore.add(pannello_avvertenze,1,0);
+
+        JPanel pannello_ok=new JPanel(new GridBagLayout());
+        pannello_ok.setBackground(new Color(0,0,0,0));
         ok = new JButton("ok");
         ok.addActionListener(this);
-        pannello_avvertenze.add(ok);
-        setContentPane(pannello_avvertenze);
+        pannello_ok.add(ok);
+        pannello_ok.setBounds(250,100,60,40);
+        contenitore.add(pannello_ok,2,0);
+
+        setContentPane(contenitore);
         setVisible(true);
 
     }

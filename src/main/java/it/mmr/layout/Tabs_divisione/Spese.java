@@ -29,19 +29,19 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
 
     public static Object spese_modificate;
 
-    public static String[] nomi = {"Descrzione",
+    public static String[] nomi = {"Descrizione",
             "Qt.", "Prezzo al pz", "Importo"};
 
     public static JButton matita;
 
-    public static JLayeredPane pannello_della_tabella = new JLayeredPane();
+
 
     public JButton piu, meno;
 
     public static int contatore_spese;
 
     public JLayeredPane Spese() throws SQLException {
-
+        JLayeredPane pannello_della_tabella = new JLayeredPane();
         pannello_della_tabella.setSize(300, 300);
 
         piu = new JButton(new ImageIcon(Personale.resized_icon_piu));
@@ -101,7 +101,7 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         pannello_della_tabella.add(colonna_importo, 4, 0);
 
         Spese x = new Spese();
-        x.Stampa_spese(Spese.Matrice_spese());
+       pannello_della_tabella.add( x.Stampa_spese(Spese.Matrice_spese()),1,0);
 
         JPanel sfondo = new JPanel();
         sfondo.setBounds(0, 40, 1920, 1000);
@@ -150,11 +150,17 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
     }
 
 
-    public void Stampa_spese(String[][] tmp) {
+    public JTable Stampa_spese(String[][] tmp) {
 
         table = new JTable(dati_spese, nomi);
         table.getModel().addTableModelListener(this);
         table.setRowHeight(35);
+        table.getColumn("Descrizione").setCellEditor(new TableMy(new JCheckBox()));
+        table.getColumn("Qt.").setCellEditor(new TableMy(new JCheckBox()));
+        table.getColumn("Prezzo al pz").setCellEditor(new TableMy(new JCheckBox()));
+        table.getColumn("Importo").setCellEditor(new TableMy(new JCheckBox()));
+
+
         //table.getColumn("nome").setCellEditor(new TableMy(new JCheckBox()));
         //table.getColumn("cognome").setCellEditor(new TableMy(new JCheckBox()));
         //table.setEditingColumn(1);
@@ -172,7 +178,7 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         });
 
         table.setBounds(0, 25, 1440, 1500);
-        pannello_della_tabella.add(table, 1, 0);
+        return table;
     }
 
     /**

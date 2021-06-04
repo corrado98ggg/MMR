@@ -175,11 +175,8 @@ import java.sql.Statement;
                     JOptionPane.showMessageDialog(null, "rimozione avvenuta con successo!");
 
                 }
-
             }
-
         }
-
         public static void main(String[] args) {
             new Rimozione_database();
         }

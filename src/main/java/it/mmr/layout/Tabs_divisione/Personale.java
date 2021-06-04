@@ -37,10 +37,9 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
             "cognome", "ruolo"};
 
     public static JButton matita;
+    public static JLayeredPane pannello_del_personale;
 
     //  public static String[][] dati_ruoli; //[contatore_persone][1]
-
-    public static JLayeredPane pannello_del_personale = new JLayeredPane();
 
     public static BufferedImage resized_icon_piu;
     public static BufferedImage resized_icon_meno;
@@ -51,6 +50,8 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
     public JButton piu, meno;
 
     public JLayeredPane Personale() throws SQLException {
+
+        pannello_del_personale = new JLayeredPane();
 
         BufferedImage icon_meno = null;
         try {
@@ -137,6 +138,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         sfondo.setBackground(Color.white);
         pannello_del_personale.add(sfondo, 0, 0);
 
+        System.out.println(pannello_del_personale);
         return pannello_del_personale;
     }
 
@@ -199,84 +201,19 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
 
     public void Stampa_personale(String[][] tmp) {
 
+
+
         JTable table = new JTable(dati, nomi);
         table.getModel().addTableModelListener(this);
         table.setRowHeight(35);
         table.getColumn("nome").setCellEditor(new TableMy(new JCheckBox()));
         table.getColumn("cognome").setCellEditor(new TableMy(new JCheckBox()));
         //table.setEditingColumn(1);
-        table.setBounds(0, 25, 1440, 1500);
+        table.setBounds(0, 25, 1400, 1420);
         pannello_del_personale.add(table, 1, 0);
+       // return table;
 
     }
-
-    /*public static String[][] Matrice_ruoli() throws SQLException {
-
-        try {
-            contatore_persone = Utils.quante_persone_sono_registrate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        dati_ruoli = new String[contatore_persone][1];
-        int i = 0;
-
-        Statement statement_tmp = DBManager.getConnection().createStatement();
-        ResultSet queryPersonale = statement_tmp.executeQuery("SELECT * FROM registrazioni LIMIT 100");
-
-        while (queryPersonale.next()) {
-            if (i >= contatore_persone) {
-                continue;
-            }
-
-            dati_ruoli[i][0] = queryPersonale.getString("ruoli");
-            //System.out.println(dati_ruoli[i][0]);
-
-            i++;
-        }
-        return dati_ruoli;
-    }
-
-
-    public static void Stampa_ruoli(String[][] tmp) {
-
-        String[] ruoli = {"ruoli"};
-
-        table_ruoli = new JTable(dati_ruoli, ruoli);
-        table_ruoli.setRowHeight(35);
-        table_ruoli.setEnabled(false);
-        table_ruoli.setBounds(1140, 25, 300, 2000);
-        pannello_del_personale.add(table_ruoli, 1, 0);
-
-
-    }*/
-
-    /*public  JPanel Stampa_matita(){
-
-
-        BufferedImage icon_matita = null;
-        try {
-            icon_matita = ImageIO.read(new File("src/main/java/images/matita.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        BufferedImage resized_icon_matita = Registrazione_database.getScaledDimension(icon_matita, 30, 30);
-
-
-        matita = new JButton(new ImageIcon(resized_icon_matita));
-        matita.addActionListener(this);
-
-        matita.setBorder(BorderFactory.createEmptyBorder());
-        matita.setContentAreaFilled(false);
-        JPanel matita_panel = new JPanel();
-        matita_panel.setBackground(Color.WHITE);
-        matita_panel.add(matita);
-        matita_panel.setBackground(Color.white);
-        matita_panel.setBounds(1440, 26, 150, 35);
-
-
-        return matita_panel;
-    }*/
 
 
     /**

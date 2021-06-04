@@ -3,6 +3,7 @@ package it.mmr.layout;
 import it.mmr.database.*;
 import it.mmr.layout.Divisioni.*;
 
+import it.mmr.layout.Tabs_divisione.PannelloTotale;
 import it.mmr.layout.Tabs_divisione.Personale;
 
 import javax.imageio.ImageIO;
@@ -76,14 +77,8 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         JLabel picLabel = new JLabel(new ImageIcon(resized_blocco_note));
         JPanel c = new JPanel();
 
-        //JLabel nome_utente_corrente = new JLabel();
-        //JPanel  nome_utente_corrente_pannello = new JPanel();
-
         JLabel picLabel1 = new JLabel(new ImageIcon(resized_danger));
         JPanel panello_danger = new JPanel();
-
-        //nome_utente_corrente_pannello.add(nome_utente_corrente);
-        //nome_utente_corrente_pannello.setBounds(25, 800, 65, 80);
 
         panello_danger.add(picLabel1);
         panello_danger.setBounds(25, 950, 65, 80);
@@ -92,14 +87,19 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         c.add(picLabel);
         c.setBounds(20, 330, 300, 300);
 
+        Business buss = new Business();
+        Aereodinamica b = new Aereodinamica();
+
+
         divisioni.add(null, logo_mmr);
-        divisioni.addTab("aereodinamica", Aereodinamica.aereodinamica());
-        //divisioni.addTab("Business", PannelloTotale.PannelloTotale());
-        //divisioni.addTab("motori", PannelloTotale.PannelloTotale());
-        //divisioni.addTab("Dinamica del veicolo", PannelloTotale.PannelloTotale());
-        //divisioni.addTab("Elettronica", PannelloTotale.PannelloTotale());
-        //divisioni.addTab("Powertrain", PannelloTotale.PannelloTotale());
-        //divisioni.addTab("Ricerca", PannelloTotale.PannelloTotale());
+        divisioni.addTab("aereodinamica",PannelloTotale.PannelloTotale());
+
+        divisioni.addTab("Business", PannelloTotale.PannelloTotale());
+        divisioni.addTab("motori", PannelloTotale.PannelloTotale());
+        divisioni.addTab("Dinamica del veicolo", PannelloTotale.PannelloTotale());
+        divisioni.addTab("Elettronica", PannelloTotale.PannelloTotale());
+        divisioni.addTab("Powertrain", PannelloTotale.PannelloTotale());
+        divisioni.addTab("Ricerca", PannelloTotale.PannelloTotale());
 
         divisioni.setSelectedIndex(1);
 
@@ -110,7 +110,6 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
 
         a.add(panello_avvertenza, 2, 2);
         a.add(panello_danger, 2, 1);
-        //a.add(nome_utente_corrente_pannello, 2, 1);
         a.add(panello_cambio_password, 2, 2);
 
         setContentPane(a);
@@ -258,7 +257,6 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         }
 
         Statement statement = DBManager.getConnection().createStatement();
-
         ResultSet tmp = statement.executeQuery("SELECT ruoli FROM registrazioni");
 
         while (tmp.next()) {
@@ -267,7 +265,6 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
             System.out.println(ruolo);
         }
         // Personale.Stampa_ruoli(Personale.Matrice_ruoli());
-
     }
 
     public static void main(String[] args) throws SQLException {

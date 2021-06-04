@@ -1,0 +1,27 @@
+Il presente testo è un semplice strumento di documentazione, che spiega l'utilizzo dell'eseguibile in modo semplice e esaustivo.
+L'applicazione è basata su un database locale reso nascosto all'utente; .MMR
+
+Il database è formato da 4 Tabelle:
+
+registrazioni (id, Nome, Cognome, Password, Root, Ruoli, Divisione) 
+avvertenze (testo)
+eventi  (Evento, Giorno, Anno, Ora, mese)
+spese
+
+Registrazioni è la tabella che tiene conto degli utenti registrati, a ogni utente viene asseganto un chiave id unica.
+Oltre, al nome cognome ruolo e divisione di appartenenza, all'utente viene assegnata la password, salvata secondo un algoritmo di codifica MD5 e un permesso speciale:
+Root; un semplice valore booleano che ci permette di capire se l'utente registrato è o meno un Leader di una divisione
+
+N.B. un utente Root puo' gestire gli utenti, registrandoli e eliminandoli.
+
+Avvertenza è un promemoria, visivamente è rappresentato da un post_it, al di sotto del nome delle divisioni
+per ricordare a tutti gli utenti qualcosa di estremamente importante
+
+eventi è la tabella che ci permette grazie all'utilizzo di un comodo calendario visivo, di selezionare una qualsiasi data, e controllare i vari impegni
+e manifestazioni importanti.
+
+N.B. si possono anche aggiungere più di un evento a giornata e rimuoverli.
+
+spese è la tabella che ci permette di gestire la finanza del progetto, vedendo così e cacolando, i vari importi.
+gli importi più rilevanti vengono elencati in Andamento in modo da avere una panoramica veloce del progetto.
+

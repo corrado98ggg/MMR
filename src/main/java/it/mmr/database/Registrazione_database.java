@@ -1,5 +1,6 @@
 package it.mmr.database;
 
+import it.mmr.layout.Schermata_Principale_home;
 import it.mmr.layout.Tabs_divisione.Personale;
 
 import javax.imageio.ImageIO;
@@ -196,6 +197,7 @@ public class Registrazione_database extends JFrame implements ActionListener {
                 try {
                     Personale x = new Personale();
                     x.Stampa_personale(Personale.Matrice_personale());
+
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }

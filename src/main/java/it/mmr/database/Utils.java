@@ -70,7 +70,6 @@ public class Utils {
         }
 
         Statement statement = DBManager.getConnection().createStatement();
-
         ResultSet rs = statement.executeQuery("SELECT * FROM Spese LIMIT 100");
 
         while (rs.next()) {

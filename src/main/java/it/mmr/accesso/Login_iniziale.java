@@ -25,6 +25,8 @@ public class Login_iniziale extends JFrame implements ActionListener {
     JTextArea etichetta_utente;
     JTextArea etichetta_password;
 
+    public static boolean root = false;
+
     public Login_iniziale() {
         super("MMR");
         ImageIcon icon_sign = new ImageIcon("src/main/java/images/iconasi_log.png.png");
@@ -172,7 +174,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
 
         Statement statement = DBManager.getConnection().createStatement();
 
-        ResultSet rs = statement.executeQuery("SELECT nome FROM registrazioni LIMIT 100");
+        ResultSet rs = statement.executeQuery("SELECT * FROM registrazioni LIMIT 100");
 
         password_tmp = MD5(password_tmp);
 
@@ -185,6 +187,28 @@ public class Login_iniziale extends JFrame implements ActionListener {
 
                     System.out.println(password_tmp);
                     if (rs.getString("password").compareTo(password_tmp) == 0 || rs.getString("password").compareTo("admin1") == 0) {
+
+
+                        try {
+                            String query = String.format(
+                                    "SELECT root FROM registrazioni WHERE Nome IS ('%s') AND password IS ('%s');",
+                                    utente_tmp, password_tmp);
+                            System.out.println(query);
+
+                            ResultSet rs3 = statement.executeQuery(query);
+                            System.out.println(rs3);
+
+                            Statement statement_2 = DBManager.getConnection().createStatement();
+
+                            if(rs.getString("root").compareTo("TRUE") == 0){
+                                root = true;
+                            }
+                            statement_2.executeUpdate(query);
+                            statement_2.close();
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        }
+
                         return true;
                     }
                 }

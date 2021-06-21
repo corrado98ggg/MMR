@@ -1,6 +1,7 @@
 package it.mmr.layout.Tabs_divisione;
 
 
+import it.mmr.accesso.Login_iniziale;
 import it.mmr.database.DBManager;
 import it.mmr.database.Nuovo_evento;
 import it.mmr.database.Registrazione_database;
@@ -65,7 +66,9 @@ public class Eventi extends JFrame implements ActionListener {
         //piu = new JButton("piu");
         // tasto_piu=new JPanel();
         // tasto_piu.add(piu);
+        if(Login_iniziale.root){
         contenitore.add(pannello_piu, 4, 0);
+        }
 
         testConnection_Eventi();
 

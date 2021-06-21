@@ -1,6 +1,7 @@
 package it.mmr.layout.Tabs_divisione;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 
 public class Aiuto extends JFrame{
@@ -27,13 +28,13 @@ public class Aiuto extends JFrame{
         }
         area_testo.setText(testo_aiuto);
         area_testo.setLineWrap(true);
-        area_testo.setSize(1570,1200);
+        area_testo.setSize(1520,1200);
 
-
+        area_testo.setFont(new Font("Monaco", Font.ITALIC, 20));
         area.add(area_testo,0,0);
-        area.setBounds(0,0,1570,1200);
+        area.setBounds(0,0,1520,1200);
 
-        setSize(1920,1080);
+       // setSize(1920,1080);
         return area;
     }
 

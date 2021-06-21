@@ -21,7 +21,7 @@ public class Avvertenze extends JFrame implements ActionListener {
         setBounds(500,500,500, 200);
         JPanel pannello_avvertenze = new JPanel(new GridBagLayout());
         pannello_avvertenze.setBackground(new Color(0,0,0,0));
-        str = new JTextField("bgbbbbbbbbbbbbbbbbbbbbb");
+        str = new JTextField("");
         str.setPreferredSize(new Dimension(400, 50));
        // str.setSize(150,50);
         pannello_avvertenze.add(str);
@@ -33,7 +33,7 @@ public class Avvertenze extends JFrame implements ActionListener {
         ok = new JButton("ok");
         ok.addActionListener(this);
         pannello_ok.add(ok);
-        pannello_ok.setBounds(250,100,60,40);
+        pannello_ok.setBounds(225,100,60,40);
         contenitore.add(pannello_ok,2,0);
 
         setContentPane(contenitore);

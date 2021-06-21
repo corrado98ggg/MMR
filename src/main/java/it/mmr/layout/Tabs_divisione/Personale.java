@@ -1,5 +1,6 @@
 package it.mmr.layout.Tabs_divisione;
 
+import it.mmr.accesso.Login_iniziale;
 import it.mmr.accesso.Termini_e_condizioni;
 import it.mmr.database.DBManager;
 import it.mmr.database.Registrazione_database;
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.UUID;
+
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
@@ -31,10 +32,10 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
     public static Object ruoli_modificato;
     public static String[][] dati;
 
-    boolean c = true;
+    //boolean c = true;
 
     public static String[] nomi = {"nome",
-            "cognome", "ruolo"};
+            "cognome", "ruolo","divisione"};
 
     public static JButton matita;
     public static JLayeredPane pannello_del_personale;
@@ -71,6 +72,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
 
         ImageIcon logo_mmr = new ImageIcon("src/main/java/images/mmr_logo.jpg");
 
+
         meno = new JButton(new ImageIcon(resized_icon_meno));
         meno.addActionListener(this);
         meno.setBorder(BorderFactory.createEmptyBorder());
@@ -91,9 +93,10 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         pannello_piu.add(piu);
         pannello_piu.setBackground(Color.white);
         pannello_piu.setBounds(1400, 850, 150, 150);
-
+if(Login_iniziale.root){
         pannello_del_personale.add(pannello_piu, 3, 0);
         pannello_del_personale.add(pmeno, 2, 0);
+}
         JPanel colore = new JPanel();
         colore.setSize(1920, 1200);
         pannello_del_personale.add(colore, 0, 0);
@@ -112,6 +115,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         JLabel testa_nome = new JLabel("nome");
         JLabel testa_cognome = new JLabel("cognome");
         JLabel testa_ruolo = new JLabel("ruolo");
+        JLabel testa_divisione = new JLabel("divisione");
 
         JPanel colonna_nome = new JPanel();
 
@@ -123,14 +127,21 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         JPanel colonna_cognome = new JPanel();
 
         colonna_cognome.add(testa_cognome);
-        colonna_cognome.setBounds(475, 0, 70, 25);
+        colonna_cognome.setBounds(360, 0, 70, 25);
 
 
         JPanel colonna_ruolo = new JPanel();
 
         colonna_ruolo.add(testa_ruolo);
-        colonna_ruolo.setBounds(960, 0, 50, 25);
+        colonna_ruolo.setBounds(700, 0, 50, 25);
         pannello_del_personale.add(colonna_ruolo, 1, 0);
+
+
+        JPanel colonna_divisione = new JPanel();
+
+        colonna_divisione.add(testa_divisione);
+        colonna_divisione.setBounds(1050, 0, 70, 25);
+        pannello_del_personale.add(colonna_divisione, 1, 0);
 
         pannello_del_personale.add(colonna_cognome, 2, 0);
         JPanel sfondo = new JPanel();
@@ -150,7 +161,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
             throwables.printStackTrace();
         }
 
-        dati = new String[contatore_persone][3];
+        dati = new String[contatore_persone][4];
         int i = 0;
 
         Statement statement_tmp = DBManager.getConnection().createStatement();
@@ -160,13 +171,20 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
             if (i >= contatore_persone) {
                 continue;
             }
-            for (int j = 1; j < 4; j++) {
+            for (int j = 1; j < 5; j++) {
 
                 //caso base:
                 if (i == 0 && j == 1) {
                     dati[i][j - 1] = queryPersonale.getString("nome");
                     System.out.println(dati[i][j - 1]);
 
+                    continue;
+                }
+
+                if(j==4)
+                {
+                    dati[i][j - 1] = queryPersonale.getString("Divisione");
+                    System.out.println(dati[i][j - 1]);
                     continue;
                 }
 

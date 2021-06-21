@@ -1,6 +1,7 @@
 package it.mmr.layout.Tabs_divisione;
 
 
+import it.mmr.accesso.Login_iniziale;
 import it.mmr.database.DBManager;
 import it.mmr.database.Nuova_spesa;
 import it.mmr.database.Utils;
@@ -63,9 +64,9 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         pannello_meno.add(meno);
         pannello_meno.setBackground(Color.white);
         pannello_meno.setBounds(1400, 750, 150, 150);
-
+if(Login_iniziale.root){
         pannello_della_tabella.add(pannello_meno, 2, 0);
-        pannello_della_tabella.add(pannello_piu, 2, 0);
+        pannello_della_tabella.add(pannello_piu, 2, 0);}
 
         JPanel colore = new JPanel();
         colore.setSize(1920, 1200);
@@ -85,15 +86,15 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
 
         JPanel colonna_Qt = new JPanel();
         colonna_Qt.add(testa_Qt);
-        colonna_Qt.setBounds(500, 0, 60, 25);
+        colonna_Qt.setBounds(350, 0, 60, 25);
 
         JPanel colonna_Prezzo_al_pezzo = new JPanel();
         colonna_Prezzo_al_pezzo.add(testa_Prezzo_al_pezzo);
-        colonna_Prezzo_al_pezzo.setBounds(700, 0, 120, 25);
+        colonna_Prezzo_al_pezzo.setBounds(720, 0, 120, 25);
 
         JPanel colonna_importo = new JPanel();
         colonna_importo.add(testa_Importo);
-        colonna_importo.setBounds(1200, 0, 60, 25);
+        colonna_importo.setBounds(1080, 0, 60, 25);
 
         pannello_della_tabella.add(colonna_Descrzione, 1, 0);
         pannello_della_tabella.add(colonna_Qt, 2, 0);

@@ -87,21 +87,18 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         c.add(picLabel);
         c.setBounds(20, 330, 300, 300);
 
-        Business buss = new Business();
-        Aereodinamica b = new Aereodinamica();
 
+    //    divisioni.add(null, logo_mmr);
+        divisioni.addTab("",logo_mmr,PannelloTotale.PannelloTotale());
 
-        divisioni.add(null, logo_mmr);
-        divisioni.addTab("aereodinamica",PannelloTotale.PannelloTotale());
+      //  divisioni.addTab("Business", PannelloTotale.PannelloTotale());
+        //divisioni.addTab("motori", PannelloTotale.PannelloTotale());
+        //divisioni.addTab("Dinamica del veicolo", PannelloTotale.PannelloTotale());
+       // divisioni.addTab("Elettronica", PannelloTotale.PannelloTotale());
+       // divisioni.addTab("Powertrain", PannelloTotale.PannelloTotale());
+       // divisioni.addTab("Ricerca", PannelloTotale.PannelloTotale());
 
-        divisioni.addTab("Business", PannelloTotale.PannelloTotale());
-        divisioni.addTab("motori", PannelloTotale.PannelloTotale());
-        divisioni.addTab("Dinamica del veicolo", PannelloTotale.PannelloTotale());
-        divisioni.addTab("Elettronica", PannelloTotale.PannelloTotale());
-        divisioni.addTab("Powertrain", PannelloTotale.PannelloTotale());
-        divisioni.addTab("Ricerca", PannelloTotale.PannelloTotale());
-
-        divisioni.setSelectedIndex(1);
+      //  divisioni.setSelectedIndex(1);
 
         divisioni.setSize(1920, 1080);
         a.setBounds(0, 0, 1920, 1080);

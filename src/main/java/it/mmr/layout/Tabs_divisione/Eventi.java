@@ -1,12 +1,10 @@
 package it.mmr.layout.Tabs_divisione;
 
-
 import it.mmr.accesso.Login_iniziale;
 import it.mmr.database.DBManager;
 import it.mmr.database.Nuovo_evento;
 import it.mmr.database.Registrazione_database;
 import it.mmr.database.Utils;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -21,23 +19,15 @@ import java.sql.Statement;
 public class Eventi extends JFrame implements ActionListener {
 
     public static JLayeredPane contenitore;
-
     public static JPanel contenitore_eventi;
     public JButton piu;
-
     public static JTextArea eventi;
-    public static String etichetta_evento;
-
-    public static String etichetta_fissa;
     public static JTextArea etichetta_fissa_area;
-
-    // public Component Eventi;
 
     public JLayeredPane Eventi() throws SQLException {
         contenitore = new JLayeredPane();
         Calendario calendario = new Calendario();
         contenitore.add(calendario.Calendario(), 1, 0);
-
 
         BufferedImage icon_piu = null;
         try {
@@ -59,46 +49,17 @@ public class Eventi extends JFrame implements ActionListener {
         pannello_piu.setBackground(Color.white);
         pannello_piu.setBounds(1400, 850, 150, 150);
 
-        //etichetta_fissa = new String(Calendario.fisso);
-        //etichetta_evento = new String(Calendario.event);
-
-
-        //piu = new JButton("piu");
-        // tasto_piu=new JPanel();
-        // tasto_piu.add(piu);
         if(Login_iniziale.root){
         contenitore.add(pannello_piu, 4, 0);
         }
 
         testConnection_Eventi();
-
-
         Disegno_evento(Calendario.fisso, Calendario.event);
-/*
-        etichetta_fissa_area = new JTextArea(etichetta_fissa);
-        eventi = new JTextArea(etichetta_evento);
-        contenitore_eventi = new JPanel();
-
-       // eventi.setForeground(new Color(0xE70E0E));
-        contenitore_eventi.setBackground(Color.yellow);
-       // contenitore_eventi.setBackground(Color.white);
-        contenitore_eventi.add(eventi);
-        contenitore_eventi.add(etichetta_fissa_area);
-        contenitore_eventi.setBounds(-200, 500, 1900, 30);
-        eventi.setOpaque(false);
-
-        eventi.setSize(1500,50);
-        eventi.setLineWrap(true);
-        contenitore.add(contenitore_eventi, 2, 0);
-        // contenitore.setBounds(0,700,200,200);
-
-        eventi.setEnabled(false);*/
 
         JPanel sfondo=new JPanel();
         sfondo.setBackground(Color.white);
         sfondo.setBounds(0,0,1920,1080);
         contenitore.add(sfondo,0,0);
-
 
         JPanel Titolo=new JPanel();
         Titolo.setBackground(Color.white);
@@ -136,17 +97,12 @@ public class Eventi extends JFrame implements ActionListener {
         eventi = new JTextArea(fisso);
         eventi.setCaretColor(Color.BLACK);
         eventi.setSelectionColor(Color.BLACK);
-        //eventi.setForeground(Color.red);
         contenitore_eventi = new JPanel();
-
-        // eventi.setForeground(new Color(0xE70E0E));
         contenitore_eventi.setBackground(Color.yellow);
-        // contenitore_eventi.setBackground(Color.white);
         contenitore_eventi.add(eventi);
-        //contenitore_eventi.add(etichetta_fissa_area);
         contenitore_eventi.setBounds(-200, 500, 1900, 30);
-        eventi.setOpaque(false);
 
+        eventi.setOpaque(false);
         eventi.setSize(1500,50);
         eventi.setLineWrap(true);
         contenitore.add(contenitore_eventi, 2, 0);
@@ -157,13 +113,9 @@ public class Eventi extends JFrame implements ActionListener {
         contenitore_fisso.setBounds(10, 550, 1080, 200);
         etichetta_fissa_area.setSize(1080,200);
         etichetta_fissa_area.setLineWrap(true);
-      //  etichetta_fissa_area.setOpaque(false);
         contenitore.add(contenitore_fisso, 3, 0);
-        // contenitore.setBounds(0,700,200,200);
 
         eventi.setEnabled(false);
-
-
     }
 
     /**

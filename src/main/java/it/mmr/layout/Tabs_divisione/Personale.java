@@ -1,7 +1,6 @@
 package it.mmr.layout.Tabs_divisione;
 
 import it.mmr.accesso.Login_iniziale;
-import it.mmr.accesso.Termini_e_condizioni;
 import it.mmr.database.DBManager;
 import it.mmr.database.Registrazione_database;
 import it.mmr.database.Rimozione_database;
@@ -31,23 +30,13 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
     public static String cognome;
     public static Object ruoli_modificato;
     public static String[][] dati;
-
-    //boolean c = true;
-
     public static String[] nomi = {"nome",
-            "cognome", "ruolo","divisione"};
+            "cognome", "ruolo", "divisione"};
 
     public static JButton matita;
     public static JLayeredPane pannello_del_personale;
-
-    //  public static String[][] dati_ruoli; //[contatore_persone][1]
-
     public static BufferedImage resized_icon_piu;
     public static BufferedImage resized_icon_meno;
-
-
-    //   public static JTable table_ruoli;
-
     public JButton piu, meno;
 
     public JLayeredPane Personale() throws SQLException {
@@ -93,24 +82,18 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         pannello_piu.add(piu);
         pannello_piu.setBackground(Color.white);
         pannello_piu.setBounds(1400, 850, 150, 150);
-if(Login_iniziale.root){
-        pannello_del_personale.add(pannello_piu, 3, 0);
-        pannello_del_personale.add(pmeno, 2, 0);
-}
+        if (Login_iniziale.root) {
+            pannello_del_personale.add(pannello_piu, 3, 0);
+            pannello_del_personale.add(pmeno, 2, 0);
+        }
         JPanel colore = new JPanel();
         colore.setSize(1920, 1200);
         pannello_del_personale.add(colore, 0, 0);
         Personale a = new Personale();
-        //  pannello_del_personale.add(a.Stampa_matita(),1,0);
         JPanel pannello_calendario = new JPanel();
 
         Personale x = new Personale();
         x.Stampa_personale(Personale.Matrice_personale());
-
-        //    Personale.Stampa_ruoli(Personale.Matrice_ruoli());
-
-        //table_ruoli.addAncestorListener();
-        // System.out.println(table_ruoli.getValueAt(0,0).toString());
 
         JLabel testa_nome = new JLabel("nome");
         JLabel testa_cognome = new JLabel("cognome");
@@ -122,23 +105,14 @@ if(Login_iniziale.root){
         colonna_nome.add(testa_nome);
         colonna_nome.setBounds(0, 0, 50, 25);
         pannello_del_personale.add(colonna_nome, 2, 0);
-
-
         JPanel colonna_cognome = new JPanel();
-
         colonna_cognome.add(testa_cognome);
         colonna_cognome.setBounds(360, 0, 70, 25);
-
-
         JPanel colonna_ruolo = new JPanel();
-
         colonna_ruolo.add(testa_ruolo);
         colonna_ruolo.setBounds(700, 0, 50, 25);
         pannello_del_personale.add(colonna_ruolo, 1, 0);
-
-
         JPanel colonna_divisione = new JPanel();
-
         colonna_divisione.add(testa_divisione);
         colonna_divisione.setBounds(1050, 0, 70, 25);
         pannello_del_personale.add(colonna_divisione, 1, 0);
@@ -181,8 +155,7 @@ if(Login_iniziale.root){
                     continue;
                 }
 
-                if(j==4)
-                {
+                if (j == 4) {
                     dati[i][j - 1] = queryPersonale.getString("Divisione");
                     System.out.println(dati[i][j - 1]);
                     continue;
@@ -220,16 +193,16 @@ if(Login_iniziale.root){
     public void Stampa_personale(String[][] tmp) {
 
 
-
         JTable table = new JTable(dati, nomi);
         table.getModel().addTableModelListener(this);
         table.setRowHeight(35);
         table.getColumn("nome").setCellEditor(new TableMy(new JCheckBox()));
         table.getColumn("cognome").setCellEditor(new TableMy(new JCheckBox()));
+        table.getColumn("divisione").setCellEditor(new TableMy(new JCheckBox()));
         //table.setEditingColumn(1);
         table.setBounds(0, 25, 1400, 1420);
         pannello_del_personale.add(table, 1, 0);
-       // return table;
+        // return table;
 
     }
 

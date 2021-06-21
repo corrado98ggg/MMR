@@ -1,7 +1,5 @@
 package it.mmr.database;
 
-import it.mmr.layout.Tabs_divisione.Personale;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -111,12 +109,9 @@ public class cambio_password extends JFrame implements ActionListener {
         lsignup.add(panel, 0, 0);
         lsignup.add(panelscritte, 1, 0);
         lsignup.add(panel_logo_mmr, 1, 0);
-        //setContentPane(panel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(650, 300, 700, 475);
         setResizable(false);
-
-        //setSize(700, 475); //lunghezza * altezza
         setVisible(true);
 
         try {

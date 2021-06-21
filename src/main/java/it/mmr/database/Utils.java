@@ -14,10 +14,6 @@ public class Utils {
     public static final String JDBC_URL_SQLite = String.format("jdbc:sqlite:%s",
             Paths.get(Utils.mmrdir(), "mmr.sqlite").toString());
 
-    //public static final String JDBC_Driver_MySQL = "com.mysql.cj.jdbc.Driver";
-    //public static final String JDBC_URL_MySQL = "jdbc:mysql://localhost:3306/jdbc_schema?user=nicola&password=qwertyuio&serverTimezone=" +
-    //       TimeZone.getDefault().getID();
-
     public static String mmrdir() {
         String path = String.format("%s%s%s%s%s", System.getProperty("user.home"), System.getProperty("file.separator"),
                 "Scrivania", System.getProperty("file.separator"), "mmr");

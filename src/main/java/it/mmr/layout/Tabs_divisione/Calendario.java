@@ -52,17 +52,11 @@ public class Calendario extends JFrame {
         } catch (IllegalAccessException e) {
         } catch (UnsupportedLookAndFeelException e) {
         }
-        //setSize(330, 375);
-        //Prepare frame
-        //Set size to 400x400 pixels
-      JLayeredPane  pane = new JLayeredPane();//Get content pane
-        pane.setSize(2000, 400);
-        //   pane.setLayout(null); //Apply null layout
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Close when X is clicked
 
-        //Create controls
+      JLayeredPane  pane = new JLayeredPane();
+        pane.setSize(2000, 400);
+
         lblMonth = new JLabel("January");
-        // lblYear = new JLabel ("Change year:");
         cmbYear = new JComboBox();
         btnPrev = new JButton("<-");
         btnNext = new JButton("->");
@@ -71,46 +65,27 @@ public class Calendario extends JFrame {
                 return true;
             }
         };
-        //mtblCalendar.addTableModelListener(this);
         tblCalendar = new JTable(mtblCalendar);
-
-
         stblCalendar = new JScrollPane(tblCalendar);
         pnlCalendar = new JPanel(null);
-
-        //Set border
         pnlCalendar.setBorder(BorderFactory.createTitledBorder("Calendario"));
-
-        //Register action listeners
         btnPrev.addActionListener(new btnPrev_Action());
         btnNext.addActionListener(new btnNext_Action());
         cmbYear.addActionListener(new cmbYear_Action());
 
-
-        //Add controls to pane
         pane.add(pnlCalendar);
         pnlCalendar.add(lblMonth);
-        //pnlCalendar.add(lblYear);
         pnlCalendar.add(cmbYear);
         pnlCalendar.add(btnPrev);
         pnlCalendar.add(btnNext);
         pnlCalendar.add(stblCalendar);
-
-        //Set bounds
         pnlCalendar.setBounds(5, 0, 1990, 400);
-        //  pnlCalendar.setBackground(Color.white);
         lblMonth.setBounds(100 - lblMonth.getPreferredSize().width / 2, 25, 500, 500);
-        //lblYear.setBounds(10, 305, 80, 20);
         cmbYear.setBounds(1420, 350, 100, 40);
         btnPrev.setBounds(10, 25, 100, 50);
         btnNext.setBounds(1420, 25, 100, 50);
         stblCalendar.setBounds(0, 90, 1550, 1000);
 
-        //Make frame visible
-        // frmMain.setResizable(false);
-        //  frmMain.setVisible(true);
-
-        //Get real month/year
         GregorianCalendar cal = new GregorianCalendar(); //Create calendar
         realDay = cal.get(GregorianCalendar.DAY_OF_MONTH); //Get day
         realMonth = cal.get(GregorianCalendar.MONTH); //Get month
@@ -201,21 +176,6 @@ public class Calendario extends JFrame {
                             throwables.printStackTrace();
                         }
                     }
-
-                    //TableModel model = (TableModel)e.getSource();
-                    //System.out.println(model);
-                    //String columnName = model.getColumnName(column);
-                    //System.out.println(columnName);
-                    //Object data = model.getValueAt(row, column);
-
-                    // viewerPane.add((String) table.getValueAt(row, 0), new JPanel().add(new JTextArea()));
-                    //viewerPane.setSelectedIndex(viewerPane.getComponentCount()-1);
-
-
-                    // etichetta_fissa = new String(Calendario.fisso);
-                    // etichetta_evento = new String(Calendario.event);
-
-
                 }
             }
         });
@@ -223,22 +183,15 @@ public class Calendario extends JFrame {
 
         try {
             Registrazione_database.testConnection();
-            //load();
         } catch (SQLException | NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Database Error!");
         }
-
         return pane;
-
     }
 
-
-    //DA FINIRE
     public static String prendi_evento(int giorno, int mese, int anno) throws SQLException {
 
         String ret = new String();
-        //ArrayList<String> stringa_di_vettori=new ArrayList<String>();
-
         boolean tmp = false;
         int cont = 0;
         str_my = new String[20];
@@ -273,7 +226,6 @@ public class Calendario extends JFrame {
 
 
     public static void refreshCalendar(int month, int year) {
-        //Variables
 
         int nod, som; //Number Of Days, Start Of Month
 

@@ -17,38 +17,19 @@ public class Login_iniziale extends JFrame implements ActionListener {
     JButton condizioni;
     JLabel background;
     public static boolean isopen = false;
-    Color azzurro = new Color(0x01C8FF);
-    Color azzurro1 = new Color(0x01C8FF);
     public static JTextField utente;
     JPasswordField password;
     JCheckBox tick;
-    JTextArea etichetta_utente;
-    JTextArea etichetta_password;
+
 
     public static boolean root = false;
 
     public Login_iniziale() {
         super("MMR");
         ImageIcon icon_sign = new ImageIcon("src/main/java/images/iconasi_log.png.png");
-     /*//   etichetta_password = new JTextArea("Password");
-        //etichetta_utente = new JTextArea("Nome");
-        etichetta_utente.setEditable(false);
-        etichetta_password.setEditable(false);
 
-        JPanel ep = new JPanel();
-        JPanel eu = new JPanel(); //pannelli relativi a label: password e utente
-        ep.add(etichetta_password);
-        eu.add(etichetta_utente);
-        eu.setBounds(97, 180, 90, 20);
-        eu.setBackground(azzurro);
-
-        ep.setBounds(100, 260, 60, 20);
-        ep.setOpaque(true);
-        etichetta_password.setBorder(BorderFactory.createEmptyBorder());*/
         login = new JButton(icon_sign);
         login.addActionListener(this);
-
-
         login.setBorder(BorderFactory.createEmptyBorder());
         login.setContentAreaFilled(false);
 
@@ -113,8 +94,6 @@ public class Login_iniziale extends JFrame implements ActionListener {
         lpane.add(access_utente, 2, 0);
         lpane.add(access_password, 2, 0);
         lpane.add(sing, 3, 0);
-     //   lpane.add(eu, 4, 0);
-       // lpane.add(ep, 4, 0);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);

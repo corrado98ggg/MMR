@@ -23,7 +23,6 @@ public class Avvertenze extends JFrame implements ActionListener {
         pannello_avvertenze.setBackground(new Color(0,0,0,0));
         str = new JTextField("");
         str.setPreferredSize(new Dimension(400, 50));
-       // str.setSize(150,50);
         pannello_avvertenze.add(str);
         pannello_avvertenze.setBounds(50,10,400,50);
         contenitore.add(pannello_avvertenze,1,0);

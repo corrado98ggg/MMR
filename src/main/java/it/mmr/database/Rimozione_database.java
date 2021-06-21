@@ -170,8 +170,6 @@ import java.sql.Statement;
                         throwables.printStackTrace();
                     }
 
-                    //Personale.colonna_ruoli();
-
                     JOptionPane.showMessageDialog(null, "rimozione avvenuta con successo!");
 
                 }

@@ -1,6 +1,5 @@
 package it.mmr.layout.Tabs_divisione;
 
-
 import it.mmr.accesso.Login_iniziale;
 import it.mmr.database.DBManager;
 import it.mmr.database.Nuova_spesa;
@@ -18,7 +17,6 @@ import java.sql.Statement;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-
 public class Spese extends JFrame implements ActionListener, TableModelListener {
 
     public static String[][] dati_spese;
@@ -34,7 +32,6 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
             "Qt.", "Prezzo al pz", "Importo"};
 
     public static JButton matita;
-
 
 
     public JButton piu, meno;
@@ -64,9 +61,10 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         pannello_meno.add(meno);
         pannello_meno.setBackground(Color.white);
         pannello_meno.setBounds(1400, 750, 150, 150);
-if(Login_iniziale.root){
-        pannello_della_tabella.add(pannello_meno, 2, 0);
-        pannello_della_tabella.add(pannello_piu, 2, 0);}
+        if (Login_iniziale.root) {
+            pannello_della_tabella.add(pannello_meno, 2, 0);
+            pannello_della_tabella.add(pannello_piu, 2, 0);
+        }
 
         JPanel colore = new JPanel();
         colore.setSize(1920, 1200);
@@ -102,7 +100,7 @@ if(Login_iniziale.root){
         pannello_della_tabella.add(colonna_importo, 4, 0);
 
         Spese x = new Spese();
-       pannello_della_tabella.add( x.Stampa_spese(Spese.Matrice_spese()),1,0);
+        pannello_della_tabella.add(x.Stampa_spese(Spese.Matrice_spese()), 1, 0);
 
         JPanel sfondo = new JPanel();
         sfondo.setBounds(0, 40, 1920, 1000);

@@ -1,8 +1,6 @@
 package it.mmr.layout;
 
 import it.mmr.database.*;
-import it.mmr.layout.Divisioni.*;
-
 import it.mmr.layout.Tabs_divisione.PannelloTotale;
 import it.mmr.layout.Tabs_divisione.Personale;
 
@@ -18,12 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
 public class Schermata_Principale_home extends JFrame implements ActionListener {
 
-    /* public JButton piu;
-     public JButton meno;*/
-    JTabbedPane divisioni;
     JButton avvertenza;
     JButton cambia_password;
     public static int i = 3;
@@ -36,7 +30,6 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         super("Home");
 
         ImageIcon logo_mmr = new ImageIcon("src/main/java/images/mmr_logo.jpg");
-        //ImageIcon blocco_note = new ImageIcon("src/main/java/images/blocco_note.jpg");
 
         BufferedImage blocconote = null;
         try {
@@ -52,7 +45,9 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
             e.printStackTrace();
         }
 
+        assert blocconote != null;
         BufferedImage resized_blocco_note = Registrazione_database.getScaledDimension(blocconote, 500, 500);
+        assert danger != null;
         BufferedImage resized_danger = Registrazione_database.getScaledDimension(danger, 60, 75);
 
         JTabbedPane divisioni = new JTabbedPane(JTabbedPane.LEFT);
@@ -86,20 +81,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         c.setBackground(new Color(237, 237, 237));
         c.add(picLabel);
         c.setBounds(20, 330, 300, 300);
-
-
-    //    divisioni.add(null, logo_mmr);
         divisioni.addTab("",logo_mmr,PannelloTotale.PannelloTotale());
-
-      //  divisioni.addTab("Business", PannelloTotale.PannelloTotale());
-        //divisioni.addTab("motori", PannelloTotale.PannelloTotale());
-        //divisioni.addTab("Dinamica del veicolo", PannelloTotale.PannelloTotale());
-       // divisioni.addTab("Elettronica", PannelloTotale.PannelloTotale());
-       // divisioni.addTab("Powertrain", PannelloTotale.PannelloTotale());
-       // divisioni.addTab("Ricerca", PannelloTotale.PannelloTotale());
-
-      //  divisioni.setSelectedIndex(1);
-
         divisioni.setSize(1920, 1080);
         a.setBounds(0, 0, 1920, 1080);
         a.add(divisioni, 0, 0);
@@ -202,7 +184,6 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
 
 
     public static void aggiungi_ruolo(String str) throws SQLException {
-
         try {
             Registrazione_database.testConnection();
             //load();
@@ -261,7 +242,6 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
             ruolo = tmp.getString("ruoli");
             System.out.println(ruolo);
         }
-        // Personale.Stampa_ruoli(Personale.Matrice_ruoli());
     }
 
     public static void main(String[] args) throws SQLException {

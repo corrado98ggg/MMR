@@ -1,7 +1,6 @@
 package it.mmr.accesso;
 
 import javax.swing.*;
-import it.mmr.accesso.Login_iniziale;
 import java.awt.*;
 
 public class Termini_e_condizioni extends JFrame {

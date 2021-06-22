@@ -53,9 +53,6 @@ public class Nuovo_evento extends JFrame implements ActionListener {
         exit = new JButton("Exit");
         exit.addActionListener(this);
 
-        //password = new JPasswordField("inserisci giorno");
-        //password.setPreferredSize(new Dimension(250, 30));
-
         mese = new JTextField("Inserisci mese");
         mese.setPreferredSize(new Dimension(250, 30));
 

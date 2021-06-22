@@ -1,8 +1,6 @@
 package it.mmr.database;
 
-import it.mmr.layout.Schermata_Principale_home;
 import it.mmr.layout.Tabs_divisione.Personale;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -84,12 +82,7 @@ public class Registrazione_database extends JFrame implements ActionListener {
         cognome.setPreferredSize(new Dimension(250, 30));
         divisione = new JTextField("divisione");
         divisione.setPreferredSize(new Dimension(250, 30));
-/*
-        JPanel pn=new JPanel();
-        pn.add(nome);
-        JPanel pc=new JPanel();
-        pc.add(cognome);
-        JPanel pd=new JPanel();*/
+
         JLabel root = new JLabel("root");
         root.setBackground(new Color(0x02cbff));
         tick_root = new JCheckBox();
@@ -155,10 +148,10 @@ public class Registrazione_database extends JFrame implements ActionListener {
         }
         if (e.getSource() == ok) {
 
-            /**
-             * sicurezza password check
-             * criteri: la password
-             * deve avere minimo 6 caratteri e un numero
+            /*
+              sicurezza password check
+              criteri: la password
+              deve avere minimo 6 caratteri e un numero
              */
             if (password.getText().length() > 5 && thereisnumber()) {
 
@@ -174,7 +167,7 @@ public class Registrazione_database extends JFrame implements ActionListener {
 
                 id = java.util.UUID.randomUUID();
 
-                if (tick_root.isSelected() == true) {
+                if (tick_root.isSelected()) {
                     root_check = "TRUE";
                 } else {
                     root_check = "FALSE";
@@ -201,8 +194,6 @@ public class Registrazione_database extends JFrame implements ActionListener {
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
-
-                //Personale.Stampa_ruoli();
 
                 setVisible(false);
 

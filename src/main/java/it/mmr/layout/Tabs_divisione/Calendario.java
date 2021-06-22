@@ -1,7 +1,6 @@
 package it.mmr.layout.Tabs_divisione;
 
 import it.mmr.database.DBManager;
-import it.mmr.database.Nuovo_evento;
 import it.mmr.database.Registrazione_database;
 
 import javax.swing.JFrame;
@@ -9,8 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -20,12 +17,11 @@ import java.sql.Statement;
 import java.util.*;
 
 public class Calendario extends JFrame {
-    static JLabel lblMonth, lblYear;
+    static JLabel lblMonth;
     static JButton btnPrev, btnNext;
     public static String[] str_my;
     static JTable tblCalendar;
-    static JComboBox cmbYear;
-    static JPanel frmMain;
+    static JComboBox<String> cmbYear;
 
     static DefaultTableModel mtblCalendar; //Table model
     static JScrollPane stblCalendar; //The scrollpane
@@ -43,21 +39,18 @@ public class Calendario extends JFrame {
     public static String event;
 
 
-    public JLayeredPane Calendario() {
+    public JLayeredPane calendario() {
         //Look and feel
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-        } catch (InstantiationException e) {
-        } catch (IllegalAccessException e) {
-        } catch (UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException ignored) {
         }
 
-      JLayeredPane  pane = new JLayeredPane();
+        JLayeredPane  pane = new JLayeredPane();
         pane.setSize(2000, 400);
 
         lblMonth = new JLabel("January");
-        cmbYear = new JComboBox();
+        cmbYear = new JComboBox<>();
         btnPrev = new JButton("<-");
         btnNext = new JButton("->");
         mtblCalendar = new DefaultTableModel() {
@@ -153,14 +146,14 @@ public class Calendario extends JFrame {
                     System.out.println(i);
                     System.out.println("-----------------");
                     try {
-                        evento = new String();
+                        evento = "";
                         evento = prendi_evento(i, currentMonth + 1, currentYear);
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
 
                     if (evento.compareTo("Nessun evento in programma") == 0) { //0 uguale
-                        fisso = new String("Nessun evento in programma");
+                        fisso = "Nessun evento in programma";
                         try {
                             Eventi.Disegno_evento(fisso, null);
                         } catch (SQLException throwables) {
@@ -168,7 +161,7 @@ public class Calendario extends JFrame {
                         }
 
                     } else {
-                        fisso = new String("Evento per la data selezionata:");
+                        fisso = "Evento per la data selezionata:";
                         event = evento;
                         try {
                             Eventi.Disegno_evento(fisso, event);
@@ -191,7 +184,7 @@ public class Calendario extends JFrame {
 
     public static String prendi_evento(int giorno, int mese, int anno) throws SQLException {
 
-        String ret = new String();
+        String ret;
         boolean tmp = false;
         int cont = 0;
         str_my = new String[20];
@@ -214,7 +207,7 @@ public class Calendario extends JFrame {
                 }
             }
         }
-        if (tmp == true) {
+        if (tmp) {
             ret = "";
             for (int i = 0; i < cont; i++) {
                 ret = ret + "\n" + str_my[i];
@@ -256,7 +249,7 @@ public class Calendario extends JFrame {
 
         //Draw calendar
         for (int i = 1; i <= nod; i++) {
-            int row = new Integer((i + som - 2) / 7);
+            int row = (i + som - 2) / 7;
             int column = (i + som - 2) % 7;
             mtblCalendar.setValueAt(i, row, column);
         }

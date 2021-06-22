@@ -7,14 +7,13 @@ import java.io.*;
 public class Aiuto extends JFrame{
 
     public static String testo_aiuto;
-    Console Input;
     JTextArea area_testo;
     JLayeredPane area;
 
-    public JLayeredPane Aiuto() throws IOException {
+    public JLayeredPane aiuto() throws IOException {
 
         area = new JLayeredPane();
-        testo_aiuto = new String();
+        testo_aiuto = "";
         area_testo = new JTextArea();
 
         BufferedReader reader = new BufferedReader(new FileReader("src/main/java/images/aiuto.txt"));

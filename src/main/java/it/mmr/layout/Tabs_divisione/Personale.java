@@ -33,13 +33,12 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
     public static String[] nomi = {"nome",
             "cognome", "ruolo", "divisione"};
 
-    public static JButton matita;
     public static JLayeredPane pannello_del_personale;
     public static BufferedImage resized_icon_piu;
     public static BufferedImage resized_icon_meno;
     public JButton piu, meno;
 
-    public JLayeredPane Personale() throws SQLException {
+    public JLayeredPane personale() throws SQLException {
 
         pannello_del_personale = new JLayeredPane();
 
@@ -49,6 +48,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assert icon_meno != null;
         resized_icon_meno = Registrazione_database.getScaledDimension(icon_meno, 109, 109);
 
         BufferedImage icon_piu = null;
@@ -57,10 +57,8 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assert icon_piu != null;
         resized_icon_piu = Registrazione_database.getScaledDimension(icon_piu, 100, 100);
-
-        ImageIcon logo_mmr = new ImageIcon("src/main/java/images/mmr_logo.jpg");
-
 
         meno = new JButton(new ImageIcon(resized_icon_meno));
         meno.addActionListener(this);
@@ -89,8 +87,6 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         JPanel colore = new JPanel();
         colore.setSize(1920, 1200);
         pannello_del_personale.add(colore, 0, 0);
-        Personale a = new Personale();
-        JPanel pannello_calendario = new JPanel();
 
         Personale x = new Personale();
         x.Stampa_personale(Personale.Matrice_personale());
@@ -173,11 +169,8 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
                     continue;
                 }
 
-                if (j / 2 != 1) {
-                    dati[i][j - 1] = queryPersonale.getString("nome");
-                    System.out.println(dati[i][j - 1]);
-                    continue;
-                }
+                dati[i][j - 1] = queryPersonale.getString("nome");
+                System.out.println(dati[i][j - 1]);
 
 
             }
@@ -215,12 +208,8 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        boolean i = false;
-
         if (e.getSource() == piu) {
-
             new Registrazione_database(); // fixato da me
-
         }
         if (e.getSource() == meno) {
             new Rimozione_database(); // fixato da me
@@ -245,7 +234,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         cognome = dati[row][1];
 
         try {
-            Schermata_Principale_home.aggiungi_ruolo((String) ruoli_modificato);
+            Schermata_Principale_home.aggiungi_ruolo();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

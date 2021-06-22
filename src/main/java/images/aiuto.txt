@@ -1,12 +1,12 @@
 Il presente testo è un semplice strumento di documentazione, che spiega l'utilizzo dell'eseguibile in modo semplice e esaustivo.
 L'applicazione è basata su un database locale reso nascosto all'utente; .MMR
 
-Il database è formato da 4 Tabelle:
+                                                                                                                            Il database è formato da 4 Tabelle:
 
-registrazioni (id, Nome, Cognome, Password, Root, Ruoli, Divisione) 
-avvertenze (testo)
-eventi  (Evento, Giorno, Anno, Ora, mese)
-spese
+                                                                                                                                       -                                                                            registrazioni (id, Nome, Cognome, Password, Root, Ruoli, Divisione)
+                                                                                                                                                  -                            avvertenze (testo)
+                                                                                                                                      -                                                                eventi  (Evento, Giorno, Anno, Ora, mese)
+                                                                                                                                                                                               -                                       spese
 
 Registrazioni è la tabella che tiene conto degli utenti registrati, a ogni utente viene asseganto un chiave id unica.
 Oltre, al nome cognome ruolo e divisione di appartenenza, all'utente viene assegnata la password, salvata secondo un algoritmo di codifica MD5 e un permesso speciale:

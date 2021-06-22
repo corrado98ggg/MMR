@@ -50,9 +50,4 @@ public class DBManager {
         System.out.println("Supports CONCUR_UPDATABLE: " + md.supportsResultSetType(ResultSet.CONCUR_UPDATABLE));
     }
 
-    public static void close() throws SQLException {
-        if (connection != null) {
-            connection.close();
-        }
-    }
 }

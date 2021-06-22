@@ -26,19 +26,13 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
     public static JTable table;
     String tmp;
 
-    public static Object spese_modificate;
 
     public static String[] nomi = {"Descrizione",
             "Qt.", "Prezzo al pz", "Importo"};
-
-    public static JButton matita;
-
-
     public JButton piu, meno;
-
     public static int contatore_spese;
+    public JLayeredPane spese() throws SQLException {
 
-    public JLayeredPane Spese() throws SQLException {
         JLayeredPane pannello_della_tabella = new JLayeredPane();
         pannello_della_tabella.setSize(300, 300);
 
@@ -158,12 +152,6 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         table.getColumn("Qt.").setCellEditor(new TableMy(new JCheckBox()));
         table.getColumn("Prezzo al pz").setCellEditor(new TableMy(new JCheckBox()));
         table.getColumn("Importo").setCellEditor(new TableMy(new JCheckBox()));
-
-
-        //table.getColumn("nome").setCellEditor(new TableMy(new JCheckBox()));
-        //table.getColumn("cognome").setCellEditor(new TableMy(new JCheckBox()));
-        //table.setEditingColumn(1);
-        //table.setEnabled(false);
 
         Spese.table.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {

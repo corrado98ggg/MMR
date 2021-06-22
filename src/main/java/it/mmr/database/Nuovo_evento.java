@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serial;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -121,7 +120,7 @@ public class Nuovo_evento extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-       String mesi[] = {"Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio",
+       String[] mesi = {"Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio",
                 "Agosto", "Settembre", "Ottobre",
                 "Novembre", "Dicembre", "gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio",
                 "agosto", "settembre", "ottobre",
@@ -141,7 +140,7 @@ public class Nuovo_evento extends JFrame implements ActionListener {
         if (e.getSource() == ok) {
 
 
-            if((check_mesi(mesi, mese.getText()) == true) && (check_giorni(giorni, giorno.getText()) == true)) {
+            if((check_mesi(mesi, mese.getText())) && (check_giorni(giorni, giorno.getText()))) {
 
                 System.out.println(mese.getText());
                 System.out.println(giorno.getText());
@@ -174,24 +173,20 @@ public class Nuovo_evento extends JFrame implements ActionListener {
         }
     }
 
-    boolean check_mesi(String mesi[], String mese) {
-
-        boolean contains;
+    boolean check_mesi(String[] mesi, String mese) {
 
         for(int i = 0; i < 24; i++){
-            if(mesi[i].equals(mese) == true){
+            if(mesi[i].equals(mese)){
                 return true;
             }
         }
         return false;
     }
 
-    boolean check_giorni(String giorni[], String giorno) {
-
-        boolean contains;
+    boolean check_giorni(String[] giorni, String giorno) {
 
         for(int i = 0; i < 31; i++){
-            if(giorni[i].equals(giorno) == true){
+            if(giorni[i].equals(giorno)){
                 return true;
             }
         }

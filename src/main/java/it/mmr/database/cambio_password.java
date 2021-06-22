@@ -158,7 +158,11 @@ public class cambio_password extends JFrame implements ActionListener {
         password_hash_nuova = Registrazione_database.MD5(password_nuova_1.getText()); //da andare nel databse e al check sostituire
         password_hash_vecchia = Registrazione_database.MD5(password_vecchia.getText());
 
-        if (password_nuova_1.getText().equals(password_nuova_2.getText()) == true) {
+        if (!password_nuova_1.getText().equals(password_nuova_2.getText())) {
+            UIManager.put("OptionPane.minimumSize", new Dimension(100, 90));
+            JOptionPane.showMessageDialog(null, "Le due password non corrispondono!");
+            setVisible(false);
+        } else {
 
 
             Statement statement_tmp = DBManager.getConnection().createStatement();
@@ -167,6 +171,7 @@ public class cambio_password extends JFrame implements ActionListener {
             while (queryPersonale.next()) {
                 if (nome.getText().equals(queryPersonale.getString("nome"))) {
                     if (cognome.getText().equals(queryPersonale.getString("cognome"))) {
+                        assert password_hash_vecchia != null;
                         if(password_hash_vecchia.equals(queryPersonale.getString("password"))){
                             try {
                                 String query = String.format(
@@ -185,10 +190,6 @@ public class cambio_password extends JFrame implements ActionListener {
             UIManager.put("OptionPane.minimumSize", new Dimension(100, 90));
             JOptionPane.showMessageDialog(null, "password cambiata con successo!");
 
-        } else {
-            UIManager.put("OptionPane.minimumSize", new Dimension(100, 90));
-            JOptionPane.showMessageDialog(null, "Le due password non corrispondono!");
-            setVisible(false);
         }
 
     }

@@ -22,9 +22,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
     JButton cambia_password;
     public static int i = 3;
     public static JLayeredPane a;
-
     public static String warning;
-    public static String ruolo;
 
     public Schermata_Principale_home() throws SQLException {
         super("Home");
@@ -81,7 +79,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         c.setBackground(new Color(237, 237, 237));
         c.add(picLabel);
         c.setBounds(20, 330, 300, 300);
-        divisioni.addTab("",logo_mmr,PannelloTotale.PannelloTotale());
+        divisioni.addTab("",logo_mmr,PannelloTotale.pannelloTotale());
         divisioni.setSize(1920, 1080);
         a.setBounds(0, 0, 1920, 1080);
         a.add(divisioni, 0, 0);
@@ -183,7 +181,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
     }
 
 
-    public static void aggiungi_ruolo(String str) throws SQLException {
+    public static void aggiungi_ruolo() throws SQLException {
         try {
             Registrazione_database.testConnection();
             //load();
@@ -223,25 +221,6 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
           i++;
         }
 
-    }
-
-    public static void check_ruolo() throws SQLException {
-
-        try {
-            testConnection_avvertenze();
-            //load();
-        } catch (SQLException | NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "Database Error!");
-        }
-
-        Statement statement = DBManager.getConnection().createStatement();
-        ResultSet tmp = statement.executeQuery("SELECT ruoli FROM registrazioni");
-
-        while (tmp.next()) {
-
-            ruolo = tmp.getString("ruoli");
-            System.out.println(ruolo);
-        }
     }
 
     public static void main(String[] args) throws SQLException {

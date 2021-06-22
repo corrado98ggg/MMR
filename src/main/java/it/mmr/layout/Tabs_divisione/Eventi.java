@@ -24,10 +24,10 @@ public class Eventi extends JFrame implements ActionListener {
     public static JTextArea eventi;
     public static JTextArea etichetta_fissa_area;
 
-    public JLayeredPane Eventi() throws SQLException {
+    public JLayeredPane eventi() throws SQLException {
         contenitore = new JLayeredPane();
         Calendario calendario = new Calendario();
-        contenitore.add(calendario.Calendario(), 1, 0);
+        contenitore.add(calendario.calendario(), 1, 0);
 
         BufferedImage icon_piu = null;
         try {
@@ -35,6 +35,7 @@ public class Eventi extends JFrame implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assert icon_piu != null;
         BufferedImage resized_icon_piu = Registrazione_database.getScaledDimension(icon_piu, 100, 100);
 
         piu = new JButton(new ImageIcon(resized_icon_piu));

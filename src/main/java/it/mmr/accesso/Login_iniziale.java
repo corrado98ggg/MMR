@@ -105,7 +105,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
             try {
 
                 System.out.println(utente.getText());
-                if (check_database(utente.getText(), password.getText()) == true && tick.isSelected() == true) {
+                if (check_database(utente.getText(), password.getText()) && tick.isSelected()) {
                     setVisible(false);
                     new Schermata_Principale_home();
 
@@ -119,7 +119,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == condizioni) {
-            if(isopen == false) {
+            if(!isopen) {
 
                 new Termini_e_condizioni(); // non è fixato da me
                 isopen=true;

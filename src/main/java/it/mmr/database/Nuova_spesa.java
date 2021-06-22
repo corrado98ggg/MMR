@@ -1,8 +1,6 @@
 package it.mmr.database;
 
-import it.mmr.layout.Tabs_divisione.Personale;
 import it.mmr.layout.Tabs_divisione.Spese;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -147,11 +145,11 @@ public class Nuova_spesa extends JFrame implements ActionListener {
 
         if (e.getSource() == ok) {
 
-            quantit = new Integer(qt.getText());
+            quantit = Integer.valueOf(qt.getText());
             System.out.println(quantit);
-            prezz = new Integer(prezzo_al_pezzo.getText());
+            prezz = Integer.valueOf(prezzo_al_pezzo.getText());
             System.out.println(prezz);
-            impor = new Integer(importo.getText());
+            impor = Integer.valueOf(importo.getText());
             System.out.println(impor);
 
 

@@ -9,12 +9,13 @@ public class Termini_e_condizioni extends JFrame {
     {
         super("Termini e condizioni d'uso");
 
-        JTextArea text=new JTextArea("L'eseguibile creato da : Corrado" +
-                "\nCarriero e Enrico Garrapa,E' un " +
-                "\nprogetto per l'esame di program" +
-                "\nmazione ad oggetti le risorse" +
-                "\nmulimediali e i dati usati sono" +
-                "\ndi proprietà intellettuale di UniMore.");
+        JTextArea text=new JTextArea("""
+                L'eseguibile creato da : Corrado
+                Carriero e Enrico Garrapa,E' un\s
+                progetto per l'esame di program
+                mazione ad oggetti le risorse
+                mulimediali e i dati usati sono
+                di proprietà intellettuale di UniMore.""");
 
         text.setFont(new Font("Monaco", Font.ITALIC, 20));
         text.setEditable(false);

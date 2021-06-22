@@ -3,8 +3,6 @@ package it.mmr.layout.Tabs_divisione;
 import it.mmr.database.DBManager;
 import it.mmr.database.Nuova_spesa;
 import it.mmr.database.Registrazione_database;
-import it.mmr.database.Utils;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -17,14 +15,9 @@ import java.sql.Statement;
 
 public class Andamento extends JFrame {
 
-    private static JLabel prezzo;
     public static JPanel sfondo;
     public static int soldi = 0;
-
-    String s;
-    int i = 29900;
-
-    public static JLayeredPane Andamento() throws SQLException {
+    public static JLayeredPane andamento() throws SQLException {
 
         JLayeredPane tot = new JLayeredPane();
         tot.setBounds(0, 0, 200, 200);
@@ -57,9 +50,13 @@ public class Andamento extends JFrame {
             e.printStackTrace();
         }
 
+        assert icon != null;
         BufferedImage icona = Registrazione_database.getScaledDimension(icon, 60, 60);
+        assert icon2 != null;
         BufferedImage icona2 = Registrazione_database.getScaledDimension(icon2, 95, 95);
+        assert icon3 != null;
         BufferedImage icona3 = Registrazione_database.getScaledDimension(icon3, 60, 60);
+        assert icon4 != null;
         BufferedImage icona4 = Registrazione_database.getScaledDimension(icon4, 95, 95);
 
 
@@ -109,7 +106,7 @@ public class Andamento extends JFrame {
         contenitore.add(pannello_icona, 6, 0);
 
 
-        prezzo = new JLabel(String.valueOf(h) + " €");
+        JLabel prezzo = new JLabel(h + " €");
         // prezzo.setEnabled(false);
         prezzo.setFont(new Font("Monaco", Font.BOLD, 20));
         prezzo.setForeground(Color.BLACK);
@@ -120,7 +117,6 @@ public class Andamento extends JFrame {
         pannello_prezzo.setBounds(55, 30, 300, 200);
         contenitore.add(pannello_prezzo, 5, 0);
 
-        ;
         JLabel descrizione = new JLabel(desc);
         descrizione.setEnabled(false);
         JPanel pannello_descrizione = new JPanel();

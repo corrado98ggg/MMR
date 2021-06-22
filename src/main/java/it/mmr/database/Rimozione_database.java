@@ -54,9 +54,9 @@ import java.sql.Statement;
             text_divisione =new JTextField("inserisci divisione appartentente all'utente");
             text_divisione.setPreferredSize(new Dimension(250,30));
 
-            /**
-             * creazione dei pannelli per l'interfaccia
-             * grafica della rimozione del personale.
+            /*
+              creazione dei pannelli per l'interfaccia
+              grafica della rimozione del personale.
              */
 
             BufferedImage logo_uni = null;
@@ -113,8 +113,8 @@ import java.sql.Statement;
 
             setVisible(true);
 
-            /**
-             * prova di accesso al database locale
+            /*
+              prova di accesso al database locale
              */
             try {
                 Registrazione_database.testConnection();

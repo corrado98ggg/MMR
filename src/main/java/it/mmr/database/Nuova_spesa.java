@@ -197,7 +197,7 @@ public class Nuova_spesa extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Registrazione_database();
+        new Nuova_spesa();
     }
 
 }

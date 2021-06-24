@@ -22,7 +22,7 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
     public static String[][] dati_spese;
     public static int row = -1;
     public static int column = -1;
-
+   public static JLayeredPane pannello_della_tabella;
     public static JTable table;
     String tmp;
 
@@ -33,7 +33,7 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
     public static int contatore_spese;
     public JLayeredPane spese() throws SQLException {
 
-        JLayeredPane pannello_della_tabella = new JLayeredPane();
+        pannello_della_tabella = new JLayeredPane();
         pannello_della_tabella.setSize(300, 300);
 
         piu = new JButton(new ImageIcon(Personale.resized_icon_piu));
@@ -55,10 +55,10 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         pannello_meno.add(meno);
         pannello_meno.setBackground(Color.white);
         pannello_meno.setBounds(1400, 750, 150, 150);
-        if (Login_iniziale.root) {
+
             pannello_della_tabella.add(pannello_meno, 2, 0);
             pannello_della_tabella.add(pannello_piu, 2, 0);
-        }
+
 
         JPanel colore = new JPanel();
         colore.setSize(1920, 1200);
@@ -94,7 +94,9 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         pannello_della_tabella.add(colonna_importo, 4, 0);
 
         Spese x = new Spese();
-        pannello_della_tabella.add(x.Stampa_spese(Spese.Matrice_spese()), 1, 0);
+        x.Stampa_spese(Spese.Matrice_spese());
+     //   pannello_della_tabella.add(x.Stampa_spese(Spese.Matrice_spese()), 1, 0);
+
 
         JPanel sfondo = new JPanel();
         sfondo.setBounds(0, 40, 1920, 1000);
@@ -143,7 +145,7 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
     }
 
 
-    public JTable Stampa_spese(String[][] tmp) {
+    public void Stampa_spese(String[][] tmp) {
 
         table = new JTable(dati_spese, nomi);
         table.getModel().addTableModelListener(this);
@@ -165,7 +167,8 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         });
 
         table.setBounds(0, 25, 1440, 1500);
-        return table;
+        pannello_della_tabella.add(table,1,0);
+        // return table;
     }
 
     /**
@@ -197,6 +200,7 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
                     }
                 }
             }
+
         }
     }
 

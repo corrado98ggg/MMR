@@ -138,10 +138,15 @@ public class Calendario extends JFrame {
                     System.out.println(column);
                     System.out.println("-----------------");
                     System.out.println(tblCalendar.getValueAt(row, column));
+                    Integer giorno_corrente= (int) tblCalendar.getValueAt(row, column);
                     System.out.println("-----------------");
                     System.out.println(currentYear);
                     System.out.println("-----------------");
-                    int i = (int) tblCalendar.getValueAt(row, column);
+                    Integer i = (int) tblCalendar.getValueAt(row, column);
+                //     i= i-1;
+                   // Integer mese=new Integer(i);
+                    Integer mese=currentMonth+1;
+                    Integer anno=currentYear;
                     System.out.println("-----------------");
                     System.out.println(i);
                     System.out.println("-----------------");
@@ -153,7 +158,7 @@ public class Calendario extends JFrame {
                     }
 
                     if (evento.compareTo("Nessun evento in programma") == 0) { //0 uguale
-                        fisso = "Nessun evento in programma";
+                        fisso = "Nessun evento in programma il"+" "+giorno_corrente.toString()+"/"+mese.toString()+"/"+anno.toString();
                         try {
                             Eventi.Disegno_evento(fisso, null);
                         } catch (SQLException throwables) {
@@ -161,7 +166,7 @@ public class Calendario extends JFrame {
                         }
 
                     } else {
-                        fisso = "Evento per la data selezionata:";
+                        fisso = "Evento per la data"+" "+giorno_corrente.toString()+"/"+mese.toString()+"/"+anno.toString();
                         event = evento;
                         try {
                             Eventi.Disegno_evento(fisso, event);

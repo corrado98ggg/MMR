@@ -21,7 +21,6 @@ public class Login_iniziale extends JFrame implements ActionListener {
     JPasswordField password;
     JCheckBox tick;
 
-
     public static boolean root = false;
 
     public Login_iniziale() {

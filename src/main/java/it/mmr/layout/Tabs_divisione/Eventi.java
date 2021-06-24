@@ -99,6 +99,7 @@ public class Eventi extends JFrame implements ActionListener {
         eventi.setCaretColor(Color.BLACK);
         eventi.setSelectionColor(Color.BLACK);
         contenitore_eventi = new JPanel();
+        etichetta_fissa_area.setFont(new Font("Monaco", Font.ITALIC, 20));
         contenitore_eventi.setBackground(Color.yellow);
         contenitore_eventi.add(eventi);
         contenitore_eventi.setBounds(-200, 500, 1900, 30);

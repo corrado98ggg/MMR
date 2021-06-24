@@ -194,6 +194,10 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         table.getColumn("divisione").setCellEditor(new TableMy(new JCheckBox()));
         //table.setEditingColumn(1);
         table.setBounds(0, 25, 1400, 1420);
+        if(Login_iniziale.root==false)
+        {
+            table.getColumn("ruolo").setCellEditor(new TableMy(new JCheckBox()));
+        }
         pannello_del_personale.add(table, 1, 0);
         // return table;
 

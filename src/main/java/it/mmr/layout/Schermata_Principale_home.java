@@ -1,5 +1,6 @@
 package it.mmr.layout;
 
+import it.mmr.accesso.Login_iniziale;
 import it.mmr.database.*;
 import it.mmr.layout.Tabs_divisione.PannelloTotale;
 import it.mmr.layout.Tabs_divisione.Personale;
@@ -65,7 +66,11 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
 
         JPanel panello_cambio_password = new JPanel();
         panello_cambio_password.add(cambia_password);
+        if(Login_iniziale.root){
         panello_cambio_password.setBounds(80, 900, 200, 30);
+        }else{
+            panello_cambio_password.setBounds(80, 970, 200, 30);
+        }
 
         JLabel picLabel = new JLabel(new ImageIcon(resized_blocco_note));
         JPanel c = new JPanel();
@@ -84,9 +89,10 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         a.setBounds(0, 0, 1920, 1080);
         a.add(divisioni, 0, 0);
         a.add(c, 1, 1);
-
+       if(Login_iniziale.root){
         a.add(panello_avvertenza, 2, 2);
         a.add(panello_danger, 2, 1);
+        }
         a.add(panello_cambio_password, 2, 2);
 
         setContentPane(a);
@@ -146,7 +152,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
 
         JTextArea testo = new JTextArea(warning);
         testo.setLineWrap(true);
-        testo.setFont(new Font("Arial Black", Font.BOLD, 10));
+        testo.setFont(new Font("Arial Black", Font.BOLD, 15));
         testo.setOpaque(false);
         testo.setEditable(false);
 

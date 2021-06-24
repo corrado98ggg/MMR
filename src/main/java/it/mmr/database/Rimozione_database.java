@@ -48,12 +48,24 @@ import java.sql.Statement;
             Button_exit = new JButton("Exit");
             Button_exit.addActionListener(this);
 
-            text_nome_utente =new JTextField("nome utente da rimuovere");
+            JLabel testo_nome=new JLabel("nome utente da rimovuovere");
+            text_nome_utente =new JTextField("");
             text_nome_utente.setPreferredSize(new Dimension(250,30));
+            JPanel nome=new JPanel((new GridBagLayout()));
+            nome.setBackground(new Color(0x02cbff));
+           // nome.setBackground(new Color(0,0,0,0));
+            nome.add(testo_nome);
+            nome.setBounds(397,185,200,20);
 
-            text_divisione =new JTextField("inserisci divisione appartentente all'utente");
+            JLabel testo_divi=new JLabel("inserisci divisione appartenente all'utente");
+            JPanel div=new JPanel((new GridBagLayout()));
+            div.add(testo_divi);
+            div.setBounds(397,185,200,20);
+            text_divisione =new JTextField("");
             text_divisione.setPreferredSize(new Dimension(250,30));
 
+            lsignup.add(nome,2,0);
+            lsignup.add(testo_divi,2,0);
             /*
               creazione dei pannelli per l'interfaccia
               grafica della rimozione del personale.
@@ -88,7 +100,7 @@ import java.sql.Statement;
 
             JPanel panelscritte=new JPanel();
             panelscritte.setBackground(new Color(0x02cbff));
-            panelscritte.setBounds(400,200,250,400);
+            panelscritte.setBounds(400,200,250,500);
 
             JPanel panel_logo_mmr=new JPanel();
             panel_logo_mmr.setBackground(new Color(0x02cbff));

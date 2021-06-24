@@ -22,7 +22,6 @@ public class cambio_password extends JFrame implements ActionListener {
     public static JPasswordField password_nuova_1;
     public static JPasswordField password_nuova_2;
 
-
     public static JTextField nome;
     public static JTextField cognome;
 

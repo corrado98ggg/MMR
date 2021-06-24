@@ -186,7 +186,6 @@ public class Login_iniziale extends JFrame implements ActionListener {
                         } catch (SQLException e1) {
                             e1.printStackTrace();
                         }
-
                         return true;
                     }
                 }

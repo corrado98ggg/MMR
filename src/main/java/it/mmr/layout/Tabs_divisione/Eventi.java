@@ -91,15 +91,13 @@ public class Eventi extends JFrame implements ActionListener {
         }
     }
 
-
     public static void Disegno_evento(String fisso, String evento) throws SQLException{
 
         etichetta_fissa_area = new JTextArea(evento);
         eventi = new JTextArea(fisso);
-        eventi.setCaretColor(Color.BLACK);
-        eventi.setSelectionColor(Color.BLACK);
+        eventi.setFont(new Font("Monaco", Font.ITALIC, 15));
         contenitore_eventi = new JPanel();
-        etichetta_fissa_area.setFont(new Font("Monaco", Font.ITALIC, 20));
+        etichetta_fissa_area.setFont(new Font("Monaco", Font.ITALIC, 25));
         contenitore_eventi.setBackground(Color.yellow);
         contenitore_eventi.add(eventi);
         contenitore_eventi.setBounds(-200, 500, 1900, 30);
@@ -107,6 +105,8 @@ public class Eventi extends JFrame implements ActionListener {
         eventi.setOpaque(false);
         eventi.setSize(1500,50);
         eventi.setLineWrap(true);
+        etichetta_fissa_area.setLineWrap(true);
+        etichetta_fissa_area.setWrapStyleWord(true);
         contenitore.add(contenitore_eventi, 2, 0);
 
         JPanel contenitore_fisso = new JPanel();
@@ -117,7 +117,7 @@ public class Eventi extends JFrame implements ActionListener {
         etichetta_fissa_area.setLineWrap(true);
         contenitore.add(contenitore_fisso, 3, 0);
 
-        eventi.setEnabled(false);
+        eventi.setEditable(false);
     }
 
     /**

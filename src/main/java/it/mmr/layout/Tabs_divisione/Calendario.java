@@ -38,6 +38,8 @@ public class Calendario extends JFrame {
     public static String fisso;
     public static String event;
 
+    public static String orario;
+
 
     public JLayeredPane calendario() {
         //Look and feel
@@ -122,34 +124,31 @@ public class Calendario extends JFrame {
             cmbYear.addItem(String.valueOf(i));
         }
 
-        //Refresh calendar
-        // setVisible(true);
-        //  setContentPane(pane);+
         tblCalendar.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 1) {
                     int row = tblCalendar.getSelectedRow();
                     //int row = e.getFirstRow();
-                    System.out.println(row);
-                    System.out.println("-----------------");
-                    System.out.println(currentMonth + 1);
-                    System.out.println("-----------------");
+                    //System.out.println(row);
+                    //System.out.println("-----------------");
+                    //System.out.println(currentMonth + 1);
+                    //System.out.println("-----------------");
                     int column = tblCalendar.getSelectedColumn();
-                    System.out.println(column);
-                    System.out.println("-----------------");
-                    System.out.println(tblCalendar.getValueAt(row, column));
+                    //System.out.println(column);
+                    //System.out.println("-----------------");
+                    //System.out.println(tblCalendar.getValueAt(row, column));
                     Integer giorno_corrente= (int) tblCalendar.getValueAt(row, column);
-                    System.out.println("-----------------");
-                    System.out.println(currentYear);
-                    System.out.println("-----------------");
+                    //System.out.println("-----------------");
+                    //System.out.println(currentYear);
+                    //System.out.println("-----------------");
                     Integer i = (int) tblCalendar.getValueAt(row, column);
                 //     i= i-1;
                    // Integer mese=new Integer(i);
                     Integer mese=currentMonth+1;
                     Integer anno=currentYear;
-                    System.out.println("-----------------");
-                    System.out.println(i);
-                    System.out.println("-----------------");
+                    //System.out.println("-----------------");
+                    //System.out.println(i);
+                    //System.out.println("-----------------");
                     try {
                         evento = "";
                         evento = prendi_evento(i, currentMonth + 1, currentYear);
@@ -166,7 +165,7 @@ public class Calendario extends JFrame {
                         }
 
                     } else {
-                        fisso = "Evento per la data"+" "+giorno_corrente.toString()+"/"+mese.toString()+"/"+anno.toString();
+                        fisso = "Evento per la data"+" "+giorno_corrente.toString()+"/"+mese.toString()+"/"+anno.toString()+"  alle ore:  "+orario;
                         event = evento;
                         try {
                             Eventi.Disegno_evento(fisso, event);
@@ -203,6 +202,7 @@ public class Calendario extends JFrame {
                 if (anno == queryPersonale.getInt("anno")) {
                     if (giorno == queryPersonale.getInt("giorno")) {
 
+                        orario = queryPersonale.getString("ora");
                         ret = queryPersonale.getString("evento");
                         str_my[cont] = ret;
                         cont++;

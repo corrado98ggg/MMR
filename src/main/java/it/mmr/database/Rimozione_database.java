@@ -23,7 +23,7 @@ import java.sql.Statement;
 
         @Serial
         private static final long serialVersionUID = 1L;
-        private final JButton Button_ok;
+        public JButton Button_ok;
         private final JButton Button_exit;
 
         JTextField text_nome_utente;
@@ -42,7 +42,7 @@ import java.sql.Statement;
             add(lsignup, BorderLayout.CENTER);
             lsignup.setBounds(0, 0, 700, 475);
 
-            Button_ok = new JButton("OK");
+            Button_ok = new JButton("OK AMICO");
             Button_ok.addActionListener(this);
 
             Button_exit = new JButton("Exit");
@@ -53,7 +53,6 @@ import java.sql.Statement;
             text_nome_utente.setPreferredSize(new Dimension(250,30));
             JPanel nome=new JPanel((new GridBagLayout()));
             nome.setBackground(new Color(0x02cbff));
-           // nome.setBackground(new Color(0,0,0,0));
             nome.add(testo_nome);
             nome.setBounds(397,185,200,20);
 
@@ -145,10 +144,6 @@ import java.sql.Statement;
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            if(e.getSource() == Button_exit){
-                setVisible(false);
-            }
-
             if(e.getSource() == Button_ok){
                 
                 divisione = text_divisione.getText();
@@ -156,6 +151,7 @@ import java.sql.Statement;
 
                 try {
                     id = Login_iniziale.get_id(nome_utente, divisione);
+                    System.out.println(id);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -176,7 +172,7 @@ import java.sql.Statement;
                     }
 
                     try {
-                        Personale x=new Personale();
+                        Personale x = new Personale();
                         x.Stampa_personale(Personale.Matrice_personale());
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
@@ -185,6 +181,10 @@ import java.sql.Statement;
                     JOptionPane.showMessageDialog(null, "rimozione avvenuta con successo!");
 
                 }
+            }
+
+            if(e.getSource() == Button_exit){
+                setVisible(false);
             }
         }
         public static void main(String[] args) {

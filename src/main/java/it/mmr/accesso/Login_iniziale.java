@@ -199,7 +199,6 @@ public class Login_iniziale extends JFrame implements ActionListener {
 
         try {
             testConnection();
-            //load();
         } catch (SQLException | NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Database Error!");
         }
@@ -209,7 +208,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
         ResultSet rs = statement.executeQuery("SELECT * FROM registrazioni LIMIT 100");
 
         while (rs.next()) {
-            if (rs.getString("utente").compareTo(utente_tmp) == 0 && rs.getString("divisione").compareTo(divisione_tmp) == 0) {
+            if (rs.getString("nome").compareTo(utente_tmp) == 0 && rs.getString("divisione").compareTo(divisione_tmp) == 0) {
                 return rs.getString("id");
             }
     }
@@ -230,10 +229,24 @@ public class Login_iniziale extends JFrame implements ActionListener {
         return null;
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         new Login_iniziale();
     }
 }
+
+/*
+BUG NEL MIO PC:
+
+- QUANDO FACCIAMO LA X NON CHIUDO L APP
+
+- LA RIMOZIONE MI RIMUOVE PIÙ DI UN ELEMENTO NELLE  SPESE .
+
+- RIMOZIONE DEL PERSONALE NON FUNZIONA  .
+
+- accetta condizione e modalità d'uso cambiare
+
+- TUTTE LE LABEL
+
+- SISTEMARE IL CODICE
+
+ */

@@ -20,20 +20,21 @@ public class Aiuto extends JFrame{
 
         String line = reader.readLine();
         while(line!=null) {
-            //System.out.println(line);
             line = reader.readLine();
-
-            testo_aiuto = testo_aiuto + line;
+            if(line != null) {
+                testo_aiuto = testo_aiuto + '\n' + line;
+            }
         }
         area_testo.setText(testo_aiuto);
         area_testo.setLineWrap(true);
+        area_testo.setWrapStyleWord(true);
+        area_testo.setEditable(false);
         area_testo.setSize(1520,1200);
-
         area_testo.setFont(new Font("Monaco", Font.ITALIC, 20));
+
         area.add(area_testo,0,0);
         area.setBounds(0,0,1520,1200);
 
-       // setSize(1920,1080);
         return area;
     }
 

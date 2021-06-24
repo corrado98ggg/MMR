@@ -66,9 +66,9 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
 
         JPanel panello_cambio_password = new JPanel();
         panello_cambio_password.add(cambia_password);
-        if(Login_iniziale.root){
-        panello_cambio_password.setBounds(80, 900, 200, 30);
-        }else{
+        if (Login_iniziale.root) {
+            panello_cambio_password.setBounds(80, 900, 200, 30);
+        } else {
             panello_cambio_password.setBounds(80, 970, 200, 30);
         }
 
@@ -84,14 +84,14 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         c.setBackground(new Color(237, 237, 237));
         c.add(picLabel);
         c.setBounds(20, 330, 300, 300);
-        divisioni.addTab("",logo_mmr,PannelloTotale.pannelloTotale());
+        divisioni.addTab("", logo_mmr, PannelloTotale.pannelloTotale());
         divisioni.setSize(1920, 1080);
         a.setBounds(0, 0, 1920, 1080);
         a.add(divisioni, 0, 0);
         a.add(c, 1, 1);
-       if(Login_iniziale.root){
-        a.add(panello_avvertenza, 2, 2);
-        a.add(panello_danger, 2, 1);
+        if (Login_iniziale.root) {
+            a.add(panello_avvertenza, 2, 2);
+            a.add(panello_danger, 2, 1);
         }
         a.add(panello_cambio_password, 2, 2);
 
@@ -112,7 +112,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         if (e.getSource() == avvertenza) {
             new Avvertenze();
         }
-        if(e.getSource() == cambia_password){
+        if (e.getSource() == cambia_password) {
             new cambio_password();
         }
     }
@@ -152,17 +152,18 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
 
         JTextArea testo = new JTextArea(warning);
         testo.setLineWrap(true);
+        testo.setWrapStyleWord(true);
         testo.setFont(new Font("Arial Black", Font.BOLD, 15));
+        testo.setSize(250, 100);
         testo.setOpaque(false);
         testo.setEditable(false);
 
+        JPanel pannello_avvertenza = new JPanel(new GridBagLayout());
+        pannello_avvertenza.setBackground(new Color(253, 203, 1));
+        pannello_avvertenza.setBounds(40, 440, 250, 100);
+        pannello_avvertenza.add(testo);
 
-        JPanel d = new JPanel();
-        d.setBounds(20, 450, 280, 100);
-        d.setBackground(new Color(253, 203, 1));
-        d.add(testo);
-
-        return d;
+        return pannello_avvertenza;
     }
 
     public static void aggiungi_stringa(String str) throws SQLException {
@@ -224,7 +225,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
                     }
                 }
             }
-          i++;
+            i++;
         }
 
     }

@@ -48,7 +48,6 @@ public class Nuovo_evento extends JFrame implements ActionListener {
 
 
         ok = new JButton("OK");
-        // ok.setForeground(new Color(0x02cbff));
         ok.addActionListener(this);
         exit = new JButton("Exit");
         exit.addActionListener(this);
@@ -139,11 +138,11 @@ public class Nuovo_evento extends JFrame implements ActionListener {
 
             if((check_mesi(mesi, mese.getText())) && (check_giorni(giorni, giorno.getText()))) {
 
-                System.out.println(mese.getText());
-                System.out.println(giorno.getText());
-                System.out.println(anno.getText());
-                System.out.println(ora.getText());
-                System.out.println(evento.getText());
+                //System.out.println(mese.getText());
+                //System.out.println(giorno.getText());
+                //System.out.println(anno.getText());
+                //System.out.println(ora.getText());
+                //System.out.println(evento.getText());
 
                 try {
                     String query = String.format(

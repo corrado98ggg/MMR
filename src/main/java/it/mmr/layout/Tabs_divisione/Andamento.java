@@ -1,5 +1,6 @@
 package it.mmr.layout.Tabs_divisione;
 
+import it.mmr.Icon.Creazione_immagini;
 import it.mmr.database.DBManager;
 import it.mmr.database.Nuova_spesa;
 import it.mmr.database.Registrazione_database;
@@ -17,53 +18,25 @@ public class Andamento extends JFrame {
 
     public static JPanel sfondo;
     public static int soldi = 0;
+    public static BufferedImage icona1;
+    public static BufferedImage icona2;
+    public static BufferedImage icona3;
+    public static BufferedImage icona4;
+
     public static JLayeredPane andamento() throws SQLException {
 
         JLayeredPane tot = new JLayeredPane();
         tot.setBounds(0, 0, 200, 200);
 
-        BufferedImage icon = null;
-        try {
-            icon = ImageIO.read(new File("src/main/java/images/crediti.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        BufferedImage icon2 = null;
-        try {
-            icon2 = ImageIO.read(new File("src/main/java/images/acquisti.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        BufferedImage icon3 = null;
-        try {
-            icon3 = ImageIO.read(new File("src/main/java/images/debito.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        BufferedImage icon4 = null;
-        try {
-            icon4 = ImageIO.read(new File("src/main/java/images/fondo_cassa.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        assert icon != null;
-        BufferedImage icona = Registrazione_database.getScaledDimension(icon, 60, 60);
-        assert icon2 != null;
-        BufferedImage icona2 = Registrazione_database.getScaledDimension(icon2, 95, 95);
-        assert icon3 != null;
-        BufferedImage icona3 = Registrazione_database.getScaledDimension(icon3, 60, 60);
-        assert icon4 != null;
-        BufferedImage icona4 = Registrazione_database.getScaledDimension(icon4, 95, 95);
-
+        icona1 = Creazione_immagini.Creazione_immagini(  "src/main/java/images/crediti.png", 60, 60);
+        icona2 = Creazione_immagini.Creazione_immagini("src/main/java/images/acquisti.png", 95, 95);
+        icona3 = Creazione_immagini.Creazione_immagini("src/main/java/images/debito.png", 60, 60);
+        icona4 = Creazione_immagini.Creazione_immagini("src/main/java/images/fondo_cassa.jpg", 95, 95);
 
         tot.add(indice(icona4, "Totale", 678998, "Soldi rimanenti", Color.green), 1, 0);
         JLayeredPane a = indice(icona2, "Spese", calcolo_soldi(), "Documenti ingresso anno corrente", Color.red);
         JLayeredPane b = indice(icona3, "Debito", 345678, "Debiti al 12/10/18", Color.red);
-        JLayeredPane c = indice(icona, "crediti", 759202, "documenti in ingresso anno correte", Color.green);
+        JLayeredPane c = indice(icona1, "crediti", 759202, "documenti in ingresso anno correte", Color.green);
 
         sfondo = new JPanel();
         sfondo.setBackground(Color.white);

@@ -22,7 +22,7 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
     public static String[][] dati_spese;
     public static int row = -1;
     public static int column = -1;
-   public static JLayeredPane pannello_della_tabella;
+    public static JLayeredPane pannello_della_tabella;
     public static JTable table;
     String tmp;
 
@@ -56,9 +56,8 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         pannello_meno.setBackground(Color.white);
         pannello_meno.setBounds(1400, 750, 150, 150);
 
-            pannello_della_tabella.add(pannello_meno, 2, 0);
-            pannello_della_tabella.add(pannello_piu, 2, 0);
-
+        pannello_della_tabella.add(pannello_meno, 2, 0);
+        pannello_della_tabella.add(pannello_piu, 2, 0);
 
         JPanel colore = new JPanel();
         colore.setSize(1920, 1200);
@@ -93,10 +92,8 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         pannello_della_tabella.add(colonna_Prezzo_al_pezzo, 3, 0);
         pannello_della_tabella.add(colonna_importo, 4, 0);
 
-        Spese x = new Spese();
-        x.Stampa_spese(Spese.Matrice_spese());
-     //   pannello_della_tabella.add(x.Stampa_spese(Spese.Matrice_spese()), 1, 0);
-
+        Spese obj_spese = new Spese();
+        obj_spese.Stampa_spese(Spese.Matrice_spese());
 
         JPanel sfondo = new JPanel();
         sfondo.setBounds(0, 40, 1920, 1000);
@@ -106,7 +103,6 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         return pannello_della_tabella;
 
     }
-
 
     public static String[][] Matrice_spese() throws SQLException {
 
@@ -128,22 +124,21 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
                 continue;
             }
             dati_spese[i][0] = queryPersonale.getString("Descrizione");
-            System.out.println(dati_spese[i][0]);
+            //System.out.println(dati_spese[i][0]);
 
             dati_spese[i][1] = queryPersonale.getString("Quantità");
-            System.out.println(dati_spese[i][1]);
+            //System.out.println(dati_spese[i][1]);
 
             dati_spese[i][2] = queryPersonale.getString("Prezzo_unit");
-            System.out.println(dati_spese[i][2]);
+            //System.out.println(dati_spese[i][2]);
 
             dati_spese[i][3] = queryPersonale.getString("Importo");
-            System.out.println(dati_spese[i][3]);
+            //System.out.println(dati_spese[i][3]);
 
             i++;
         }
         return dati_spese;
     }
-
 
     public void Stampa_spese(String[][] tmp) {
 
@@ -160,7 +155,7 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
                 if (e.getClickCount() == 1) {
                     row = Spese.table.getSelectedRow();
                     //int row = e.getFirstRow();
-                    System.out.println(row);
+                    //System.out.println(row);
                     column = Spese.table.getSelectedColumn();
                 }
             }
@@ -212,10 +207,7 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
      *          has changed
      */
     @Override
-    public void tableChanged(TableModelEvent e) {
-
-    }
-
+    public void tableChanged(TableModelEvent e) { }
 
     public void rimuovi_spesa() throws SQLException {
 
@@ -240,7 +232,6 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
                     tmp.equals(queryPersonale.getString("Prezzo_unit")) ||
                     tmp.equals(queryPersonale.getString("Importo"))) {
 
-
                 try {
                     String query2 = String.format(
                             "DELETE FROM spese WHERE Quantità='%d' OR Prezzo_unit='%d' OR Importo='%d'",
@@ -252,7 +243,6 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
                     e1.printStackTrace();
                 }
 
-
                 try {
                     String query_tuo = String.format(
                             "DELETE FROM spese WHERE Descrizione='%s'",
@@ -263,12 +253,10 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
-
-
             }
         }
         JOptionPane.showMessageDialog(null, "Rimozione avvenuta con successo");
-        Spese x = new Spese();
-        x.Stampa_spese(Spese.Matrice_spese());
+        Spese obj_spese = new Spese();
+        obj_spese.Stampa_spese(Spese.Matrice_spese());
     }
 }

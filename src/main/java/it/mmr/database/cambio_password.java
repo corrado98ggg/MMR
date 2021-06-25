@@ -1,5 +1,7 @@
 package it.mmr.database;
 
+import it.mmr.Icon.Creazione_immagini;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -21,10 +23,10 @@ public class cambio_password extends JFrame implements ActionListener {
     public static JPasswordField password_vecchia;
     public static JPasswordField password_nuova_1;
     public static JPasswordField password_nuova_2;
-
+    public static BufferedImage resized_logo_mmr;
+    public static BufferedImage resized_logo_uni;
     public static JTextField nome;
     public static JTextField cognome;
-
     public static JButton ok;
     public static JButton exit;
 
@@ -36,25 +38,8 @@ public class cambio_password extends JFrame implements ActionListener {
         add(lsignup, BorderLayout.CENTER);
         lsignup.setBounds(0, 0, 700, 475);
 
-        BufferedImage logo_uni = null;
-        try {
-            logo_uni = ImageIO.read(new File("src/main/java/images/logo_uni.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        BufferedImage logo_mmr = null;
-        try {
-            logo_mmr = ImageIO.read(new File("src/main/java/images/mmr_logo.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        assert logo_mmr != null;
-        assert logo_uni != null;
-
-        BufferedImage resized_logo_mmr = Registrazione_database.getScaledDimension(logo_mmr, 300, 400);
-        BufferedImage resized_logo_uni = Registrazione_database.getScaledDimension(logo_uni, 600, 800);
+        resized_logo_mmr = Creazione_immagini.Creazione_immagini("src/main/java/images/mmr_logo.jpg", 300, 400);
+        resized_logo_uni = Creazione_immagini.Creazione_immagini("src/main/java/images/logo_uni.png", 600, 800);
 
         nome = new JTextField("nome");
         nome.setPreferredSize(new Dimension(250, 30));
@@ -163,7 +148,6 @@ public class cambio_password extends JFrame implements ActionListener {
             setVisible(false);
         } else {
 
-
             Statement statement_tmp = DBManager.getConnection().createStatement();
             ResultSet queryPersonale = statement_tmp.executeQuery("SELECT * FROM Registrazioni LIMIT 100");
 
@@ -171,7 +155,7 @@ public class cambio_password extends JFrame implements ActionListener {
                 if (nome.getText().equals(queryPersonale.getString("nome"))) {
                     if (cognome.getText().equals(queryPersonale.getString("cognome"))) {
                         assert password_hash_vecchia != null;
-                        if(password_hash_vecchia.equals(queryPersonale.getString("password"))){
+                        if (password_hash_vecchia.equals(queryPersonale.getString("password"))) {
                             try {
                                 String query = String.format(
                                         "UPDATE Registrazioni SET password=('%s') WHERE Nome IS ('%s') AND Cognome IS ('%s');",
@@ -188,13 +172,8 @@ public class cambio_password extends JFrame implements ActionListener {
             }
             UIManager.put("OptionPane.minimumSize", new Dimension(100, 90));
             JOptionPane.showMessageDialog(null, "password cambiata con successo!");
-
         }
-
     }
-
-    public static void main(String[] args) {
-        new cambio_password();
-    }
+    public static void main(String[] args) { new cambio_password(); }
 }
 

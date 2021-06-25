@@ -1,5 +1,6 @@
 package it.mmr.database;
 
+import it.mmr.Icon.Creazione_immagini;
 import it.mmr.layout.Tabs_divisione.Spese;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -27,19 +28,16 @@ public class Nuova_spesa extends JFrame implements ActionListener {
 
     public JButton ok;
     public static JButton quit;
-
     UUID id;
-
     public Integer quantit;
     public Integer prezz;
     public Integer impor;
-
-
     JTextField descrizione;
     JTextField qt;
     JTextField prezzo_al_pezzo;
     JTextField importo;
-
+    public static BufferedImage resized_logo_mmr;
+    public static BufferedImage resized_logo_uni;
 
     public Nuova_spesa() {
 
@@ -49,34 +47,13 @@ public class Nuova_spesa extends JFrame implements ActionListener {
         add(lsignup, BorderLayout.CENTER);
         lsignup.setBounds(0, 0, 700, 475);
 
-
-        BufferedImage logo_uni = null;
-        try {
-            logo_uni = ImageIO.read(new File("src/main/java/images/logo_uni.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        BufferedImage logo_mmr = null;
-        try {
-            logo_mmr = ImageIO.read(new File("src/main/java/images/mmr_logo.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        assert logo_mmr != null;
-        assert logo_uni != null;
-
-        BufferedImage resized_logo_mmr = Registrazione_database.getScaledDimension(logo_mmr, 300, 400);
-        BufferedImage resized_logo_uni = Registrazione_database.getScaledDimension(logo_uni, 600, 800);
-
+        resized_logo_mmr = Creazione_immagini.Creazione_immagini("src/main/java/images/mmr_logo.jpg", 300, 400);
+        resized_logo_uni = Creazione_immagini.Creazione_immagini("src/main/java/images/logo_uni.png", 600, 800);
 
         ok = new JButton("OK");
-        // ok.setForeground(new Color(0x02cbff));
         ok.addActionListener(this);
         quit = new JButton("Exit");
         quit.addActionListener(this);
-
 
         descrizione = new JTextField("descrizione");
         descrizione.setPreferredSize(new Dimension(250, 30));
@@ -199,6 +176,4 @@ public class Nuova_spesa extends JFrame implements ActionListener {
     public static void main(String[] args) {
         new Nuova_spesa();
     }
-
 }
-

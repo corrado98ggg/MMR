@@ -25,7 +25,6 @@ public class Termini_e_condizioni extends JFrame {
         setBounds(800,300,450,200);
         setContentPane(t);
         setResizable(false);
-        Login_iniziale.isopen = false;
         setVisible(true);
     }
     public static void main(String[] args) {

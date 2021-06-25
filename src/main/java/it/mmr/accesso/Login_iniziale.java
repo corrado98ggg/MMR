@@ -16,12 +16,11 @@ public class Login_iniziale extends JFrame implements ActionListener {
     JButton login;
     JButton condizioni;
     JLabel background;
-    public static boolean isopen = false;
-    public static JTextField utente;
     JPasswordField password;
     JCheckBox tick;
 
-    public static boolean root = false;
+    public static JTextField utente;
+    public static boolean root = true;
 
     public Login_iniziale() {
         super("MMR");
@@ -37,6 +36,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
         condizioni.addActionListener(this);
         condizioni.setBorder(BorderFactory.createEmptyBorder());
         condizioni.setContentAreaFilled(false);
+        condizioni.setFont(new Font("MONACO", Font.ITALIC, 20));
 
         setPreferredSize(new Dimension(1200, 550));
         setBounds(400, 200, 1200, 550);
@@ -54,7 +54,6 @@ public class Login_iniziale extends JFrame implements ActionListener {
         panelBack.add(background);
         JPanel panelLog = new JPanel(new GridBagLayout());
         panelLog.setBackground(new Color(0,0,0,0));
-       // panelLog.setBackground(azzurro1);
 
         utente = new JTextField("");
         password = new JPasswordField("");
@@ -75,13 +74,15 @@ public class Login_iniziale extends JFrame implements ActionListener {
 
         panelLog.add(login);
         JPanel sing = new JPanel(new GridBagLayout());
-        JLabel messaggio = new JLabel("accetto");
+        JLabel messaggio = new JLabel("accetto ");
+        messaggio.setForeground(Color.WHITE);
+        messaggio.setFont(new Font("MONACO", Font.ITALIC, 20));
         tick = new JCheckBox();
         tick.setBackground(new Color(0,0,0,0));
 
         sing.add(messaggio);
         sing.add(condizioni);
-        sing.setBounds(0, 450, 300, 100);
+        sing.setBounds(-100, 450, 600, 100);
         sing.setBackground(new Color(0,0,0,0));
         sing.add(tick);
 
@@ -103,7 +104,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
         if (e.getSource() == login) {
             try {
 
-                System.out.println(utente.getText());
+                //System.out.println(utente.getText());
                 if (check_database(utente.getText(), password.getText()) && tick.isSelected()) {
                     setVisible(false);
                     new Schermata_Principale_home();
@@ -114,17 +115,8 @@ public class Login_iniziale extends JFrame implements ActionListener {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-
         }
-
-        if (e.getSource() == condizioni) {
-            if(!isopen) {
-
-                new Termini_e_condizioni(); // non è fixato da me
-                isopen=true;
-            }
-        }
-
+        new Termini_e_condizioni();
     }
 
     public static void testConnection() throws SQLException {

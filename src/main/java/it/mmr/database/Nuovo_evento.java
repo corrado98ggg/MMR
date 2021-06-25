@@ -1,5 +1,6 @@
 package it.mmr.database;
 
+import it.mmr.Icon.Creazione_immagini;
 import it.mmr.layout.Tabs_divisione.Eventi;
 
 import javax.imageio.ImageIO;
@@ -26,6 +27,7 @@ public class Nuovo_evento extends JFrame implements ActionListener {
     public static JTextField anno;
     public static JTextField evento;
     public static JTextField ora;
+    public static BufferedImage resized_flag;
 
     public Nuovo_evento() {
 
@@ -35,17 +37,7 @@ public class Nuovo_evento extends JFrame implements ActionListener {
         add(lsignup, BorderLayout.CENTER);
         lsignup.setBounds(0, 0, 700, 475);
 
-        BufferedImage flag = null;
-        try {
-            flag = ImageIO.read(new File("src/main/java/images/flag.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        assert flag != null;
-
-        BufferedImage resized_flag = Registrazione_database.getScaledDimension(flag, 600, 800);
-
+        resized_flag = Creazione_immagini.Creazione_immagini("src/main/java/images/flag.png", 600, 800);
 
         ok = new JButton("OK");
         ok.addActionListener(this);
@@ -77,22 +69,17 @@ public class Nuovo_evento extends JFrame implements ActionListener {
         panelscritte.setBackground(new Color(0x02cbff));
         panelscritte.setBounds(400, 300, 250, 400);
 
-
         panel.add(piclabel2);
-
-        //panelscritte.add(password);
         panelscritte.add(mese);
         panelscritte.add(giorno);
         panelscritte.add(anno);
         panelscritte.add(ora);
         panelscritte.add(evento);
-        //panelscritte.add(root);
         panelscritte.add(ok);
         panelscritte.add(exit);
 
         lsignup.add(panel, 0, 0);
         lsignup.add(panelscritte, 1, 0);
-        //setContentPane(panel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(650, 300, 700, 475);
         setResizable(false);
@@ -102,7 +89,6 @@ public class Nuovo_evento extends JFrame implements ActionListener {
 
         try {
             Eventi.testConnection_Eventi();
-            //load();
         } catch (SQLException | NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Database Error!");
         }
@@ -143,7 +129,6 @@ public class Nuovo_evento extends JFrame implements ActionListener {
                 //System.out.println(anno.getText());
                 //System.out.println(ora.getText());
                 //System.out.println(evento.getText());
-
                 try {
                     String query = String.format(
                             "INSERT INTO Eventi (evento, giorno, anno, ora, mese) VALUES ('%s', '%s', '%s', '%s', '%s')",
@@ -157,7 +142,6 @@ public class Nuovo_evento extends JFrame implements ActionListener {
 
                 UIManager.put("OptionPane.minimumSize", new Dimension(100, 90));
                 JOptionPane.showMessageDialog(null, "Evento Registrato con successo!");
-
                 setVisible(false);
 
             } else {

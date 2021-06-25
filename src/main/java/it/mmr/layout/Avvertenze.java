@@ -60,7 +60,7 @@ public class Avvertenze extends JFrame implements ActionListener {
                 throwables.printStackTrace();
             }
             try {
-                Schermata_Principale_home.a.add(Schermata_Principale_home.check_avvertenza(), Schermata_Principale_home.i, 2);
+                Schermata_Principale_home.contenitore.add(Schermata_Principale_home.check_avvertenza(), Schermata_Principale_home.i, 2);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }

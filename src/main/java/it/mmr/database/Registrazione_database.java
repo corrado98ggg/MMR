@@ -1,5 +1,6 @@
 package it.mmr.database;
 
+import it.mmr.Icon.Creazione_immagini;
 import it.mmr.layout.Tabs_divisione.Personale;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -46,36 +47,16 @@ public class Registrazione_database extends JFrame implements ActionListener {
         add(lsignup, BorderLayout.CENTER);
         lsignup.setBounds(0, 0, 700, 475);
 
-        BufferedImage logo_uni = null;
-        try {
-            logo_uni = ImageIO.read(new File("src/main/java/images/logo_uni.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        BufferedImage logo_mmr = null;
-        try {
-            logo_mmr = ImageIO.read(new File("src/main/java/images/mmr_logo.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        assert logo_mmr != null;
-        assert logo_uni != null;
-
-        resized_logo_mmr = getScaledDimension(logo_mmr, 300, 400);
-        resized_logo_uni = getScaledDimension(logo_uni, 600, 800);
-
+        resized_logo_mmr = Creazione_immagini.Creazione_immagini("src/main/java/images/mmr_logo.jpg", 300, 400);
+        resized_logo_uni = Creazione_immagini.Creazione_immagini("src/main/java/images/logo_uni.png", 600, 800);
 
         ok = new JButton("OK");
-        // ok.setForeground(new Color(0x02cbff));
         ok.addActionListener(this);
         exit = new JButton("Exit");
         exit.addActionListener(this);
 
         password = new JPasswordField("inserisci una nuova password");
         password.setPreferredSize(new Dimension(250, 30));
-
         nome = new JTextField("nome");
         nome.setPreferredSize(new Dimension(250, 30));
         cognome = new JTextField("cognome");
@@ -86,7 +67,6 @@ public class Registrazione_database extends JFrame implements ActionListener {
         JLabel root = new JLabel("root");
         root.setBackground(new Color(0x02cbff));
         tick_root = new JCheckBox();
-
 
         JPanel panel = new JPanel();
         panel.setBounds(0, 0, 700, 875);
@@ -321,6 +301,4 @@ public class Registrazione_database extends JFrame implements ActionListener {
     public static void main(String[] args) {
         new Registrazione_database();
     }
-
 }
-

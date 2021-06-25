@@ -37,7 +37,6 @@ public class Avvertenze extends JFrame implements ActionListener {
 
         setContentPane(contenitore);
         setVisible(true);
-
     }
 
     public static void main(String[] args) {

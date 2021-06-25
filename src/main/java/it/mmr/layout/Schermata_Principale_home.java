@@ -28,8 +28,8 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
 
         ImageIcon logo_mmr = new ImageIcon("src/main/java/images/mmr_logo.jpg");
 
-        BufferedImage resized_blocco_note = Creazione_immagini.Creazione_immagini("src/main/java/images/AVVERTENZE.png", 500, 500);
-        BufferedImage resized_danger = Creazione_immagini.Creazione_immagini("src/main/java/images/danger.png", 60, 75);
+        BufferedImage resized_blocco_note = Creazione_immagini.creazioneImmagini("src/main/java/images/AVVERTENZE.png", 500, 500);
+        BufferedImage resized_danger = Creazione_immagini.creazioneImmagini("src/main/java/images/danger.png", 60, 75);
 
         JTabbedPane divisioni = new JTabbedPane(JTabbedPane.LEFT);
 

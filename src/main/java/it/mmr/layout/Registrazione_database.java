@@ -1,15 +1,15 @@
-package it.mmr.database;
+package it.mmr.layout;
 
 import it.mmr.Icon.Creazione_immagini;
+import it.mmr.database.DBManager;
+import it.mmr.database.Utils;
 import it.mmr.layout.Tabs_divisione.Personale;
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serial;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -47,8 +47,8 @@ public class Registrazione_database extends JFrame implements ActionListener {
         add(lsignup, BorderLayout.CENTER);
         lsignup.setBounds(0, 0, 700, 475);
 
-        resized_logo_mmr = Creazione_immagini.Creazione_immagini("src/main/java/images/mmr_logo.jpg", 300, 400);
-        resized_logo_uni = Creazione_immagini.Creazione_immagini("src/main/java/images/logo_uni.png", 600, 800);
+        resized_logo_mmr = Creazione_immagini.creazioneImmagini("src/main/java/images/mmr_logo.jpg", 300, 400);
+        resized_logo_uni = Creazione_immagini.creazioneImmagini("src/main/java/images/logo_uni.png", 600, 800);
 
         ok = new JButton("OK");
         ok.addActionListener(this);
@@ -98,17 +98,14 @@ public class Registrazione_database extends JFrame implements ActionListener {
         lsignup.add(panel, 0, 0);
         lsignup.add(panelscritte, 1, 0);
         lsignup.add(panel_logo_mmr, 1, 0);
-        //setContentPane(panel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(650, 300, 700, 475);
         setResizable(false);
 
-        //setSize(700, 475); //lunghezza * altezza
         setVisible(true);
 
         try {
             testConnection();
-            //load();
         } catch (SQLException | NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Database Error!");
         }

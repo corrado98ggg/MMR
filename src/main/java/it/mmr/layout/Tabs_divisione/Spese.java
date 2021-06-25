@@ -1,6 +1,5 @@
 package it.mmr.layout.Tabs_divisione;
 
-import it.mmr.accesso.Login_iniziale;
 import it.mmr.database.DBManager;
 import it.mmr.database.Nuova_spesa;
 import it.mmr.database.Utils;
@@ -154,8 +153,6 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 1) {
                     row = Spese.table.getSelectedRow();
-                    //int row = e.getFirstRow();
-                    //System.out.println(row);
                     column = Spese.table.getSelectedColumn();
                 }
             }
@@ -175,7 +172,11 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == piu) {
-            new Nuova_spesa();
+            try {
+                new Nuova_spesa();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
 
         if (e.getSource() == meno) {
@@ -195,10 +196,8 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
                     }
                 }
             }
-
         }
     }
-
     /**
      * This fine grain notification tells listeners the exact range
      * of cells, rows, or columns that changed.
@@ -258,5 +257,23 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         JOptionPane.showMessageDialog(null, "Rimozione avvenuta con successo");
         Spese obj_spese = new Spese();
         obj_spese.Stampa_spese(Spese.Matrice_spese());
+        JLayeredPane a = null;
+
+        try {
+            Andamento.tot.add(Andamento.indice(Andamento.icona4, "Totale", 10000 - Nuova_spesa.calcolo_soldi(), "Soldi rimanenti", Color.green), Nuova_spesa.i, 0);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        try {
+            a = Andamento.indice(Andamento.icona2, "Spese", Nuova_spesa.calcolo_soldi(), "Documenti ingresso anno corrente", Color.red);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        assert a != null;
+        a.setBounds(0, 400, 400, 400);
+        a.setBackground(Color.white);
+        Andamento.tot.add(a, Nuova_spesa.i, 0);
+        Nuova_spesa.i++;
     }
 }

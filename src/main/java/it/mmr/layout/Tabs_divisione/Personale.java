@@ -3,19 +3,16 @@ package it.mmr.layout.Tabs_divisione;
 import it.mmr.Icon.Creazione_immagini;
 import it.mmr.accesso.Login_iniziale;
 import it.mmr.database.DBManager;
-import it.mmr.database.Registrazione_database;
-import it.mmr.database.Rimozione_database;
+import it.mmr.layout.Registrazione_database;
+import it.mmr.layout.Rimozione_database;
 import it.mmr.database.Utils;
 import it.mmr.layout.Schermata_Principale_home;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -43,8 +40,8 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
 
         pannello_del_personale = new JLayeredPane();
 
-        resized_icon_meno = Creazione_immagini.Creazione_immagini("src/main/java/images/meno.png", 109, 109);
-        resized_icon_piu = Creazione_immagini.Creazione_immagini("src/main/java/images/piuu.png", 100, 100);
+        resized_icon_meno = Creazione_immagini.creazioneImmagini("src/main/java/images/meno.png", 109, 109);
+        resized_icon_piu = Creazione_immagini.creazioneImmagini("src/main/java/images/piuu.png", 100, 100);
 
         meno = new JButton(new ImageIcon(resized_icon_meno));
         meno.addActionListener(this);
@@ -172,7 +169,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         table.getColumn("divisione").setCellEditor(new TableMy(new JCheckBox()));
         //table.setEditingColumn(1);
         table.setBounds(0, 25, 1400, 1420);
-        if(Login_iniziale.root==false)
+        if(!Login_iniziale.root)
         {
             table.getColumn("ruolo").setCellEditor(new TableMy(new JCheckBox()));
         }
@@ -205,7 +202,6 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         //System.out.println(column);
         TableModel model = (TableModel) e.getSource();
         //System.out.println(model);
-        String columnName = model.getColumnName(column);
         //System.out.println(columnName);
         ruoli_modificato = model.getValueAt(row, column);
         //System.out.println(ruoli_modificato);

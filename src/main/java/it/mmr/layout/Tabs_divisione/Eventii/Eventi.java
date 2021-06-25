@@ -1,19 +1,16 @@
-package it.mmr.layout.Tabs_divisione;
+package it.mmr.layout.Tabs_divisione.Eventii;
 
 import it.mmr.Icon.Creazione_immagini;
 import it.mmr.accesso.Login_iniziale;
 import it.mmr.database.DBManager;
 import it.mmr.database.Nuovo_evento;
-import it.mmr.database.Registrazione_database;
 import it.mmr.database.Utils;
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -30,7 +27,7 @@ public class Eventi extends JFrame implements ActionListener {
         Calendario calendario = new Calendario();
         contenitore.add(calendario.calendario(), 1, 0);
 
-        BufferedImage resized_icon_piu = Creazione_immagini.Creazione_immagini("src/main/java/images/piuu.png", 100, 100);
+        BufferedImage resized_icon_piu = Creazione_immagini.creazioneImmagini("src/main/java/images/piuu.png", 100, 100);
 
         piu = new JButton(new ImageIcon(resized_icon_piu));
         piu.addActionListener(this);

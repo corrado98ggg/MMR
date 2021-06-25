@@ -1,16 +1,16 @@
 package it.mmr.database;
 
 import it.mmr.Icon.Creazione_immagini;
+import it.mmr.layout.Tabs_divisione.Andamento;
 import it.mmr.layout.Tabs_divisione.Spese;
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serial;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.UUID;
@@ -38,8 +38,10 @@ public class Nuova_spesa extends JFrame implements ActionListener {
     JTextField importo;
     public static BufferedImage resized_logo_mmr;
     public static BufferedImage resized_logo_uni;
+    public static int soldi = 0;
+  public static   int i = 3;
 
-    public Nuova_spesa() {
+    public Nuova_spesa() throws SQLException {
 
         super("Nuova Spesa");
 
@@ -47,8 +49,8 @@ public class Nuova_spesa extends JFrame implements ActionListener {
         add(lsignup, BorderLayout.CENTER);
         lsignup.setBounds(0, 0, 700, 475);
 
-        resized_logo_mmr = Creazione_immagini.Creazione_immagini("src/main/java/images/mmr_logo.jpg", 300, 400);
-        resized_logo_uni = Creazione_immagini.Creazione_immagini("src/main/java/images/logo_uni.png", 600, 800);
+        resized_logo_mmr = Creazione_immagini.creazioneImmagini("src/main/java/images/mmr_logo.jpg", 300, 400);
+        resized_logo_uni = Creazione_immagini.creazioneImmagini("src/main/java/images/logo_uni.png", 600, 800);
 
         ok = new JButton("OK");
         ok.addActionListener(this);
@@ -123,12 +125,11 @@ public class Nuova_spesa extends JFrame implements ActionListener {
         if (e.getSource() == ok) {
 
             quantit = Integer.valueOf(qt.getText());
-            System.out.println(quantit);
+            //System.out.println(quantit);
             prezz = Integer.valueOf(prezzo_al_pezzo.getText());
-            System.out.println(prezz);
+            //System.out.println(prezz);
             impor = Integer.valueOf(importo.getText());
-            System.out.println(impor);
-
+            //System.out.println(impor);
 
             id = java.util.UUID.randomUUID();
 
@@ -147,14 +148,52 @@ public class Nuova_spesa extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Spesa registrata con successo!");
 
             try {
-                Spese x = new Spese();
-                x.Stampa_spese(Spese.Matrice_spese());
+                Spese obj_spese = new Spese();
+                obj_spese.Stampa_spese(Spese.Matrice_spese());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+            JLayeredPane a = null;
+            try {
+                a = Andamento.indice(Andamento.icona2, "Spese", calcolo_soldi(), "Documenti ingresso anno corrente", Color.red);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            assert a != null;
+            a.setBounds(0, 400, 400, 400);
+            a.setBackground(Color.white);
+            Andamento.tot.add(a, i, 0);
+            i++;
+
+            try {
+                Andamento.tot.add(Andamento.indice(Andamento.icona4, "Totale", 10000 - calcolo_soldi(), "Soldi rimanenti", Color.green), i, 0);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
 
             setVisible(false);
         }
+    }
+
+
+    public static int calcolo_soldi() throws SQLException {
+        try {
+            Nuova_spesa.testConnection_spese();
+        } catch (SQLException | NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Database Error!");
+        }
+
+        soldi = 0;
+
+        Statement statement = DBManager.getConnection().createStatement();
+        ResultSet tmp = statement.executeQuery("SELECT * FROM spese");
+
+        while (tmp.next()) {
+            soldi = tmp.getInt("Importo") + soldi;
+        }
+
+        return soldi;
     }
 
     public static void testConnection_spese() throws SQLException {
@@ -174,6 +213,10 @@ public class Nuova_spesa extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Nuova_spesa();
+        try {
+            new Nuova_spesa();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

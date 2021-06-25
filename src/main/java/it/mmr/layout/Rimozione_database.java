@@ -1,17 +1,15 @@
-package it.mmr.database;
+package it.mmr.layout;
 
 import it.mmr.Icon.Creazione_immagini;
 import it.mmr.accesso.Login_iniziale;
+import it.mmr.database.DBManager;
 import it.mmr.layout.Tabs_divisione.Personale;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serial;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -46,7 +44,7 @@ public class Rimozione_database extends JFrame implements ActionListener {
         add(lsignup, BorderLayout.CENTER);
         lsignup.setBounds(0, 0, 700, 475);
 
-        Button_ok = new JButton("OK AMICO");
+        Button_ok = new JButton("OK");
         Button_ok.addActionListener(this);
 
         Button_exit = new JButton("Exit");
@@ -73,8 +71,8 @@ public class Rimozione_database extends JFrame implements ActionListener {
               creazione dei pannelli per l'interfaccia
               grafica della rimozione del personale.
              */
-        resized_logo_mmr = Creazione_immagini.Creazione_immagini("src/main/java/images/mmr_logo.jpg", 300, 400);
-        resized_logo_uni = Creazione_immagini.Creazione_immagini("src/main/java/images/logo_uni.png", 600, 800);
+        resized_logo_mmr = Creazione_immagini.creazioneImmagini("src/main/java/images/mmr_logo.jpg", 300, 400);
+        resized_logo_uni = Creazione_immagini.creazioneImmagini("src/main/java/images/logo_uni.png", 600, 800);
 
         JPanel panel = new JPanel();
         panel.setBounds(0, 0, 700, 875);

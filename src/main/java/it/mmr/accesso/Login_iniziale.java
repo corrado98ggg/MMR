@@ -106,9 +106,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
 
                 //System.out.println(utente.getText());
                 if (check_database(utente.getText(), password.getText()) && tick.isSelected()) {
-                    setVisible(false);
                     new Schermata_Principale_home();
-
                 } else {
                     JOptionPane.showMessageDialog(null, "Utente non registrato o condizioni non accettate");
                 }
@@ -116,7 +114,9 @@ public class Login_iniziale extends JFrame implements ActionListener {
                 throwables.printStackTrace();
             }
         }
-        new Termini_e_condizioni();
+        if(e.getSource() == condizioni) {
+            new Termini_e_condizioni();
+        }
     }
 
     public static void testConnection() throws SQLException {
@@ -228,16 +228,16 @@ public class Login_iniziale extends JFrame implements ActionListener {
 /*
 BUG NEL MIO PC:
 
-- QUANDO FACCIAMO LA X NON CHIUDO L APP
+- QUANDO FACCIAMO LA X NON CHIUDO L'APP
 
-- LA RIMOZIONE MI RIMUOVE PIÙ DI UN ELEMENTO NELLE  SPESE .
+- SCROLL PANE
 
-- RIMOZIONE DEL PERSONALE NON FUNZIONA  .
+- LABEL
 
-- accetta condizione e modalità d'uso cambiare
+- GIF NO!
 
-- TUTTE LE LABEL
+- GIf Ok
 
-- SISTEMARE IL CODICE
+- Gif mario driftino
 
  */

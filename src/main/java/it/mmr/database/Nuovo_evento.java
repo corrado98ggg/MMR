@@ -1,16 +1,13 @@
 package it.mmr.database;
 
 import it.mmr.Icon.Creazione_immagini;
-import it.mmr.layout.Tabs_divisione.Eventi;
+import it.mmr.layout.Tabs_divisione.Eventii.Eventi;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serial;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -37,7 +34,7 @@ public class Nuovo_evento extends JFrame implements ActionListener {
         add(lsignup, BorderLayout.CENTER);
         lsignup.setBounds(0, 0, 700, 475);
 
-        resized_flag = Creazione_immagini.Creazione_immagini("src/main/java/images/flag.png", 600, 800);
+        resized_flag = Creazione_immagini.creazioneImmagini("src/main/java/images/flag.png", 600, 800);
 
         ok = new JButton("OK");
         ok.addActionListener(this);

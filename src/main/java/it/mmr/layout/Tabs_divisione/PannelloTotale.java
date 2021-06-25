@@ -1,5 +1,7 @@
 package it.mmr.layout.Tabs_divisione;
 
+import it.mmr.layout.Tabs_divisione.Eventii.Eventi;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -15,6 +17,9 @@ public class PannelloTotale extends JFrame {
         Eventi obj_eventi = new Eventi();
         Spese obj_spese = new Spese();
         Aiuto obj_aiuto = new Aiuto();
+
+
+
 
         tabs.setBackground(Color.CYAN);
         tabs.addTab("Personale", obj_personale.personale());

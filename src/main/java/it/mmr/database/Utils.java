@@ -1,5 +1,7 @@
 package it.mmr.database;
 
+import it.mmr.layout.Registrazione_database;
+
 import javax.swing.*;
 import java.io.File;
 import java.nio.file.Paths;

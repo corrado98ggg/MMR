@@ -108,7 +108,8 @@ public class Login_iniziale extends JFrame implements ActionListener {
                 if (check_database(utente.getText(), password.getText()) && tick.isSelected()) {
                     new Schermata_Principale_home();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Utente non registrato o condizioni non accettate");
+                   // JOptionPane.showMessageDialog(null, "Utente non registrato o condizioni non accettate");
+                    new Messaggio();
                 }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
@@ -233,8 +234,6 @@ BUG NEL MIO PC:
 - SCROLL PANE
 
 - LABEL
-
-- GIF NO!
 
 - GIf Ok
 

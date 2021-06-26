@@ -95,10 +95,10 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         sfondo.setBackground(Color.white);
 
         pannello_del_personale.add(sfondo, 0, 0);
-        pannello_del_personale.add(colonna_cognome, 2, 0);
-        pannello_del_personale.add(colonna_divisione, 1, 0);
-        pannello_del_personale.add(colonna_ruolo, 1, 0);
-        pannello_del_personale.add(colonna_nome, 2, 0);
+        pannello_del_personale.add(colonna_cognome, 0, 0);
+        pannello_del_personale.add(colonna_divisione, 0, 0);
+        pannello_del_personale.add(colonna_ruolo,0 , 0);
+        pannello_del_personale.add(colonna_nome, 0, 0);
         //System.out.println(pannello_del_personale);
         return pannello_del_personale;
     }
@@ -173,7 +173,11 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         {
             table.getColumn("ruolo").setCellEditor(new TableMy(new JCheckBox()));
         }
-        pannello_del_personale.add(table, 1, 0);
+        JScrollPane scrollPane = new JScrollPane( table );
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        scrollPane.setBounds(0, 0, 1400, 985);
+        pannello_del_personale.add(scrollPane, 1, 0);
         // return table;
     }
 

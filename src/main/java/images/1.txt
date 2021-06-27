@@ -1,0 +1,6 @@
+Questo semplice Tabs, serve per spiegare in maniera semplice e pratica il progetto.
+
+More Modena Racing Formula Student Team. E' un Team di Formula Student presso l'Università di Modena e ReggioEmilia,
+Dipartimento di Ingegneria Enzo Ferrari.
+
+Il progetto si suddivide in divisioni come riportato nello schema sotto:

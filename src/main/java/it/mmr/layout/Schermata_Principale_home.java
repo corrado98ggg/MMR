@@ -125,7 +125,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         contenitore.add(pannello_gokart,1,1);
         contenitore.add(pannello_instagram, 1,1);
         contenitore.add(pannello_facebook,1,1);
-        contenitore.add(pannello_sito,0,1);
+        contenitore.add(pannello_sito,1,1);
 
         if (Login_iniziale.root) {
             contenitore.add(panello_avvertenza, 2, 2);
@@ -164,7 +164,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         }
 
         if(e.getSource() == sito){
-            try {Desktop.getDesktop().browse(new URI("https://en.moremodenaracing.it/"));
+            try {Desktop.getDesktop().browse(new URI("https://www.moremodenaracing.it/"));
             } catch (Exception e2)
             {JOptionPane.showMessageDialog(null,e2);}
 

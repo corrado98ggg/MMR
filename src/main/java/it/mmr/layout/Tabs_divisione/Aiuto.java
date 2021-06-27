@@ -9,9 +9,7 @@ import java.io.*;
 
 public class Aiuto extends JFrame{
 
-
     JPanel area;
-
     public JLayeredPane aiuto() throws IOException {
         JLayeredPane a=new JLayeredPane();
 
@@ -29,18 +27,17 @@ public class Aiuto extends JFrame{
         pannello_schema.setBounds(200,200,1000,600);
         pannello_schema.setBackground(Color.WHITE);
         area.add(pannello_schema);
-       // area.setBounds(0,0,1620,985);
 
         JPanel text2=new JPanel();
         text2.setBackground(Color.WHITE);
         text2.add(leggi_file("src/main/java/images/aiuto.txt"));
-        text2.setBounds(0,780,1585,985);
+        text2.setBounds(0,780,1400,985);
         area.add(text2,2,2);
 
         JScrollPane scrollPane = new JScrollPane(area);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setSize(1585,985);
+        scrollPane.setSize(1535,985);
         a.add(scrollPane,1,0);
         return a;
     }

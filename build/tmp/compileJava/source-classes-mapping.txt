@@ -1,23 +1,23 @@
 it/mmr/database/Utils.java
  it.mmr.database.Utils
-it/mmr/database/Nuova_spesa.java
- it.mmr.database.Nuova_spesa
 it/mmr/Icon/Creazione_immagini.java
  it.mmr.Icon.Creazione_immagini
-it/mmr/layout/Avvertenze.java
- it.mmr.layout.Avvertenze
-it/mmr/layout/Tabs_divisione/Andamento.java
- it.mmr.layout.Tabs_divisione.Andamento
+it/mmr/layout/Tabs_divisione/Eventii/Eventi.java
+ it.mmr.layout.Tabs_divisione.Eventii.Eventi
+it/mmr/database/Nuova_spesa.java
+ it.mmr.database.Nuova_spesa
 it/mmr/accesso/Messaggio.java
  it.mmr.accesso.Messaggio
+it/mmr/layout/Tabs_divisione/Andamento.java
+ it.mmr.layout.Tabs_divisione.Andamento
 it/mmr/accesso/Termini_e_condizioni.java
  it.mmr.accesso.Termini_e_condizioni
 it/mmr/layout/Tabs_divisione/TableMy.java
  it.mmr.layout.Tabs_divisione.TableMy
 it/mmr/database/DBManager.java
  it.mmr.database.DBManager
-it/mmr/layout/Tabs_divisione/Aiuto.java
- it.mmr.layout.Tabs_divisione.Aiuto
+it/mmr/database/Nuovo_evento.java
+ it.mmr.database.Nuovo_evento
 it/mmr/layout/cambio_password.java
  it.mmr.layout.cambio_password
 it/mmr/layout/Tabs_divisione/Eventii/Calendario.java
@@ -28,22 +28,22 @@ it/mmr/layout/Tabs_divisione/Eventii/Calendario.java
  it.mmr.layout.Tabs_divisione.Eventii.Calendario$btnPrev_Action
  it.mmr.layout.Tabs_divisione.Eventii.Calendario$cmbYear_Action
  it.mmr.layout.Tabs_divisione.Eventii.Calendario$tblCalendarRenderer
-it/mmr/layout/Tabs_divisione/Eventii/Eventi.java
- it.mmr.layout.Tabs_divisione.Eventii.Eventi
-it/mmr/database/Nuovo_evento.java
- it.mmr.database.Nuovo_evento
+it/mmr/layout/Schermata_Principale_home.java
+ it.mmr.layout.Schermata_Principale_home
+it/mmr/layout/Avvertenze.java
+ it.mmr.layout.Avvertenze
 it/mmr/accesso/Login_iniziale.java
  it.mmr.accesso.Login_iniziale
 it/mmr/layout/Tabs_divisione/Personale.java
  it.mmr.layout.Tabs_divisione.Personale
-it/mmr/layout/Tabs_divisione/PannelloTotale.java
- it.mmr.layout.Tabs_divisione.PannelloTotale
+it/mmr/layout/Rimozione_database.java
+ it.mmr.layout.Rimozione_database
+it/mmr/layout/Registrazione_database.java
+ it.mmr.layout.Registrazione_database
 it/mmr/layout/Tabs_divisione/Spese.java
  it.mmr.layout.Tabs_divisione.Spese
  it.mmr.layout.Tabs_divisione.Spese$1
-it/mmr/layout/Registrazione_database.java
- it.mmr.layout.Registrazione_database
-it/mmr/layout/Schermata_Principale_home.java
- it.mmr.layout.Schermata_Principale_home
-it/mmr/layout/Rimozione_database.java
- it.mmr.layout.Rimozione_database
+it/mmr/layout/Tabs_divisione/PannelloTotale.java
+ it.mmr.layout.Tabs_divisione.PannelloTotale
+it/mmr/layout/Tabs_divisione/Aiuto.java
+ it.mmr.layout.Tabs_divisione.Aiuto

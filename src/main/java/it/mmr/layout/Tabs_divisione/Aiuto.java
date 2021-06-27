@@ -9,17 +9,50 @@ import java.io.*;
 
 public class Aiuto extends JFrame{
 
-    public static String testo_aiuto;
-    JTextArea area_testo;
-    JLayeredPane area;
+
+    JPanel area;
 
     public JLayeredPane aiuto() throws IOException {
+        JLayeredPane a=new JLayeredPane();
 
-        area = new JLayeredPane();
+        area = new JPanel();
+        area.setSize(1585,985);
+        area.setBackground(Color.WHITE);
+        area.setLayout(new BoxLayout(area, BoxLayout.Y_AXIS));
+
+        BufferedImage resized_schema = Creazione_immagini.creazioneImmagini("src/main/java/images/ddd.png", 1000, 600);
+        area.add(leggi_file("src/main/java/images/1.txt"));
+
+        JLabel schema=new JLabel(new ImageIcon(resized_schema));
+        JPanel pannello_schema =new JPanel();
+        pannello_schema.add(schema);
+        pannello_schema.setBounds(200,200,1000,600);
+        pannello_schema.setBackground(Color.WHITE);
+        area.add(pannello_schema);
+       // area.setBounds(0,0,1620,985);
+
+        JPanel text2=new JPanel();
+        text2.setBackground(Color.WHITE);
+        text2.add(leggi_file("src/main/java/images/aiuto.txt"));
+        text2.setBounds(0,780,1585,985);
+        area.add(text2,2,2);
+
+        JScrollPane scrollPane = new JScrollPane(area);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setSize(1585,985);
+        a.add(scrollPane,1,0);
+        return a;
+    }
+
+    public static JTextArea leggi_file(String a) throws IOException {
+         String testo_aiuto;
+        JTextArea area_testo;
         testo_aiuto = "";
         area_testo = new JTextArea();
 
-        BufferedReader reader = new BufferedReader(new FileReader("src/main/java/images/aiuto.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader(a));
+
 
         String line = reader.readLine();
         while(line!=null) {
@@ -33,13 +66,9 @@ public class Aiuto extends JFrame{
         area_testo.setLineWrap(true);
         area_testo.setWrapStyleWord(true);
         area_testo.setEditable(false);
-        area_testo.setBounds(0, 0,1620,1400);
+        area_testo.setBounds(0, 0,1585,985);
         area_testo.setFont(new Font("Monaco", Font.ITALIC, 20));
-
-        area.add(area_testo,0,0);
-        area.setBounds(0,0,1620,1400);
-
-        return area;
+        return  area_testo;
     }
 
     public static void main(String[] args) throws IOException {

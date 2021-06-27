@@ -52,7 +52,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
 
         JPanel pannello_sito = new JPanel(new GridBagLayout());
         pannello_sito.add(sito);
-        pannello_sito.setBounds(-30, 620, 280, 90);
+        pannello_sito.setBounds(-20, 629, 280, 90);
 
         JTabbedPane divisioni = new JTabbedPane(JTabbedPane.LEFT);
 
@@ -106,15 +106,26 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         pannelo_blocconote.add(picLabel);
         pannelo_blocconote.setBounds(20, 330, 300, 300);
 
+        JTextArea recapiti =new JTextArea("Via Pietro Vivarelli 10\n" +"41125 Modena, italy\n"+"Mail: mmr@unimore.it\n"+"Tel:+39 0592056294");
+        recapiti.setFont(new Font("Monaco", Font.ITALIC, 20));
+        recapiti.setBackground(new Color(237, 237, 237));
+        recapiti.setOpaque(true);
+        recapiti.setEditable(false);
+        JPanel panello_recapiti=new JPanel();
+        panello_recapiti.setBounds(10,750,300,300);
+        panello_recapiti.add(recapiti);
+
+
         divisioni.addTab("", logo_mmr, PannelloTotale.pannelloTotale());
         divisioni.setSize(1920, 1080);
         contenitore.setBounds(0, 0, 1920, 1080);
+        contenitore.add(panello_recapiti,0,2);
         contenitore.add(divisioni, 0, 0);
         contenitore.add(pannelo_blocconote, 1, 1);
         contenitore.add(pannello_gokart,1,1);
         contenitore.add(pannello_instagram, 1,1);
         contenitore.add(pannello_facebook,1,1);
-        contenitore.add(pannello_sito,1,1);
+        contenitore.add(pannello_sito,0,1);
 
         if (Login_iniziale.root) {
             contenitore.add(panello_avvertenza, 2, 2);

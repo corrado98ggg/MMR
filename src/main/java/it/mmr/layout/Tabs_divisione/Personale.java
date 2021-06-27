@@ -35,6 +35,9 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
     public static BufferedImage resized_icon_piu;
     public static BufferedImage resized_icon_meno;
     public JButton piu, meno;
+    public static JTextField ricerca;
+    public JButton search;
+    public JButton indietro;
 
     public JLayeredPane personale() throws SQLException {
 
@@ -93,11 +96,30 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         JPanel sfondo = new JPanel();
         sfondo.setBounds(0, 40, 1920, 1000);
         sfondo.setOpaque(false);
-
+        ricerca = new JTextField("");
+        ricerca.setPreferredSize(new Dimension(400, 50));
+        ricerca.setSize(200, 100);
+        JPanel pannello_ricerca = new JPanel();
+        pannello_ricerca.add(ricerca);
+        pannello_ricerca.setBounds(0, 930, 400, 50);
+        search = new JButton("cerca");
+        JPanel pannello_bott = new JPanel();
+        pannello_bott.add(search);
+        pannello_bott.setBounds(300, 950, 300, 300);
+        search.addActionListener(this);
+        indietro= new JButton("indietro");
+        indietro.addActionListener(this);
+        JPanel pannello_indietro = new JPanel();
+        pannello_indietro.add(indietro);
+        pannello_indietro.setBounds(600, 950, 300, 300);
+        search.addActionListener(this);
+        pannello_del_personale.add(pannello_indietro, 8, 0);
+        pannello_del_personale.add(pannello_bott, 8, 0);
+        pannello_del_personale.add(pannello_ricerca, 9, 0);
         pannello_del_personale.add(sfondo, 0, 0);
         pannello_del_personale.add(colonna_cognome, 0, 0);
         pannello_del_personale.add(colonna_divisione, 0, 0);
-        pannello_del_personale.add(colonna_ruolo,0 , 0);
+        pannello_del_personale.add(colonna_ruolo, 0, 0);
         pannello_del_personale.add(colonna_nome, 0, 0);
         return pannello_del_personale;
     }
@@ -120,6 +142,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
             if (i >= contatore_persone) {
                 continue;
             }
+
             for (int j = 1; j < 5; j++) {
 
                 //caso base:
@@ -158,6 +181,9 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         return dati;
     }
 
+
+
+
     public void Stampa_personale(String[][] tmp) {
 
         JTable table = new JTable(dati, nomi);
@@ -168,16 +194,56 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         table.getColumn("divisione").setCellEditor(new TableMy(new JCheckBox()));
         //table.setEditingColumn(1);
         table.setBounds(0, 25, 1400, 1420);
-        if(!Login_iniziale.root)
-        {
+        if (!Login_iniziale.root) {
             table.getColumn("ruolo").setCellEditor(new TableMy(new JCheckBox()));
         }
-        JScrollPane scrollPane = new JScrollPane( table );
+        JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        scrollPane.setBounds(0, 0, 1400, 985);
+        scrollPane.setBounds(0, 0, 1400, 900);
         pannello_del_personale.add(scrollPane, 1, 0);
         // return table;
+    }
+
+    public static int conta_ricerca()
+    {
+        int l=0;
+        Statement statement_tmp = null;
+        try {
+            statement_tmp = DBManager.getConnection().createStatement();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        ResultSet queryPersonale = null;
+        try {
+            queryPersonale = statement_tmp.executeQuery("SELECT * FROM registrazioni LIMIT 100");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        int i=0;
+        while (true) {
+            try {
+                if (!queryPersonale.next()) break;
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            if (i >= contatore_persone) {
+                continue;
+            }
+            System.out.println(ricerca.getText());
+            try {
+                if (ricerca.getText().compareTo(queryPersonale.getString("nome")) == 0 ||
+                        ricerca.getText().compareTo(queryPersonale.getString("cognome")) == 0 ||
+
+                        ricerca.getText().compareTo(queryPersonale.getString("Divisione")) == 0) {
+                l++;}
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
+        return l;
     }
 
     /**
@@ -194,7 +260,116 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         if (e.getSource() == meno) {
             new Rimozione_database();
         }
+        if(e.getSource()==indietro)
+        {
+
+
+            try {
+                Stampa_personale(Personale.Matrice_personale());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        if (e.getSource() == search) {
+
+
+            Statement statement_tmp = null;
+            try {
+                statement_tmp = DBManager.getConnection().createStatement();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            ResultSet queryPersonale = null;
+            try {
+                queryPersonale = statement_tmp.executeQuery("SELECT * FROM registrazioni LIMIT 100");
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+
+            dati = new String[conta_ricerca()][4];
+            int i = 0;
+
+
+            int k = 0;
+            while (true) {
+                try {
+                    if (!queryPersonale.next()) break;
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                if (i >= contatore_persone) {
+                    continue;
+                }
+                System.out.println(ricerca.getText());
+                try {
+                    if (ricerca.getText().compareTo(queryPersonale.getString("nome")) == 0 ||
+                            ricerca.getText().compareTo(queryPersonale.getString("cognome")) == 0 ||
+
+                            ricerca.getText().compareTo(queryPersonale.getString("Divisione")) == 0) {
+                        for (int j = 1; j < 5; j++) {
+
+                            //caso base:
+                            if (i == 0 && j == 1) {
+                                try {
+                                    dati[i][j - 1] = queryPersonale.getString("nome");
+                                } catch (SQLException throwables) {
+                                    throwables.printStackTrace();
+                                }
+                                System.out.println(dati[i][j - 1]);
+
+                                continue;
+                            }
+
+                            if (j == 4) {
+                                try {
+                                    dati[i][j - 1] = queryPersonale.getString("Divisione");
+                                } catch (SQLException throwables) {
+                                    throwables.printStackTrace();
+                                }
+                                System.out.println(dati[i][j - 1]);
+                                continue;
+                            }
+
+                            if (j / 2 == 1) {
+                                if (k == 1) {
+                                    try {
+                                        dati[i][j - 1] = queryPersonale.getString("ruoli");
+                                    } catch (SQLException throwables) {
+                                        throwables.printStackTrace();
+                                    }
+                                    System.out.println(dati[i][j - 1]);
+                                    continue;
+                                }
+                                try {
+                                    dati[i][j - 1] = queryPersonale.getString("cognome");
+                                } catch (SQLException throwables) {
+                                    throwables.printStackTrace();
+                                }
+                                System.out.println(dati[i][j - 1]);
+                                k++;
+                                continue;
+                            }
+
+                            try {
+                                dati[i][j - 1] = queryPersonale.getString("nome");
+                            } catch (SQLException throwables) {
+                                throwables.printStackTrace();
+                            }
+                            System.out.println(dati[i][j - 1]);
+
+                        }
+                        k = 0;
+                        i++;
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+            Stampa_personale(dati);
+        }
     }
+
 
     @Override
     public void tableChanged(TableModelEvent e) {

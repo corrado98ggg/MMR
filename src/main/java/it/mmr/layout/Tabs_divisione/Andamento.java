@@ -2,7 +2,6 @@ package it.mmr.layout.Tabs_divisione;
 
 import it.mmr.Icon.Creazione_immagini;
 import it.mmr.database.Nuova_spesa;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,10 +21,10 @@ public class Andamento extends JFrame {
         tot = new JLayeredPane();
         tot.setBounds(0, 0, 200, 200);
 
-        icona1 = Creazione_immagini.creazioneImmagini(  "src/main/java/images/crediti.png", 60, 60);
-        icona2 = Creazione_immagini.creazioneImmagini("src/main/java/images/acquisti.png", 95, 95);
-        icona3 = Creazione_immagini.creazioneImmagini("src/main/java/images/debito.png", 60, 60);
-        icona4 = Creazione_immagini.creazioneImmagini("src/main/java/images/fondo_cassa.jpg", 95, 95);
+        icona1 = Creazione_immagini.creazioneImmagini("src/main/java/images/credit.png", 60, 60);
+        icona2 = Creazione_immagini.creazioneImmagini("src/main/java/images/spese.png", 60, 65);
+        icona3 = Creazione_immagini.creazioneImmagini("src/main/java/images/debit.png", 60, 60);
+        icona4 = Creazione_immagini.creazioneImmagini("src/main/java/images/positive-dynamic.png", 60, 60);
 
         tot.add(indice(icona4, "Totale", 10000 - Nuova_spesa.calcolo_soldi(), "Soldi rimanenti", Color.green), 1, 0);
         JLayeredPane a = indice(icona2, "Spese", Nuova_spesa.calcolo_soldi(), "Documenti ingresso anno corrente", Color.red);
@@ -33,15 +32,12 @@ public class Andamento extends JFrame {
         JLayeredPane c = indice(icona1, "crediti", 759202, "documenti in ingresso anno correte", Color.green);
 
         sfondo = new JPanel();
-        sfondo.setBackground(Color.white);
         sfondo.setBounds(0, 0, 1920, 1080);
+        sfondo.setBackground(Color.white);
 
-        b.setBounds(0, 600, 400, 400);
-        b.setBackground(Color.white);
-        a.setBounds(0, 400, 400, 400);
-        a.setBackground(Color.white);
+        b.setBounds(0, 800, 900, 900); //debito
+        a.setBounds(0, 600, 400, 400);
         c.setBounds(0, 200, 400, 400);
-        c.setBackground(Color.white);
 
         tot.add(sfondo, 0, 0);
         tot.add(a, 3, 0);

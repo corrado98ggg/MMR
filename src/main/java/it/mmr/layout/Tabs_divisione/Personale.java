@@ -48,7 +48,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         meno.setBorder(BorderFactory.createEmptyBorder());
         meno.setContentAreaFilled(false);
         JPanel pmeno = new JPanel();
-        pmeno.setBackground(Color.WHITE);
+        pmeno.setOpaque(true);
         pmeno.add(meno);
         pmeno.setBounds(1400, 750, 150, 150);
 
@@ -60,7 +60,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         JPanel pannello_piu = new JPanel();
         pannello_piu.setSize(700, 700);
         pannello_piu.add(piu);
-        pannello_piu.setBackground(Color.white);
+        pannello_piu.setOpaque(true);
         pannello_piu.setBounds(1400, 850, 150, 150);
         if (Login_iniziale.root) {
             pannello_del_personale.add(pannello_piu, 3, 0);
@@ -92,14 +92,13 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         colonna_divisione.setBounds(1050, 0, 70, 25);
         JPanel sfondo = new JPanel();
         sfondo.setBounds(0, 40, 1920, 1000);
-        sfondo.setBackground(Color.white);
+        sfondo.setOpaque(false);
 
         pannello_del_personale.add(sfondo, 0, 0);
         pannello_del_personale.add(colonna_cognome, 0, 0);
         pannello_del_personale.add(colonna_divisione, 0, 0);
         pannello_del_personale.add(colonna_ruolo,0 , 0);
         pannello_del_personale.add(colonna_nome, 0, 0);
-        //System.out.println(pannello_del_personale);
         return pannello_del_personale;
     }
 

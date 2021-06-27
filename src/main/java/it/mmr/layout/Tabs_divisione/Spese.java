@@ -3,7 +3,6 @@ package it.mmr.layout.Tabs_divisione;
 import it.mmr.database.DBManager;
 import it.mmr.database.Nuova_spesa;
 import it.mmr.database.Utils;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -42,7 +41,6 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         JPanel pannello_piu = new JPanel();
         pannello_piu.setSize(700, 700);
         pannello_piu.add(piu);
-        pannello_piu.setBackground(Color.white);
         pannello_piu.setBounds(1400, 850, 150, 150);
 
         meno = new JButton(new ImageIcon(Personale.resized_icon_meno));
@@ -52,7 +50,6 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         JPanel pannello_meno = new JPanel();
         pannello_meno.setSize(700, 700);
         pannello_meno.add(meno);
-        pannello_meno.setBackground(Color.white);
         pannello_meno.setBounds(1400, 750, 150, 150);
 
         pannello_della_tabella.add(pannello_meno, 2, 0);
@@ -65,39 +62,19 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
 
         tabella.Stampa_personale(Personale.Matrice_personale());
 
-        JLabel testa_Descrzione = new JLabel("Descrizione");
-        JLabel testa_Qt = new JLabel("Qt.");
-        JLabel testa_Prezzo_al_pezzo = new JLabel("Prezzo al pezzo");
-        JLabel testa_Importo = new JLabel("Importo");
-
-        JPanel colonna_Descrzione = new JPanel();
-        colonna_Descrzione.add(testa_Descrzione);
-        colonna_Descrzione.setBounds(0, 0, 90, 25);
-
-        JPanel colonna_Qt = new JPanel();
-        colonna_Qt.add(testa_Qt);
-        colonna_Qt.setBounds(350, 0, 60, 25);
-
-        JPanel colonna_Prezzo_al_pezzo = new JPanel();
-        colonna_Prezzo_al_pezzo.add(testa_Prezzo_al_pezzo);
-        colonna_Prezzo_al_pezzo.setBounds(720, 0, 120, 25);
-
-        JPanel colonna_importo = new JPanel();
-        colonna_importo.add(testa_Importo);
-        colonna_importo.setBounds(1080, 0, 60, 25);
-
-        pannello_della_tabella.add(colonna_Descrzione, 1, 0);
-        pannello_della_tabella.add(colonna_Qt, 2, 0);
-        pannello_della_tabella.add(colonna_Prezzo_al_pezzo, 3, 0);
-        pannello_della_tabella.add(colonna_importo, 4, 0);
-
         Spese obj_spese = new Spese();
         obj_spese.Stampa_spese(Spese.Matrice_spese());
 
         JPanel sfondo = new JPanel();
         sfondo.setBounds(0, 40, 1920, 1000);
-        sfondo.setBackground(Color.white);
+        sfondo.setOpaque(false);
         pannello_della_tabella.add(sfondo, 0, 0);
+
+        JScrollPane scrollPane = new JScrollPane( table );
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        scrollPane.setBounds(0, 0, 1400, 985);
+        pannello_della_tabella.add(scrollPane, 1, 0);
 
         return pannello_della_tabella;
 
@@ -148,6 +125,7 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         table.getColumn("Qt.").setCellEditor(new TableMy(new JCheckBox()));
         table.getColumn("Prezzo al pz").setCellEditor(new TableMy(new JCheckBox()));
         table.getColumn("Importo").setCellEditor(new TableMy(new JCheckBox()));
+        table.setBounds(0, 25, 1400, 1420);
 
         Spese.table.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -158,9 +136,11 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
             }
         });
 
-        table.setBounds(0, 25, 1440, 1500);
-        pannello_della_tabella.add(table,1,0);
-        // return table;
+        JScrollPane scrollPane = new JScrollPane( table );
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        scrollPane.setBounds(0, 0, 1400, 985);
+        pannello_della_tabella.add(scrollPane, 1, 0);
     }
 
     /**
@@ -272,7 +252,7 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         }
         assert a != null;
         a.setBounds(0, 400, 400, 400);
-        a.setBackground(Color.white);
+        a.setOpaque(false);
         Andamento.tot.add(a, Nuova_spesa.i, 0);
         Nuova_spesa.i++;
     }

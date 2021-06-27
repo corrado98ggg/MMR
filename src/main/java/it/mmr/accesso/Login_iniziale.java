@@ -1,5 +1,6 @@
 package it.mmr.accesso;
 
+import it.mmr.Icon.Creazione_immagini;
 import it.mmr.database.DBManager;
 import it.mmr.database.Utils;
 import it.mmr.layout.Schermata_Principale_home;
@@ -8,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -45,8 +47,10 @@ public class Login_iniziale extends JFrame implements ActionListener {
         add(lpane, BorderLayout.CENTER);
         lpane.setBounds(0, 0, 1200, 700);
 
-        ImageIcon back = new ImageIcon("src/main/java/images/back.jpg");
-        background = new JLabel("", back, JLabel.CENTER);
+        BufferedImage back = Creazione_immagini.creazioneImmagini("src/main/java/images/Ben.jpg", 1269, 563);
+        ImageIcon back_ = new ImageIcon(back);
+
+        background = new JLabel("", back_, JLabel.CENTER);
         background.setBounds(0, 0, 1200, 700);
         JPanel panelBack = new JPanel();
         panelBack.setBounds(0, -5, 1200, 700);
@@ -63,12 +67,12 @@ public class Login_iniziale extends JFrame implements ActionListener {
 
         utente.setPreferredSize(new Dimension(400, 50));
         password.setPreferredSize(new Dimension(400, 50));
-        access_utente.setBounds(50, 230, 400, 50);
+        access_utente.setBounds(200, 150, 400, 50);
 
         access_utente.add(utente);
 
         JPanel access_password = new JPanel(new GridBagLayout());
-        access_password.setBounds(50, 380, 400, 50);
+        access_password.setBounds(200, 285, 400, 50);
         access_password.setBackground(new Color(0,0,0,0));
         access_password.add(password);
 
@@ -156,7 +160,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
 
                 while (rs2.next()) {
 
-                    System.out.println(password_tmp);
+                    //System.out.println(password_tmp);
                     if (rs.getString("password").compareTo(password_tmp) == 0 || rs.getString("password").compareTo("admin1") == 0) {
 
 
@@ -164,10 +168,10 @@ public class Login_iniziale extends JFrame implements ActionListener {
                             String query = String.format(
                                     "SELECT root FROM registrazioni WHERE Nome IS ('%s') AND password IS ('%s');",
                                     utente_tmp, password_tmp);
-                            System.out.println(query);
+                            //System.out.println(query);
 
                             ResultSet rs3 = statement.executeQuery(query);
-                            System.out.println(rs3);
+                            //System.out.println(rs3);
 
                             Statement statement_2 = DBManager.getConnection().createStatement();
 
@@ -231,11 +235,8 @@ BUG NEL MIO PC:
 
 - QUANDO FACCIAMO LA X NON CHIUDO L'APP
 
-- SCROLL PANE
 
 - LABEL
-
-- GIf Ok
 
 - Gif mario driftino
 

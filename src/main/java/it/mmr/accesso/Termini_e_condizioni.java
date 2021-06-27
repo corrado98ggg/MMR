@@ -11,10 +11,10 @@ public class Termini_e_condizioni extends JFrame {
 
         JTextArea text=new JTextArea("""
                 L'eseguibile creato da : Corrado
-                Carriero e Enrico Garrapa,E' un\s
-                progetto per l'esame di program
-                mazione ad oggetti le risorse
-                mulimediali e i dati usati sono
+                Carriero e Enrico Garrapa,
+                è un progetto per l'esame di\040
+                programmazione ad oggetti. Le risorse
+                multimediali e i dati usati sono
                 di proprietà intellettuale di UniMore.""");
 
         text.setFont(new Font("Monaco", Font.ITALIC, 20));

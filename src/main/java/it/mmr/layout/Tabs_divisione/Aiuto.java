@@ -1,7 +1,10 @@
 package it.mmr.layout.Tabs_divisione;
 
+import it.mmr.Icon.Creazione_immagini;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class Aiuto extends JFrame{
@@ -25,15 +28,16 @@ public class Aiuto extends JFrame{
                 testo_aiuto = testo_aiuto + '\n' + line;
             }
         }
+
         area_testo.setText(testo_aiuto);
         area_testo.setLineWrap(true);
         area_testo.setWrapStyleWord(true);
         area_testo.setEditable(false);
-        area_testo.setSize(1520,1200);
+        area_testo.setBounds(0, 0,1620,1400);
         area_testo.setFont(new Font("Monaco", Font.ITALIC, 20));
 
         area.add(area_testo,0,0);
-        area.setBounds(0,0,1520,1200);
+        area.setBounds(0,0,1620,1400);
 
         return area;
     }

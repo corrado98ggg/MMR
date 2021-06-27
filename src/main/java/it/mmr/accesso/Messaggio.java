@@ -11,7 +11,7 @@ public class Messaggio extends JFrame implements ActionListener {
     public Messaggio() {
         JLayeredPane contenitore = new JLayeredPane();
 
-        JTextArea text = new JTextArea("Utente non registrato o condizioni non accettate");
+        JTextArea text = new JTextArea("Utente non è registrato o condizioni non accettate");
         text.setEditable(false);
         text.setFont(new Font("MONACO", Font.ITALIC, 17));
         text.setLineWrap(true);

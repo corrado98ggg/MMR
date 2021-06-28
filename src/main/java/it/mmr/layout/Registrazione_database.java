@@ -55,13 +55,13 @@ public class Registrazione_database extends JFrame implements ActionListener {
         exit = new JButton("Exit");
         exit.addActionListener(this);
 
-        password = new JPasswordField("inserisci una nuova password");
+        password = new JPasswordField("");
         password.setPreferredSize(new Dimension(250, 30));
-        nome = new JTextField("nome");
+        nome = new JTextField("");
         nome.setPreferredSize(new Dimension(250, 30));
-        cognome = new JTextField("cognome");
+        cognome = new JTextField("");
         cognome.setPreferredSize(new Dimension(250, 30));
-        divisione = new JTextField("divisione");
+        divisione = new JTextField("");
         divisione.setPreferredSize(new Dimension(250, 30));
 
         JLabel root = new JLabel("root");
@@ -69,7 +69,7 @@ public class Registrazione_database extends JFrame implements ActionListener {
         tick_root = new JCheckBox();
 
         JPanel panel = new JPanel();
-        panel.setBounds(0, 0, 700, 875);
+        panel.setBounds(0, 0, 800, 875);
         panel.setBackground(new Color(0x02cbff));
 
         JLabel picLabel = new JLabel(new ImageIcon(resized_logo_mmr));
@@ -77,18 +77,46 @@ public class Registrazione_database extends JFrame implements ActionListener {
 
         JPanel panelscritte = new JPanel();
         panelscritte.setBackground(new Color(0x02cbff));
-        panelscritte.setBounds(400, 200, 250, 400);
+        panelscritte.setBounds(475, 220, 250, 400);
 
         JPanel panel_logo_mmr = new JPanel();
         panel_logo_mmr.setBackground(new Color(0x02cbff));
-        panel_logo_mmr.setBounds(60, 255, 300, 175);
+        panel_logo_mmr.setBounds(5, 230, 300, 175);
 
         panel.add(piclabel2);
         panel_logo_mmr.add(picLabel);
 
-        panelscritte.add(password);
+        JLabel testo_nome=new JLabel("nome:");
+        JPanel pannello_nome=new JPanel(new GridBagLayout());
+        pannello_nome.setBackground(new Color(0,0,0,0));
+        pannello_nome.add(testo_nome);
+        pannello_nome.setBounds(320,235,135,20);
+        lsignup.add(pannello_nome,1,1);
+
+        JLabel testo_cognome=new JLabel("cognome:");
+        JPanel pannello_cognome =new JPanel(new GridBagLayout());
+        pannello_cognome.setBackground(new Color(0,0,0,0));
+        pannello_cognome.add(testo_cognome);
+        pannello_cognome.setBounds(320,270,135,20);
+        lsignup.add(pannello_cognome,1,1);
+
+        JLabel testo_password =new JLabel("password:");
+        JPanel pannello_scritta1=new JPanel(new GridBagLayout());
+        pannello_scritta1.setBackground(new Color(0,0,0,0));
+        pannello_scritta1.add(testo_password);
+        pannello_scritta1.setBounds(320,305,135,20);
+        lsignup.add(pannello_scritta1,1,1);
+
+        JLabel testo_divisione =new JLabel("divisione:");
+        JPanel pannello_scritta2=new JPanel(new GridBagLayout());
+        pannello_scritta2.setBackground(new Color(0,0,0,0));
+        pannello_scritta2.add(testo_divisione);
+        pannello_scritta2.setBounds(320,340,135,20);
+        lsignup.add(pannello_scritta2,1,1);
+
         panelscritte.add(nome);
         panelscritte.add(cognome);
+        panelscritte.add(password);
         panelscritte.add(divisione);
         panelscritte.add(root);
         panelscritte.add(tick_root);
@@ -99,10 +127,9 @@ public class Registrazione_database extends JFrame implements ActionListener {
         lsignup.add(panelscritte, 1, 0);
         lsignup.add(panel_logo_mmr, 1, 0);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        setBounds(650, 300, 700, 475);
+        setBounds(650, 300, 750, 475);
         setResizable(false);
-
-
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
 
         try {

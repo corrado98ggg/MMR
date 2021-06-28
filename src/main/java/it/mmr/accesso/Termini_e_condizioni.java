@@ -24,6 +24,7 @@ public class Termini_e_condizioni extends JFrame {
         t.add(text);
         setBounds(800,300,450,200);
         setContentPane(t);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         setVisible(true);
     }

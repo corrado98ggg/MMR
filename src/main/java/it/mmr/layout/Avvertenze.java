@@ -36,6 +36,7 @@ public class Avvertenze extends JFrame implements ActionListener {
         contenitore.add(pannello_ok,2,0);
 
         setContentPane(contenitore);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 

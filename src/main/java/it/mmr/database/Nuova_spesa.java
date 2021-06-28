@@ -57,17 +57,17 @@ public class Nuova_spesa extends JFrame implements ActionListener {
         quit = new JButton("Exit");
         quit.addActionListener(this);
 
-        descrizione = new JTextField("descrizione");
+        descrizione = new JTextField("");
         descrizione.setPreferredSize(new Dimension(250, 30));
-        qt = new JTextField("quantità");
+        qt = new JTextField("");
         qt.setPreferredSize(new Dimension(250, 30));
-        prezzo_al_pezzo = new JTextField("prezzo all'unità");
+        prezzo_al_pezzo = new JTextField("");
         prezzo_al_pezzo.setPreferredSize(new Dimension(250, 30));
-        importo = new JTextField("Importo");
+        importo = new JTextField("");
         importo.setPreferredSize(new Dimension(250, 30));
 
         JPanel panel = new JPanel();
-        panel.setBounds(0, 0, 700, 875);
+        panel.setBounds(0, 0, 800, 875);
         panel.setBackground(new Color(0x02cbff));
 
         JLabel picLabel = new JLabel(new ImageIcon(resized_logo_mmr));
@@ -75,14 +75,42 @@ public class Nuova_spesa extends JFrame implements ActionListener {
 
         JPanel panelscritte = new JPanel();
         panelscritte.setBackground(new Color(0x02cbff));
-        panelscritte.setBounds(400, 200, 250, 400);
+        panelscritte.setBounds(475, 200, 250, 400);
 
         JPanel panel_logo_mmr = new JPanel();
         panel_logo_mmr.setBackground(new Color(0x02cbff));
-        panel_logo_mmr.setBounds(60, 255, 300, 175);
+        panel_logo_mmr.setBounds(5, 230, 300, 175);
 
         panel.add(piclabel2);
         panel_logo_mmr.add(picLabel);
+
+        JLabel testo_descrizione =new JLabel("descrizione:");
+        JPanel pannello_descrizione =new JPanel(new GridBagLayout());
+        pannello_descrizione.setBackground(new Color(0,0,0,0));
+        pannello_descrizione.add(testo_descrizione);
+        pannello_descrizione.setBounds(320,210,135,20);
+        lsignup.add(pannello_descrizione,1,1);
+
+        JLabel testo_quantità =new JLabel("quantità:");
+        JPanel pannello_quantità =new JPanel(new GridBagLayout());
+        pannello_quantità.setBackground(new Color(0,0,0,0));
+        pannello_quantità.add(testo_quantità);
+        pannello_quantità.setBounds(320,250,135,20);
+        lsignup.add(pannello_quantità,1,1);
+
+        JLabel testo_unita =new JLabel("prezzo ad' unità:");
+        JPanel pannello_unita =new JPanel(new GridBagLayout());
+        pannello_unita.setBackground(new Color(0,0,0,0));
+        pannello_unita.add(testo_unita);
+        pannello_unita.setBounds(320,285,135,20);
+        lsignup.add(pannello_unita,1,1);
+
+        JLabel testo_import =new JLabel("importo:");
+        JPanel pannello_import =new JPanel(new GridBagLayout());
+        pannello_import.setBackground(new Color(0,0,0,0));
+        pannello_import.add(testo_import);
+        pannello_import.setBounds(320,320,135,20);
+        lsignup.add(pannello_import,1,1);
 
         panelscritte.add(descrizione);
         panelscritte.add(qt);
@@ -96,9 +124,9 @@ public class Nuova_spesa extends JFrame implements ActionListener {
         lsignup.add(panel_logo_mmr, 1, 0);
         //setContentPane(panel);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        setBounds(650, 300, 700, 475);
+        setBounds(650, 300, 750, 475);
         setResizable(false);
-
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         //setSize(700, 475); //lunghezza * altezza
         setVisible(true);
 

@@ -135,6 +135,7 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         setContentPane(contenitore);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(1920, 1080);
+        setResizable(false);
         setVisible(true);
 
         try {

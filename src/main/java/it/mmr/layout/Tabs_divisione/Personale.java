@@ -107,7 +107,7 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         pannello_bott.add(search);
         pannello_bott.setBounds(300, 950, 300, 300);
         search.addActionListener(this);
-        indietro= new JButton("indietro");
+        indietro = new JButton("indietro");
         indietro.addActionListener(this);
         JPanel pannello_indietro = new JPanel();
         pannello_indietro.add(indietro);
@@ -182,8 +182,6 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
     }
 
 
-
-
     public void Stampa_personale(String[][] tmp) {
 
         JTable table = new JTable(dati, nomi);
@@ -205,41 +203,31 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         // return table;
     }
 
-    public static int conta_ricerca()
-    {
-        int l=0;
-        Statement statement_tmp = null;
-        try {
-            statement_tmp = DBManager.getConnection().createStatement();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        ResultSet queryPersonale = null;
-        try {
-            queryPersonale = statement_tmp.executeQuery("SELECT * FROM registrazioni LIMIT 100");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+    public static int conta_ricerca() throws SQLException {
+        int l = 0;
+        Statement statement_tmp;
+        statement_tmp = DBManager.getConnection().createStatement();
+        ResultSet queryPersonale;
+        assert statement_tmp != null;
+        queryPersonale = statement_tmp.executeQuery("SELECT * FROM registrazioni LIMIT 100");
 
-        int i=0;
+
+        int i = 0;
         while (true) {
-            try {
-                if (!queryPersonale.next()) break;
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+
+            assert queryPersonale != null;
+            if (!queryPersonale.next()) break;
+
             if (i >= contatore_persone) {
                 continue;
             }
             System.out.println(ricerca.getText());
-            try {
-                if (ricerca.getText().compareTo(queryPersonale.getString("nome")) == 0 ||
-                        ricerca.getText().compareTo(queryPersonale.getString("cognome")) == 0 ||
 
-                        ricerca.getText().compareTo(queryPersonale.getString("Divisione")) == 0) {
-                l++;}
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            if (ricerca.getText().compareTo(queryPersonale.getString("nome")) == 0 ||
+                    ricerca.getText().compareTo(queryPersonale.getString("cognome")) == 0 ||
+
+                    ricerca.getText().compareTo(queryPersonale.getString("Divisione")) == 0) {
+                l++;
             }
         }
 
@@ -260,116 +248,83 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         if (e.getSource() == meno) {
             new Rimozione_database();
         }
-        if(e.getSource()==indietro)
-        {
-
-
+        if (e.getSource() == indietro) {
             try {
                 Stampa_personale(Personale.Matrice_personale());
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+
         }
         if (e.getSource() == search) {
-
-
-            Statement statement_tmp = null;
             try {
-                statement_tmp = DBManager.getConnection().createStatement();
+                Search();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            ResultSet queryPersonale = null;
-            try {
-                queryPersonale = statement_tmp.executeQuery("SELECT * FROM registrazioni LIMIT 100");
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-
-
-            dati = new String[conta_ricerca()][4];
-            int i = 0;
-
-
-            int k = 0;
-            while (true) {
-                try {
-                    if (!queryPersonale.next()) break;
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                if (i >= contatore_persone) {
-                    continue;
-                }
-                System.out.println(ricerca.getText());
-                try {
-                    if (ricerca.getText().compareTo(queryPersonale.getString("nome")) == 0 ||
-                            ricerca.getText().compareTo(queryPersonale.getString("cognome")) == 0 ||
-
-                            ricerca.getText().compareTo(queryPersonale.getString("Divisione")) == 0) {
-                        for (int j = 1; j < 5; j++) {
-
-                            //caso base:
-                            if (i == 0 && j == 1) {
-                                try {
-                                    dati[i][j - 1] = queryPersonale.getString("nome");
-                                } catch (SQLException throwables) {
-                                    throwables.printStackTrace();
-                                }
-                                System.out.println(dati[i][j - 1]);
-
-                                continue;
-                            }
-
-                            if (j == 4) {
-                                try {
-                                    dati[i][j - 1] = queryPersonale.getString("Divisione");
-                                } catch (SQLException throwables) {
-                                    throwables.printStackTrace();
-                                }
-                                System.out.println(dati[i][j - 1]);
-                                continue;
-                            }
-
-                            if (j / 2 == 1) {
-                                if (k == 1) {
-                                    try {
-                                        dati[i][j - 1] = queryPersonale.getString("ruoli");
-                                    } catch (SQLException throwables) {
-                                        throwables.printStackTrace();
-                                    }
-                                    System.out.println(dati[i][j - 1]);
-                                    continue;
-                                }
-                                try {
-                                    dati[i][j - 1] = queryPersonale.getString("cognome");
-                                } catch (SQLException throwables) {
-                                    throwables.printStackTrace();
-                                }
-                                System.out.println(dati[i][j - 1]);
-                                k++;
-                                continue;
-                            }
-
-                            try {
-                                dati[i][j - 1] = queryPersonale.getString("nome");
-                            } catch (SQLException throwables) {
-                                throwables.printStackTrace();
-                            }
-                            System.out.println(dati[i][j - 1]);
-
-                        }
-                        k = 0;
-                        i++;
-                    }
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-            Stampa_personale(dati);
         }
     }
 
+    public void Search() throws SQLException {
+
+        Statement statement_tmp;
+        statement_tmp = DBManager.getConnection().createStatement();
+        ResultSet queryPersonale;
+        queryPersonale = statement_tmp.executeQuery("SELECT * FROM registrazioni LIMIT 100");
+
+        dati = new String[conta_ricerca()][4];
+        int i = 0;
+        int k = 0;
+        while (queryPersonale.next()) {
+
+            if (i >= contatore_persone) {
+                continue;
+            }
+            System.out.println(ricerca.getText());
+            if (ricerca.getText().compareTo(queryPersonale.getString("nome")) == 0 ||
+                    ricerca.getText().compareTo(queryPersonale.getString("cognome")) == 0 ||
+                    ricerca.getText().compareTo(queryPersonale.getString("Divisione")) == 0) {
+                for (int j = 1; j < 5; j++) {
+
+                    //caso base:
+                    if (i == 0 && j == 1) {
+
+                        dati[i][j - 1] = queryPersonale.getString("nome");
+                        System.out.println(dati[i][j - 1]);
+
+                        continue;
+                    }
+
+                    if (j == 4) {
+
+                        dati[i][j - 1] = queryPersonale.getString("Divisione");
+                        System.out.println(dati[i][j - 1]);
+                        continue;
+                    }
+
+                    if (j / 2 == 1) {
+                        if (k == 1) {
+
+                            dati[i][j - 1] = queryPersonale.getString("ruoli");
+                            System.out.println(dati[i][j - 1]);
+                            continue;
+                        }
+                        dati[i][j - 1] = queryPersonale.getString("cognome");
+
+                        System.out.println(dati[i][j - 1]);
+                        k++;
+                        continue;
+                    }
+
+                    dati[i][j - 1] = queryPersonale.getString("nome");
+                    System.out.println(dati[i][j - 1]);
+                }
+                k = 0;
+                i++;
+            }
+        }
+        Stampa_personale(dati);
+    }
 
     @Override
     public void tableChanged(TableModelEvent e) {
@@ -379,8 +334,6 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         int column = e.getColumn();
         //System.out.println(column);
         TableModel model = (TableModel) e.getSource();
-        //System.out.println(model);
-        //System.out.println(columnName);
         ruoli_modificato = model.getValueAt(row, column);
         //System.out.println(ruoli_modificato);
 

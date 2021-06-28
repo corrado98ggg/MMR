@@ -95,7 +95,7 @@ public class Nuova_spesa extends JFrame implements ActionListener {
         lsignup.add(panelscritte, 1, 0);
         lsignup.add(panel_logo_mmr, 1, 0);
         //setContentPane(panel);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setBounds(650, 300, 700, 475);
         setResizable(false);
 

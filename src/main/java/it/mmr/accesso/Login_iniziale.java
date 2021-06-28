@@ -3,6 +3,7 @@ package it.mmr.accesso;
 import it.mmr.Icon.Creazione_immagini;
 import it.mmr.database.DBManager;
 import it.mmr.database.Utils;
+import it.mmr.layout.Registrazione_database;
 import it.mmr.layout.Schermata_Principale_home;
 
 import javax.swing.*;
@@ -124,24 +125,10 @@ public class Login_iniziale extends JFrame implements ActionListener {
         }
     }
 
-    public static void testConnection() throws SQLException {
-        DBManager.setConnection(
-                Utils.JDBC_Driver_SQLite,
-                Utils.JDBC_URL_SQLite);
-        Statement statement = DBManager.getConnection().createStatement();
-
-        try {
-            statement.executeQuery("SELECT * FROM registrazioni");
-        } catch (SQLException e) {
-            statement.executeUpdate("DROP TABLE IF EXISTS registrazioni");
-            statement.executeUpdate("CREATE TABLE registrazioni (" + "id VARCHAR(50) PRIMARY KEY, " + "Nome VARCHAR(50)," + "Password VARCHAR(50))");
-        }
-    }
-
     public boolean check_database(String utente_tmp, String password_tmp) throws SQLException {
 
         try {
-            testConnection();
+            Registrazione_database.testConnection();
             //load();
         } catch (SQLException | NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Database Error!");
@@ -194,7 +181,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
     public static String get_id(String utente_tmp, String divisione_tmp) throws SQLException {
 
         try {
-            testConnection();
+            Registrazione_database.testConnection();
         } catch (SQLException | NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Database Error!");
         }

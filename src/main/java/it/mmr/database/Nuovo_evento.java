@@ -77,7 +77,7 @@ public class Nuovo_evento extends JFrame implements ActionListener {
 
         lsignup.add(panel, 0, 0);
         lsignup.add(panelscritte, 1, 0);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setBounds(650, 300, 700, 475);
         setResizable(false);
 

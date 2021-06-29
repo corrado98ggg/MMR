@@ -115,7 +115,11 @@ public class Schermata_Principale_home extends JFrame implements ActionListener 
         pannelo_blocconote.add(picLabel);
         pannelo_blocconote.setBounds(20, 330, 300, 300);
 
-        JTextArea recapiti =new JTextArea("Via Pietro Vivarelli 10\n" +"41125 Modena, italy\n"+"Mail: mmr@unimore.it\n"+"Tel:+39 0592056294");
+        JTextArea recapiti =new JTextArea("""
+                Via Pietro Vivarelli 10
+                41125 Modena, italy
+                Mail: mmr@unimore.it
+                Tel:+39 0592056294""");
         recapiti.setFont(new Font("Monaco", Font.ITALIC, 20));
         recapiti.setBackground(new Color(237, 237, 237));
         recapiti.setOpaque(true);

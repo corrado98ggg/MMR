@@ -2,7 +2,6 @@ package it.mmr.accesso;
 
 import it.mmr.Icon.Creazione_immagini;
 import it.mmr.database.DBManager;
-import it.mmr.database.Utils;
 import it.mmr.layout.Registrazione_database;
 import it.mmr.layout.Schermata_Principale_home;
 
@@ -48,7 +47,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
         add(lpane, BorderLayout.CENTER);
         lpane.setBounds(0, 0, 1200, 700);
 
-        BufferedImage back = Creazione_immagini.creazioneImmagini("src/main/java/images/Ben.jpg", 1269, 563);
+        BufferedImage back = Creazione_immagini.creazioneImmagini("src/main/java/images/benno.jpg", 1269, 563);
         ImageIcon back_ = new ImageIcon(back);
 
         background = new JLabel("", back_, JLabel.CENTER);
@@ -68,12 +67,12 @@ public class Login_iniziale extends JFrame implements ActionListener {
 
         utente.setPreferredSize(new Dimension(400, 50));
         password.setPreferredSize(new Dimension(400, 50));
-        access_utente.setBounds(200, 150, 400, 50);
+        access_utente.setBounds(88, 150, 400, 50);
 
         access_utente.add(utente);
 
         JPanel access_password = new JPanel(new GridBagLayout());
-        access_password.setBounds(200, 285, 400, 50);
+        access_password.setBounds(88, 285, 400, 50);
         access_password.setBackground(new Color(0,0,0,0));
         access_password.add(password);
 
@@ -157,8 +156,6 @@ public class Login_iniziale extends JFrame implements ActionListener {
                                     "SELECT root FROM registrazioni WHERE Nome IS ('%s') AND password IS ('%s');",
                                     utente_tmp, password_tmp);
                             //System.out.println(query);
-
-                            ResultSet rs3 = statement.executeQuery(query);
                             //System.out.println(rs3);
 
                             Statement statement_2 = DBManager.getConnection().createStatement();
@@ -199,6 +196,10 @@ public class Login_iniziale extends JFrame implements ActionListener {
         return "nessuno";
 }
 
+/*
+L' algoritmo MD5 message-digest è una funzione hash ampiamente utilizzata che produce un valore hash a 128 bit.
+funzione di hash crittografico.
+ */
     public String MD5(String md5) {
 
         //echo -n corrado2 | md5sum

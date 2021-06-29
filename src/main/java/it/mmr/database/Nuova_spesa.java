@@ -91,14 +91,14 @@ public class Nuova_spesa extends JFrame implements ActionListener {
         pannello_descrizione.setBounds(320,210,135,20);
         lsignup.add(pannello_descrizione,1,1);
 
-        JLabel testo_quantità =new JLabel("quantità:");
+        JLabel testo_quantità =new JLabel("quantita':");
         JPanel pannello_quantità =new JPanel(new GridBagLayout());
         pannello_quantità.setBackground(new Color(0,0,0,0));
         pannello_quantità.add(testo_quantità);
         pannello_quantità.setBounds(320,250,135,20);
         lsignup.add(pannello_quantità,1,1);
 
-        JLabel testo_unita =new JLabel("prezzo ad' unità:");
+        JLabel testo_unita =new JLabel("prezzo ad' unita':");
         JPanel pannello_unita =new JPanel(new GridBagLayout());
         pannello_unita.setBackground(new Color(0,0,0,0));
         pannello_unita.add(testo_unita);

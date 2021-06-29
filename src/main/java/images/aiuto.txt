@@ -5,7 +5,7 @@ Il database è formato da 4 Tabelle:
 Registrazioni (id, Nome, Cognome, Password, Root, Ruoli, Divisione)
 Avvertenza(testo)
 Eventi  (Evento, Giorno, Anno, Ora, mese)
-Spese
+Spese  (id, descrizione, quantita, prezzo al pezzo, spesa)
 
 Registrazioni è la tabella che tiene conto degli utenti registrati, a ogni utente viene asseganto un chiave id unica.
 Oltre, al nome cognome ruolo e divisione di appartenenza, all'utente viene assegnata la password,

@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 
 import javax.swing.*;
 import javax.swing.table.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,14 +17,15 @@ import java.sql.Statement;
 import java.util.*;
 
 public class Calendario extends JFrame {
+
     static JLabel etichettaMese;
-    static JButton bottonePreview, bottoneProssimo;
+    static JButton bottonePrima, bottoneProssimo;
     public static String[] stringa;
     static JTable tabellacalendario;
     static JComboBox<String> ComboboxAnno;
 
     static DefaultTableModel ModelloTabellaCalendario; //Table model
-    static JScrollPane scroll; //The scrollpane
+    static JScrollPane scroll; //scroll
     static JPanel pannelloCalendario;
     static int veroAnno, veroMese, verogiorno, annocorrente, mesecorrente;
 
@@ -55,31 +55,33 @@ public class Calendario extends JFrame {
 
         etichettaMese = new JLabel("");
         ComboboxAnno = new JComboBox<>();
-        bottonePreview = new JButton("<-");
+        bottonePrima = new JButton("<-");
         bottoneProssimo = new JButton("->");
+
         ModelloTabellaCalendario = new DefaultTableModel() {
             public boolean isCellEditable(int rowIndex, int mColIndex) {
-                return true;
+                return false;
             }
         };
+
         tabellacalendario = new JTable(ModelloTabellaCalendario);
         scroll = new JScrollPane(tabellacalendario);
         pannelloCalendario = new JPanel(null);
         pannelloCalendario.setBorder(BorderFactory.createTitledBorder("Calendario"));
-        bottonePreview.addActionListener(new btnPrev_Action());
-        bottoneProssimo.addActionListener(new btnNext_Action());
-        ComboboxAnno.addActionListener(new cmbYear_Action());
+        bottonePrima.addActionListener(new mesePrima());
+        bottoneProssimo.addActionListener(new meseDopo());
+        ComboboxAnno.addActionListener(new aggiornaAnno());
 
         pane.add(pannelloCalendario);
         pannelloCalendario.add(etichettaMese);
         pannelloCalendario.add(ComboboxAnno);
-        pannelloCalendario.add(bottonePreview);
+        pannelloCalendario.add(bottonePrima);
         pannelloCalendario.add(bottoneProssimo);
         pannelloCalendario.add(scroll);
         pannelloCalendario.setBounds(5, 0, 1990, 400);
-        etichettaMese.setBounds(100 - etichettaMese.getPreferredSize().width / 2, 25, 500, 500);
+        //etichettaMese.setBounds(100 - etichettaMese.getPreferredSize().width / 2, 25, 500, 500);
         ComboboxAnno.setBounds(1420, 350, 100, 40);
-        bottonePreview.setBounds(10, 25, 100, 50);
+        bottonePrima.setBounds(10, 25, 100, 50);
         bottoneProssimo.setBounds(1420, 25, 100, 50);
         scroll.setBounds(0, 90, 1550, 1000);
 
@@ -129,24 +131,24 @@ public class Calendario extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 1) {
                     int row = tabellacalendario.getSelectedRow();
-                    //int row = e.getFirstRow();
-                    //System.out.println(row);
-                    //System.out.println("-----------------");
-                    //System.out.println(currentMonth + 1);
-                    //System.out.println("-----------------");
+                    /*int row = e.getFirstRow();
+                    System.out.println(row);
+                    System.out.println("-----------------");
+                    System.out.println(currentMonth + 1);
+                    System.out.println("-----------------");*/
                     int column = tabellacalendario.getSelectedColumn();
                     //System.out.println(column);
                     //System.out.println("-----------------");
                     //System.out.println(tblCalendar.getValueAt(row, column));
-                    Integer giorno_corrente= (int) tabellacalendario.getValueAt(row, column);
+                    int giorno_corrente= (int) tabellacalendario.getValueAt(row, column);
                     //System.out.println("-----------------");
                     //System.out.println(currentYear);
                     //System.out.println("-----------------");
-                    Integer i = (int) tabellacalendario.getValueAt(row, column);
+                    int i = (int) tabellacalendario.getValueAt(row, column);
                     //i= i-1;
-                   // Integer mese=new Integer(i);
-                    Integer mese= mesecorrente +1;
-                    Integer anno= annocorrente;
+                    //Integer mese=new Integer(i);
+                    int mese= mesecorrente +1;
+                    int anno= annocorrente;
                     //System.out.println("-----------------");
                     //System.out.println(i);
                     //System.out.println("-----------------");
@@ -158,7 +160,7 @@ public class Calendario extends JFrame {
                     }
 
                     if (evento.compareTo("Nessun evento in programma") == 0) { //0 uguale
-                        fisso = "Nessun evento in programma il"+" "+giorno_corrente.toString()+"/"+mese.toString()+"/"+anno.toString();
+                        fisso = "Nessun evento in programma il"+" "+ giorno_corrente +"/"+ mese +"/"+ anno;
                         try {
                             Eventi.Disegno_evento(fisso, null);
                         } catch (SQLException throwables) {
@@ -166,7 +168,7 @@ public class Calendario extends JFrame {
                         }
 
                     } else {
-                        fisso = "Evento per la data"+" "+giorno_corrente.toString()+"/"+mese.toString()+"/"+anno.toString()+"  alle ore:  "+orario;
+                        fisso = "Evento per la data"+" "+ giorno_corrente +"/"+ mese +"/"+ anno +"  alle ore:  "+orario;
                         event = evento;
                         try {
                             Eventi.Disegno_evento(fisso, event);
@@ -177,7 +179,7 @@ public class Calendario extends JFrame {
                 }
             }
         });
-        Calendario.refreshCalendar(veroMese, veroAnno); //Refresh calendario
+        Calendario.aggiornaCalendario(veroMese, veroAnno); //Refresh calendario
 
         try {
             Registrazione_database.testConnection();
@@ -224,21 +226,13 @@ public class Calendario extends JFrame {
     }
 
 
-    public static void refreshCalendar(int mese, int anno) {
+    public static void aggiornaCalendario(int mese, int anno) {
 
         int numero_giorni, mesi_start; //NUMERO GIORNI E PARTENZA DEI MESI
 
-        bottonePreview.setEnabled(true);
-        bottoneProssimo.setEnabled(true);
-        if (mese == 0 && anno <= veroAnno - 10) {
-            bottonePreview.setEnabled(false);
-        } //troppo presto
-        if (mese == 11 && anno >= veroAnno + 100) {
-            bottoneProssimo.setEnabled(false);
-        } //troppo tardi
-        etichettaMese.setText(mesi[mese]); //Refresh the month label (at the top)
-        etichettaMese.setBounds(750 - etichettaMese.getPreferredSize().width / 2, 35, 180, 25); //Re-align label with calendar
-        ComboboxAnno.setSelectedItem(String.valueOf(anno)); //Select the correct year in the combo box
+        etichettaMese.setText(mesi[mese]);
+        etichettaMese.setBounds(750 - etichettaMese.getPreferredSize().width / 2, 35, 180, 25);
+        ComboboxAnno.setSelectedItem(String.valueOf(anno));
 
         //puliamo la tabella
         for (int i = 0; i < 6; i++) {
@@ -257,30 +251,11 @@ public class Calendario extends JFrame {
             int column = (i + mesi_start - 2) % 7;
             ModelloTabellaCalendario.setValueAt(i, row, column);
         }
-
-        tabellacalendario.setDefaultRenderer(tabellacalendario.getColumnClass(0), new tblCalendarRenderer());
     }
 
-    static class tblCalendarRenderer extends DefaultTableCellRenderer {
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean selected, boolean focused, int row, int column) {
-            super.getTableCellRendererComponent(table, value, selected, focused, row, column);
-            if (column == 0 || column == 6) { //Week-end
-                setBackground(new Color(255, 220, 220));
-            } else { //settimana
-                setBackground(new Color(255, 255, 255));
-            }
-            if (value != null) {
-                if (Integer.parseInt(value.toString()) == verogiorno && mesecorrente == veroMese && annocorrente == veroAnno) { //Today
-                    setBackground(new Color(220, 220, 255));
-                }
-            }
-            setBorder(null);
-            setForeground(Color.black);
-            return this;
-        }
-    }
 
-    static class btnPrev_Action implements ActionListener {
+    static class mesePrima implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             if (mesecorrente == 0) { //indietro di un anno
                 mesecorrente = 11;
@@ -288,11 +263,12 @@ public class Calendario extends JFrame {
             } else { //di un mese
                 mesecorrente -= 1;
             }
-            refreshCalendar(mesecorrente, annocorrente);
+            aggiornaCalendario(mesecorrente, annocorrente);
         }
     }
 
-    static class btnNext_Action implements ActionListener {
+    static class meseDopo implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             if (mesecorrente == 11) { //prossimo anno
                 mesecorrente = 0;
@@ -300,16 +276,16 @@ public class Calendario extends JFrame {
             } else { //prissimo mese
                 mesecorrente += 1;
             }
-            refreshCalendar(mesecorrente, annocorrente);
+            aggiornaCalendario(mesecorrente, annocorrente);
         }
     }
 
-    static class cmbYear_Action implements ActionListener {
+    static class aggiornaAnno implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (ComboboxAnno.getSelectedItem() != null) {
                 String b = ComboboxAnno.getSelectedItem().toString();
                 annocorrente = Integer.parseInt(b);
-                refreshCalendar(mesecorrente, annocorrente);
+                aggiornaCalendario(mesecorrente, annocorrente);
             }
         }
     }

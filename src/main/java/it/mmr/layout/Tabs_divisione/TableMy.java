@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.util.EventObject;
 
 public class TableMy extends DefaultCellEditor {
+
     public TableMy(JCheckBox checkBox) {
         super(checkBox);
     }

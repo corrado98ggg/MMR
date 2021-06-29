@@ -26,7 +26,7 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
 
 
     public static String[] nomi = {"Descrizione",
-            "Qt.", "Prezzo al pz", "Importo"};
+            "Quantità", "Prezzo a unità", "Importo"};
     public JButton piu, meno;
     public static int contatore_spese;
     public JLayeredPane spese() throws SQLException {
@@ -122,8 +122,8 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         table.getModel().addTableModelListener(this);
         table.setRowHeight(35);
         table.getColumn("Descrizione").setCellEditor(new TableMy(new JCheckBox()));
-        table.getColumn("Qt.").setCellEditor(new TableMy(new JCheckBox()));
-        table.getColumn("Prezzo al pz").setCellEditor(new TableMy(new JCheckBox()));
+        table.getColumn("Quantità").setCellEditor(new TableMy(new JCheckBox()));
+        table.getColumn("Prezzo a unità").setCellEditor(new TableMy(new JCheckBox()));
         table.getColumn("Importo").setCellEditor(new TableMy(new JCheckBox()));
         table.setBounds(0, 25, 1400, 1420);
 

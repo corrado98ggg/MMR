@@ -26,7 +26,6 @@ public class Utils {
 
         try {
             Registrazione_database.testConnection();
-            //load();
         } catch (SQLException | NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Database Error!");
         }

@@ -54,9 +54,6 @@ public class Rimozione_database extends JFrame implements ActionListener {
         text_nome_utente = new JTextField("");
         text_nome_utente.setPreferredSize(new Dimension(250, 30));
 
-
-
-
         text_divisione = new JTextField("");
         text_divisione.setPreferredSize(new Dimension(250, 30));
 

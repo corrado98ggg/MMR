@@ -210,8 +210,6 @@ public class Personale extends JFrame implements ActionListener, TableModelListe
         ResultSet queryPersonale;
         assert statement_tmp != null;
         queryPersonale = statement_tmp.executeQuery("SELECT * FROM registrazioni LIMIT 100");
-
-
         int i = 0;
         while (true) {
 

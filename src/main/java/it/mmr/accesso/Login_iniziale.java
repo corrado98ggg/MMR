@@ -111,6 +111,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
 
                 //System.out.println(utente.getText());
                 if (check_database(utente.getText(), password.getText()) && tick.isSelected()) {
+                    setVisible(false);
                     new Schermata_Principale_home();
                 } else {
                    // JOptionPane.showMessageDialog(null, "Utente non registrato o condizioni non accettate");
@@ -199,6 +200,8 @@ public class Login_iniziale extends JFrame implements ActionListener {
 }
 
     public String MD5(String md5) {
+
+        //echo -n corrado2 | md5sum
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
             byte[] array = md.digest(md5.getBytes());

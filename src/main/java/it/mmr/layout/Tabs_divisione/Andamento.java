@@ -35,8 +35,8 @@ public class Andamento extends JFrame {
         sfondo.setBounds(0, 0, 1920, 1080);
         sfondo.setBackground(Color.white);
 
-        b.setBounds(0, 800, 900, 900); //debito
-        a.setBounds(0, 600, 400, 400);
+        b.setBounds(0, 600, 900, 900); //debito
+        a.setBounds(0, 400, 400, 400);
         c.setBounds(0, 200, 400, 400);
 
         tot.add(sfondo, 0, 0);

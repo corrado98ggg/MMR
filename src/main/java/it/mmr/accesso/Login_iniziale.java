@@ -22,7 +22,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
     JCheckBox tick;
 
     public static JTextField utente;
-    public static boolean root = true;
+    public static boolean root = false;
 
     public Login_iniziale() {
         super("MMR");

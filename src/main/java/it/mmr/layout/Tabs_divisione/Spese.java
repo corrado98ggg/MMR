@@ -252,6 +252,7 @@ public class Spese extends JFrame implements ActionListener, TableModelListener 
         }
         assert a != null;
         a.setBounds(0, 400, 400, 400);
+        //a.setBounds(0, 600, 400, 400);
         a.setOpaque(false);
         Andamento.tot.add(a, Nuova_spesa.i, 0);
         Nuova_spesa.i++;

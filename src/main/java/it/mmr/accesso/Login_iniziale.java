@@ -4,7 +4,6 @@ import it.mmr.Icon.Creazione_immagini;
 import it.mmr.database.DBManager;
 import it.mmr.layout.Registrazione_database;
 import it.mmr.layout.Schermata_Principale_home;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -155,8 +154,10 @@ public class Login_iniziale extends JFrame implements ActionListener {
                             String query = String.format(
                                     "SELECT root FROM registrazioni WHERE Nome IS ('%s') AND password IS ('%s');",
                                     utente_tmp, password_tmp);
-                            //System.out.println(query);
-                            //System.out.println(rs3);
+                            System.out.println(query);
+
+                            ResultSet rs3 = statement.executeQuery(query);
+                            System.out.println(rs3);
 
                             Statement statement_2 = DBManager.getConnection().createStatement();
 
@@ -168,6 +169,7 @@ public class Login_iniziale extends JFrame implements ActionListener {
                         } catch (SQLException e1) {
                             e1.printStackTrace();
                         }
+
                         return true;
                     }
                 }
